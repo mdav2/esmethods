@@ -1,0 +1,440 @@
+
+    -----------------------------------------------------------------------
+          Psi4: An Open-Source Ab Initio Electronic Structure Package
+                               Psi4 1.2.1 release
+
+                         Git: Rev {HEAD} 406f4de 
+
+
+    R. M. Parrish, L. A. Burns, D. G. A. Smith, A. C. Simmonett,
+    A. E. DePrince III, E. G. Hohenstein, U. Bozkaya, A. Yu. Sokolov,
+    R. Di Remigio, R. M. Richard, J. F. Gonthier, A. M. James,
+    H. R. McAlexander, A. Kumar, M. Saitow, X. Wang, B. P. Pritchard,
+    P. Verma, H. F. Schaefer III, K. Patkowski, R. A. King, E. F. Valeev,
+    F. A. Evangelista, J. M. Turney, T. D. Crawford, and C. D. Sherrill,
+    J. Chem. Theory Comput. 13(7) pp 3185--3197 (2017).
+    (doi: 10.1021/acs.jctc.7b00174)
+
+
+                         Additional Contributions by
+    P. Kraus, H. Kruse, M. H. Lechner, M. C. Schieber, and R. A. Shaw
+
+    -----------------------------------------------------------------------
+
+
+    Psi4 started on: Sunday, 01 September 2019 11:51PM
+
+    Process ID: 28668
+    Host:       ws-b14-mmd
+    PSIDATADIR: /home/mmd01986/psi4conda/share/psi4
+    Memory:     500.0 MiB
+    Threads:    1
+    
+  ==> Input File <==
+
+--------------------------------------------------------------------------
+memory 2 GB
+
+molecule {
+H
+H 1 0.96
+}
+
+set basis sto-3g
+set mp2_type conv
+set scf_type pk
+
+energy('mp2')
+--------------------------------------------------------------------------
+
+  Memory set to   1.863 GiB by Python driver.
+
+*** tstart() called on ws-b14-mmd
+*** at Sun Sep  1 23:51:11 2019
+
+   => Loading Basis Set <=
+
+    Name: STO-3G
+    Role: ORBITAL
+    Keyword: BASIS
+    atoms 1-2 entry H          line    19 file /home/mmd01986/psi4conda/share/psi4/basis/sto-3g.gbs 
+
+    There are an even number of electrons - assuming singlet.
+    Specify the multiplicity in the molecule input block.
+
+
+         ---------------------------------------------------------
+                                   SCF
+            by Justin Turney, Rob Parrish, Andy Simmonett
+                             and Daniel Smith
+                              RHF Reference
+                        1 Threads,   1907 MiB Core
+         ---------------------------------------------------------
+
+  ==> Geometry <==
+
+    Molecular point group: d2h
+    Full point group: D_inf_h
+
+    Geometry (in Angstrom), charge = 0, multiplicity = 1:
+
+       Center              X                  Y                   Z               Mass       
+    ------------   -----------------  -----------------  -----------------  -----------------
+         H            0.000000000000     0.000000000000    -0.480000000000     1.007825032070
+         H            0.000000000000     0.000000000000     0.480000000000     1.007825032070
+
+  Running in d2h symmetry.
+
+  Rotational constants: A = ************  B =     36.29935  C =     36.29935 [cm^-1]
+  Rotational constants: A = ************  B = 1088227.21948  C = 1088227.21948 [MHz]
+  Nuclear repulsion =    0.551226258947917
+
+  Charge       = 0
+  Multiplicity = 1
+  Electrons    = 2
+  Nalpha       = 1
+  Nbeta        = 1
+
+  ==> Algorithm <==
+
+  SCF Algorithm Type is PK.
+  DIIS enabled.
+  MOM disabled.
+  Fractional occupation disabled.
+  Guess Type is SAD.
+  Energy threshold   = 1.00e-08
+  Density threshold  = 1.00e-08
+  Integral threshold = 0.00e+00
+
+  ==> Primary Basis <==
+
+  Basis Set: STO-3G
+    Blend: STO-3G
+    Number of shells: 2
+    Number of basis function: 2
+    Number of Cartesian functions: 2
+    Spherical Harmonics?: true
+    Max angular momentum: 0
+
+  ==> Pre-Iterations <==
+
+   -------------------------------------------------------
+    Irrep   Nso     Nmo     Nalpha   Nbeta   Ndocc  Nsocc
+   -------------------------------------------------------
+     Ag         1       1       0       0       0       0
+     B1g        0       0       0       0       0       0
+     B2g        0       0       0       0       0       0
+     B3g        0       0       0       0       0       0
+     Au         0       0       0       0       0       0
+     B1u        1       1       0       0       0       0
+     B2u        0       0       0       0       0       0
+     B3u        0       0       0       0       0       0
+   -------------------------------------------------------
+    Total       2       2       1       1       1       0
+   -------------------------------------------------------
+
+  ==> Integral Setup <==
+
+  Using in-core PK algorithm.
+   Calculation information:
+      Number of atoms:                   2
+      Number of AO shells:               2
+      Number of primitives:              6
+      Number of atomic orbitals:         2
+      Number of basis functions:         2
+
+      Integral cutoff                 1.00e-12
+      Number of threads:                 1
+
+  Performing in-core PK
+  Using 12 doubles for integral storage.
+  We computed 6 shell quartets total.
+  Whereas there are 6 unique shell quartets.
+
+  ==> DiskJK: Disk-Based J/K Matrices <==
+
+    J tasked:                  Yes
+    K tasked:                  Yes
+    wK tasked:                  No
+    Memory (MB):              1430
+    Schwarz Cutoff:          1E-12
+
+    OpenMP threads:              1
+
+  Minimum eigenvalue in the overlap matrix is 4.7964922342E-01.
+  Using Symmetric Orthogonalization.
+
+  SCF Guess: Superposition of Atomic Densities via on-the-fly atomic UHF.
+
+  ==> Iterations <==
+
+                        Total Energy        Delta E     RMS |[F,P]|
+
+   @RHF iter   0:    -0.65376352965140   -6.53764e-01   0.00000e+00 
+   @RHF iter   1:    -1.07701965343424   -4.23256e-01   0.00000e+00 
+   @RHF iter   2:    -1.07701965343424    0.00000e+00   0.00000e+00 DIIS
+
+  ==> Post-Iterations <==
+
+    Orbital Energies [Eh]
+    ---------------------
+
+    Doubly Occupied:                                                      
+
+       1Ag    -0.497339  
+
+    Virtual:                                                              
+
+       1B1u    0.484532  
+
+    Final Occupation by Irrep:
+             Ag   B1g   B2g   B3g    Au   B1u   B2u   B3u 
+    DOCC [     1,    0,    0,    0,    0,    0,    0,    0 ]
+
+  Energy converged.
+
+  @RHF Final Energy:    -1.07701965343424
+
+   => Energetics <=
+
+    Nuclear Repulsion Energy =              0.5512262589479169
+    One-Electron Energy =                  -2.2618131148101850
+    Two-Electron Energy =                   0.6335672024280324
+    Total Energy =                         -1.0770196534342356
+
+
+
+Properties will be evaluated at   0.000000,   0.000000,   0.000000 [a0]
+
+Properties computed using the SCF density matrix
+
+  Nuclear Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Electronic Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000
+
+  Dipole Moment: [e a0]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+  Dipole Moment: [D]
+     X:     0.0000      Y:     0.0000      Z:     0.0000     Total:     0.0000
+
+
+*** tstop() called on ws-b14-mmd at Sun Sep  1 23:51:11 2019
+Module time:
+	user time   =       0.18 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.18 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+ MINTS: Wrapper to libmints.
+   by Justin Turney
+
+   Calculation information:
+      Number of threads:                 1
+      Number of atoms:                   2
+      Number of AO shells:               2
+      Number of SO shells:               1
+      Number of primitives:              6
+      Number of atomic orbitals:         2
+      Number of basis functions:         2
+
+      Number of irreps:                  8
+      Integral cutoff                 0.00e+00
+      Number of functions per irrep: [   1    0    0    0    0    1    0    0 ]
+
+ OEINTS: Overlap, kinetic, potential, dipole, and quadrupole integrals
+         stored in file 35.
+
+      Computing two-electron integrals...done
+      Computed 4 non-zero two-electron integrals.
+        Stored in file 33.
+
+
+*** tstart() called on ws-b14-mmd
+*** at Sun Sep  1 23:51:11 2019
+
+
+
+  Options:
+  ----------------------------------------------------------------------------
+  ACTIVE                        => [  ]             
+  BASIS_RELATIVISTIC            => (empty)          
+  BENCH                         => 0                
+  CACHELEVEL                    => 2                
+  CCL_ENERGY                    => FALSE            
+  CC_DIIS_MAX_VECS              => 6                
+  CC_DIIS_MIN_VECS              => 2                
+  CC_MAXITER                    => 50               
+  CC_TYPE                       => CONV             
+  CEPA_OS_SCALE                 => 1.27             
+  CEPA_SOS_SCALE                => 1.3              
+  CEPA_SS_SCALE                 => 1.13             
+  CEPA_TYPE                     => CEPA0            
+  CI_TYPE                       => CONV             
+  CUBEPROP_BASIS_FUNCTIONS      => [  ]             
+  CUBEPROP_FILEPATH             => .                
+  CUBEPROP_ISOCONTOUR_THRESHOLD => 0.85             
+  CUBEPROP_ORBITALS             => [  ]             
+  CUBEPROP_TASKS                => [  ]             
+  CUBIC_BASIS_TOLERANCE         => 1e-12            
+  CUBIC_BLOCK_MAX_POINTS        => 1000             
+  CUBIC_GRID_OVERAGE            => [  ]             
+  CUBIC_GRID_SPACING            => [  ]             
+  CUTOFF                        => 14               
+  DEBUG                         => 0                
+  DERTYPE                       => NONE             
+  DF_BASIS_CC                   => (empty)          
+  DIE_IF_NOT_CONVERGED          => TRUE             
+  DKH_ORDER                     => 2                
+  DOCC                          => [  ]             
+  DO_DIIS                       => TRUE             
+  DO_LEVEL_SHIFT                => TRUE             
+  DO_SCS                        => FALSE           !
+  DO_SOS                        => FALSE           !
+  E3_SCALE                      => 0.25             
+  EA_POLES                      => FALSE            
+  EKT_EA                        => FALSE            
+  EKT_IP                        => FALSE            
+  EP_EA_POLES                   => FALSE            
+  EP_IP_POLES                   => FALSE            
+  EP_MAXITER                    => 30               
+  EXTERNAL_POTENTIAL_SYMMETRY   => FALSE            
+  E_CONVERGENCE                 => 1e-06           !
+  FREEZE_CORE                   => FALSE            
+  FROZEN_DOCC                   => [  ]             
+  FROZEN_UOCC                   => [  ]             
+  INTEGRAL_PACKAGE              => LIBINT           
+  IP_POLES                      => FALSE            
+  LEVEL_SHIFT                   => 0.02             
+  LINEQ_SOLVER                  => CDGESV           
+  LITERAL_CFOUR                 => (empty)          
+  MAT_NUM_COLUMN_PRINT          => 5                
+  MAX_MOGRAD_CONVERGENCE        => 0.001            
+  MOGRAD_DAMPING                => 1                
+  MOLDEN_WITH_VIRTUAL           => TRUE             
+  MO_DIIS_NUM_VECS              => 6                
+  MO_MAXITER                    => 50               
+  MO_READ                       => FALSE            
+  MO_STEP_MAX                   => 0.5              
+  MO_WRITE                      => FALSE            
+  MP2_OS_SCALE                  => 1.2              
+  MP2_SOS_SCALE                 => 1.3              
+  MP2_SOS_SCALE2                => 1.2              
+  MP2_SS_SCALE                  => 0.333333         
+  MP2_TYPE                      => CONV            !
+  MP_TYPE                       => CONV             
+  NAT_ORBS                      => FALSE            
+  NUM_FROZEN_DOCC               => 0                
+  NUM_FROZEN_UOCC               => 0                
+  NUM_GPUS                      => 1                
+  OCC_ORBS_PRINT                => FALSE            
+  OEPROP                        => FALSE            
+  OPT_METHOD                    => ORB_RESP         
+  ORB_OPT                       => FALSE           !
+  ORB_RESP_SOLVER               => PCG              
+  ORTH_TYPE                     => MGS              
+  PCG_BETA_TYPE                 => FLETCHER_REEVES  
+  PCG_CONVERGENCE               => 1e-06            
+  PCG_MAXITER                   => 30               
+  PCM                           => FALSE            
+  PCMSOLVER_PARSED_FNAME        => (empty)          
+  PCM_CC_TYPE                   => PTE              
+  PCM_SCF_TYPE                  => TOTAL            
+  PRINT                         => 1                
+  PRINT_NOONS                   => 3                
+  PROPERTIES                    => [  ]             
+  PROPERTIES_ORIGIN             => [  ]             
+  PUREAM                        => TRUE             
+  QC_MODULE                     => (empty)          
+  RAS1                          => [  ]             
+  RAS2                          => [  ]             
+  RAS3                          => [  ]             
+  RAS4                          => [  ]             
+  RELATIVISTIC                  => NO               
+  RELAXED                       => TRUE             
+  RESTRICTED_DOCC               => [  ]             
+  RESTRICTED_UOCC               => [  ]             
+  RMS_MOGRAD_CONVERGENCE        => 1e-06            
+  R_CONVERGENCE                 => 1e-05            
+  SCF_TYPE                      => PK              !
+  SCS_TYPE                      => SCS              
+  SOCC                          => [  ]             
+  SOS_TYPE                      => SOS              
+  SYMMETRIZE                    => TRUE             
+  TPDM_ABCD_TYPE                => DIRECT           
+  WFN                           => SCF              
+  WFN_TYPE                      => OMP2            !
+  WRITER_FILE_LABEL             => (empty)          
+
+
+ ============================================================================== 
+ ============================================================================== 
+ ============================================================================== 
+
+                       MP2   
+              Program Written by Ugur Bozkaya,
+              Latest Revision June 25, 2014.
+
+ ============================================================================== 
+ ============================================================================== 
+ ============================================================================== 
+
+	RMS orbital gradient is changed to :     1.00e-05
+	MAX orbital gradient is changed to :     3.16e-04
+	MO spaces per irreps... 
+
+	IRREP   FC    OCC   VIR  FV 
+	==============================
+	  Ag     0     1     0    0
+	 B1g     0     0     0    0
+	 B2g     0     0     0    0
+	 B3g     0     0     0    0
+	  Au     0     0     0    0
+	 B1u     0     0     1    0
+	 B2u     0     0     0    0
+	 B3u     0     0     0    0
+	==============================
+
+	Memory is   2000 MB 
+	Cost of iabc is      0 MB 
+	Cost of abcd is      0 MB 
+	Switching to the incore algoritm for iabc..
+	Switching to the incore algoritm for abcd..
+
+	Computing MP2 energy using SCF MOs (Canonical MP2)... 
+	============================================================================== 
+	Nuclear Repulsion Energy (a.u.)    :     0.55122625894792
+	SCF Energy (a.u.)                  :    -1.07701965343424
+	REF Energy (a.u.)                  :    -1.07701965343424
+	Alpha-Alpha Contribution (a.u.)    :     0.00000000000000
+	Alpha-Beta Contribution (a.u.)     :    -0.01921955973568
+	Beta-Beta Contribution (a.u.)      :     0.00000000000000
+	Scaled_SS Correlation Energy (a.u.):     0.00000000000000
+	Scaled_OS Correlation Energy (a.u.):    -0.02306347168281
+	SCS-MP2 Total Energy (a.u.)        :    -1.10008312511705
+	SOS-MP2 Total Energy (a.u.)        :    -1.07701965343424
+	SCSN-MP2 Total Energy (a.u.)       :    -1.07701965343424
+	SCS-MP2-VDW Total Energy (a.u.)    :    -1.10162068989590
+	SOS-PI-MP2 Total Energy (a.u.)     :    -1.10392703706418
+	MP2 Correlation Energy (a.u.)      :    -0.01921955973568
+	MP2 Total Energy (a.u.)            :    -1.09623921316991
+	============================================================================== 
+
+*** tstop() called on ws-b14-mmd at Sun Sep  1 23:51:11 2019
+Module time:
+	user time   =       0.00 seconds =       0.00 minutes
+	system time =       0.00 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+Total time:
+	user time   =       0.19 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
+	total time  =          0 seconds =       0.00 minutes
+
+    Psi4 stopped on: Sunday, 01 September 2019 11:51PM
+    Psi4 wall time for execution: 0:00:00.25
+
+*** Psi4 exiting successfully. Buy a developer a beer!
