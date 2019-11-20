@@ -34,13 +34,13 @@ HF::tensor4p::~tensor4p() {
     }
 }
 
-HF::wfn::wfn(int nbf) 
+HF::wfn::wfn(int nbf, int nocc, int natom) 
 {  
     int nmo = nbf*2;
     this->nbf = nbf;
-    this->nocc = 5;
+    this->nocc = nocc; //5
     this->noccso = this->nocc*2;
-    this->natom = 3;
+    this->natom = natom;//3
     this->nmo = nmo;
     this->maxiter = 50;
     this->eval = gsl_vector_alloc(nbf);
@@ -65,7 +65,9 @@ HF::wfn::wfn(int nbf)
     this->tautijab = new tensor4p (nmo);
     this->tauijab = new tensor4p (nmo);
     this->tia = gsl_matrix_alloc (nmo, nmo);
+    this->tia_new = gsl_matrix_alloc (nmo, nmo);
     this->tijab = new tensor4p (nmo);
+    this->tijab_new = new tensor4p (nmo);
     this->W = new tensor4p (nmo);
     this->Dia = gsl_matrix_alloc (nmo, nmo);
     this->Dijab = new tensor4p (nmo);
@@ -88,6 +90,7 @@ HF::wfn::wfn(int nbf)
     gsl_matrix_set_zero (this->C);
     gsl_matrix_set_zero (this->FF);
     gsl_matrix_set_zero (this->tia);
+    gsl_matrix_set_zero (this->tia_new);
     gsl_matrix_set_zero (this->Dia);
 }
 
@@ -111,6 +114,7 @@ HF::wfn::~wfn()
     gsl_matrix_free(this->C);
     gsl_matrix_free(this->FF);
     gsl_matrix_free(this->tia);
+    gsl_matrix_free(this->tia_new);
     gsl_matrix_free(this->Dia);
     delete this->AO_eri;
     delete this->MO_eri;
@@ -118,6 +122,7 @@ HF::wfn::~wfn()
     delete this->tautijab;
     delete this->tauijab;
     delete this->tijab;
+    delete this->tijab_new;
     delete this->W;
     delete this->Dijab;
 } 
@@ -210,8 +215,9 @@ double HF::wfn::do_SCF (void) {
     //>Compute initial energy
     this->E = this->compute_E () + this->enuc;
     //<Compute initial energy
+    std::cout << std::setprecision(15) << this->E << "\n";
 
-    for (int i = 0; i < this->maxiter; i++) {
+    for (int i = 0; i < 35; i++) {
         //>Build new Fock matrix
         this->build_F ();
         //<Build new Fock matrix
@@ -230,6 +236,12 @@ double HF::wfn::do_SCF (void) {
         gsl_eigen_symmv (this->Fp, this->eval, this->evec, this->w);
         gsl_eigen_symmv_sort (this->eval, this->evec, GSL_EIGEN_SORT_VAL_ASC);
         gsl_matrix_memcpy(this->Fp, this->FPROTECT);
+        //for ( int i = 0; i < this->nbf; i++ ) {
+        //    for ( int j = 0; j < this->nbf; j++ ) {
+        //        std::cout << std::setprecision(15) << gsl_matrix_get ( this->Fp, i, j ) << " ";
+        //    }
+        //    std::cout << "\n";
+        //}
         //>Transform C' (orthog) -> C (non-orthog)
         gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
                         1.0, this->lambda, this->evec,
@@ -243,7 +255,7 @@ double HF::wfn::do_SCF (void) {
         this->E = this->compute_E () + this->enuc;
         std::cout << std::setprecision(15) << this->E << "\n";
     }
-    this->build_F();
+    //this->build_F();
     //this->print_MO_F();
     
     return this->E + this->enuc;
@@ -253,7 +265,7 @@ double HF::wfn::compute_E (void) {
     double Em = 0.0;
     for (int u = 0; u < this->nbf; u++) {
         for (int v = 0; v < this->nbf; v++) {
-            Em += gsl_matrix_get (this->D, v, u)
+            Em += gsl_matrix_get (this->D, u, v)
                 * ( gsl_matrix_get (this->Hcore, u, v)
                   + gsl_matrix_get (this->F, u, v));
         }
@@ -290,7 +302,7 @@ double HF::wfn::MP2viaCC ( void ) {
         for ( int j = 0; j < this->noccso; j++) {
             for ( int a = this->noccso; a < this->nmo; a++) {
                 for ( int b = this->noccso; b < this->nmo; b++) {
-                    tsum += this->SO_eri->myarray[i][a][j][b]
+                    tsum += this->SO_eri->myarray[i][j][a][b]
                             * this->tijab->myarray[i][j][a][b];
                             //  * ( this->SO_eri->myarray[i][a][j][b])
                             //  / ( gsl_vector_get ( this->eval, i/2)
@@ -317,9 +329,9 @@ void HF::wfn::ccenergy (void) {
         for ( int j = 0; j < this->noccso; j++ ) {
             for ( int a = this->noccso; a < this->nmo; a++ ) {
                 for ( int b = this->noccso; b < this->nmo; b++ ) {
-                    Ecc += 0.25*this->SO_eri->myarray[i][a][j][b]
+                    Ecc += 0.25*this->SO_eri->myarray[i][j][a][b]
                                *this->tijab->myarray[i][j][a][b]; 
-                    Ecc += 0.5*this->SO_eri->myarray[i][a][j][b]
+                    Ecc += 0.5*this->SO_eri->myarray[i][j][a][b]
                               *gsl_matrix_get ( this->tia, i, a )
                               *gsl_matrix_get ( this->tia, j, b );
                 }
@@ -338,21 +350,35 @@ void HF::wfn::cciter (void) {
     this->build_Wmnij(); //Eqn 6
     this->build_Wabef(); //Eqn 7
     this->build_Wmbej(); //Eqn 8
-    //T1
     this->build_tia(); //Eqn 1
-    //T2
     this->build_tijab(); //Eqn 2
-    //this->print_tijab();
+    this->tiacpy();
+    this->tijabcpy();
     this->ccenergy();
-    std::cout << "E[CC] " << this->Ecorr << "\n";
+    std::cout << "E(CC) " << this->Ecorr << "\n";
 }
     
 
 void HF::wfn::do_CCSD (void) {
-    //CHECKED:
-    //ITER 0 : ALL
-    //ITER 1 : tautijab, tauijab, Fae, Fmi, Fme, Wmnij, Wabef, Wmbej
-    //         ... tia,
+    for ( int i = 0; i < this->nbf; i++ ) {
+        for ( int j = 0; j < this->nbf; j++ ) {
+            for ( int k = 0; k < this->nbf; k++ ) {
+                for ( int l = 0; l < this->nbf; l++ ) {
+                std::cout << this->MO_eri->myarray[i][j][k][l] << " ";
+                }
+            std::cout << "\n";
+            }
+            std::cout << "\n";
+            std::cout << "\n";
+        }
+    }
+    for ( int i = 0; i < this->nbf; i++ ) {
+        for ( int j = 0; j < this->nbf; j++ ) {
+            std::cout << gsl_matrix_get ( this->C, i , j) <<  " ";
+        }
+        std::cout << "\n";
+    }
+    return;
     //this->print_MO_F ();
     std::cout << "Transforming MO -> SO ... \n";
     this->MOtoSO ();    
@@ -360,14 +386,12 @@ void HF::wfn::do_CCSD (void) {
     this->FtoSO ();
     this->build_Dia(); //Eqn 12
     this->build_Dijab(); //Eqn 13
-    //T1
-    this->build_tia(); //Eqn 1
     //T2
-    this->build_tijab(); //Eqn 2
+    this->build_tijab_MP2(); //Eqn 2
     this->ccenergy();
+    std::cout << "E[MP2](CC) " << this->MP2viaCC() << "\n";
     std::cout << "E[MP2](CC) " << this->Ecorr << "\n";
-    this->cciter();
-    for ( int i = 0; i < 5 ; i++ ) {
+    for ( int i = 0; i < 38 ; i++ ) {
         this->cciter();
     }
 }
@@ -407,7 +431,7 @@ void HF::wfn::FtoSO (void ) {
             tsum = 0.0;
             tsum += gsl_matrix_get (this->HcoreSO, p, q);
             for ( int m = 0; m < this->noccso; m++) {
-                tsum += this->SO_eri->myarray[p][q][m][m];
+                tsum += this->SO_eri->myarray[p][m][q][m];
                 //tsum -= this->SO_eri->myarray[p][m][q][m];
             }
             gsl_matrix_set (this->FSO, p, q, tsum);
@@ -430,7 +454,7 @@ void HF::wfn::MOtoSO (void) {
                     ss = s/2;
                     spinint1 = this->MO_eri->myarray[pp][qq][rr][ss] * ( p%2 == q%2) * (r%2 == s%2);
                     spinint2 = this->MO_eri->myarray[pp][ss][qq][rr] * ( p%2 == s%2) * ( q%2 == r%2);
-                    this->SO_eri->myarray[p][q][r][s] = spinint1 - spinint2;
+                    this->SO_eri->myarray[p][r][q][s] = spinint1 - spinint2;
                 
                 }
             }
@@ -466,6 +490,24 @@ void HF::wfn::AOtoMOnoddy (void) {
 
 
 //<<-- BUILDS (FOCK ETC) -->>//
+void HF::wfn::tiacpy (void) {
+    for ( int i =0; i < this->noccso; i++ ) {
+        for ( int a = this->noccso; a < this->nmo; a++ ) {
+            gsl_matrix_set ( this->tia , i , a , gsl_matrix_get (this->tia_new , i , a ));
+        }
+    }
+}
+void HF::wfn::tijabcpy (void) {
+    for ( int i =0; i < this->noccso; i++ ) {
+        for ( int j =0; j < this->noccso; j++ ) {
+            for ( int a = this->noccso; a < this->nmo; a++ ) {
+                for ( int b = this->noccso; b < this->nmo; b++ ) {
+                    this->tijab->myarray[i][j][a][b] = this->tijab_new->myarray[i][j][a][b];
+                }
+            }
+        }
+    }
+}
 void HF::wfn::build_D (void) {
     double tsum = 0.0;
     for (int u = 0.0; u < this->nbf; u++) {
@@ -542,7 +584,7 @@ void HF::wfn::build_tia (void) {
             for ( int n = 0; n < this->noccso; n++ ) {
                 for ( int f = this->noccso; f < this->nmo; f++ ) {
                     tsum4 += gsl_matrix_get ( this->tia, n, f )
-                           * this->SO_eri->myarray[n][i][a][f]; 
+                           * this->SO_eri->myarray[n][a][i][f]; 
                 }
             }
 
@@ -552,7 +594,7 @@ void HF::wfn::build_tia (void) {
                 for ( int e = this->noccso; e < this->nmo; e++ ) {
                     for ( int f = this->noccso; f < this->nmo; f++ ) {
                         tsum5 += this->tijab->myarray[i][m][e][f]
-                               * this->SO_eri->myarray[m][e][a][f]; 
+                               * this->SO_eri->myarray[m][a][e][f]; 
                     }
                 }
             }
@@ -564,7 +606,7 @@ void HF::wfn::build_tia (void) {
                 for ( int e = this->noccso; e < this->nmo; e++ ) {
                     for ( int n = 0; n < this->noccso; n++ ) {
                         tsum6 += this->tijab->myarray[m][n][a][e]
-                               * this->SO_eri->myarray[n][e][m][i]; 
+                               * this->SO_eri->myarray[n][m][e][i]; 
                     }
                 }
             }
@@ -573,7 +615,7 @@ void HF::wfn::build_tia (void) {
             tiatmp = gsl_matrix_get ( this->FSO, i , a ) 
                    + tsum1 - tsum2 + tsum3 - tsum4 - tsum5 - tsum6;
             tiatmp /= gsl_matrix_get ( Dia, i, a );            
-            gsl_matrix_set ( this->tia, i, a, tiatmp );
+            gsl_matrix_set ( this->tia_new, i, a, tiatmp );
         }
     }
 }
@@ -593,7 +635,7 @@ void HF::wfn::build_tijab (void) {
         for ( int j = 0; j < this->noccso; j++ ) {
             for ( int a = this->noccso; a < this->nmo; a++ ) {
                 for ( int b = this->noccso; b < this->nmo; b++ ) {
-                    tijabtmp = this->SO_eri->myarray[i][a][j][b];
+                    tijabtmp = this->SO_eri->myarray[i][j][a][b];
                     //term #2
                     //<<--PERMUTATION P_(ab)-->>//
                     //P_(ab) = p(ab) - p(ba)
@@ -712,28 +754,28 @@ void HF::wfn::build_tijab (void) {
                                   * this->W->myarray[m][b][e][j];
                             tsum5 -= gsl_matrix_get ( this->tia, i, e )
                                   * gsl_matrix_get ( this->tia, m, a )
-                                  * this->SO_eri->myarray[m][e][b][j];
+                                  * this->SO_eri->myarray[m][b][e][j];
 
                             //p(ij)p(ba)f part
                             tsum5 -= this->tijab->myarray[i][m][b][e]
                                   * this->W->myarray[m][a][e][j];
                             tsum5 += gsl_matrix_get ( this->tia, i, e )
                                   * gsl_matrix_get ( this->tia, m, b )
-                                  * this->SO_eri->myarray[m][e][a][j];
+                                  * this->SO_eri->myarray[m][a][e][j];
 
                             //p(ji)p(ab)f part
                             tsum5 -= this->tijab->myarray[j][m][a][e]
                                   * this->W->myarray[m][b][e][i];
                             tsum5 += gsl_matrix_get ( this->tia, j, e )
                                   * gsl_matrix_get ( this->tia, m, a )
-                                  * this->SO_eri->myarray[m][e][b][i];
+                                  * this->SO_eri->myarray[m][b][e][i];
                     
                             //p(ji)p(ba)f part
                             tsum5 += this->tijab->myarray[j][m][b][e]
                                   * this->W->myarray[m][a][e][i];
                             tsum5 -= gsl_matrix_get ( this->tia, j, e )
                                   * gsl_matrix_get ( this->tia, m, b )
-                                  * this->SO_eri->myarray[m][e][a][i];
+                                  * this->SO_eri->myarray[m][a][e][i];
                             
                         }
                     }
@@ -746,11 +788,11 @@ void HF::wfn::build_tijab (void) {
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
                         //p(ij) part 
                         tsum6 += gsl_matrix_get ( this->tia, i, e )
-                               * this->SO_eri->myarray[a][e][b][j];
+                               * this->SO_eri->myarray[a][b][e][j];
                         
                         //p(ji) part
                         tsum6 -= gsl_matrix_get ( this->tia, j, e )
-                               * this->SO_eri->myarray[a][e][b][i];
+                               * this->SO_eri->myarray[a][b][e][i];
                     }
                     //<<--PERMUTATION P_(ij)-->>//
 
@@ -761,11 +803,11 @@ void HF::wfn::build_tijab (void) {
                     for ( int m = 0; m < this->noccso; m++ ) {
                         //p(ab) part
                         tsum7 += gsl_matrix_get ( this->tia, m, a )
-                               * this->SO_eri->myarray[m][i][b][j]; 
+                               * this->SO_eri->myarray[m][b][i][j]; 
                         
                         //p(ba) part
                         tsum7 -= gsl_matrix_get ( this->tia, m, b )
-                               * this->SO_eri->myarray[m][i][a][j];
+                               * this->SO_eri->myarray[m][a][i][j];
                     }
                     tijabtmp += tsum1;
                     tijabtmp -= tsum2;
@@ -775,9 +817,8 @@ void HF::wfn::build_tijab (void) {
                     //std::cout << "TIJAB " << tijabtmp << "\n";
                     tijabtmp += tsum6;
                     tijabtmp -= tsum7;
-                    //tijabtmp += this->SO_eri->myarray[i][a][j][b];
                     tijabtmp /= this->Dijab->myarray[i][j][a][b];
-                    this->tijab->myarray[i][j][a][b] = tijabtmp;
+                    this->tijab_new->myarray[i][j][a][b] = tijabtmp;
                 }
             }
         }
@@ -789,7 +830,7 @@ void HF::wfn::build_tijab_MP2 (void) {
             for ( int a = this->noccso; a < this->nmo; a++ ) {
                 for ( int b = this->noccso; b < this->nmo; b++) {
                     this->tijab->myarray[i][j][a][b] = 
-                        this->SO_eri->myarray[i][a][j][b]
+                        this->SO_eri->myarray[i][j][a][b]
                       / (
                         gsl_vector_get ( this -> eval, i/2)
                       + gsl_vector_get ( this -> eval, j/2)
@@ -887,7 +928,7 @@ void HF::wfn::build_Fae (void) {
             for ( int m = 0; m < this->noccso; m++ ) {
                 for ( int f = this->noccso; f < this->nmo; f++ ) {
                     tsum2 +=  gsl_matrix_get ( this->tia, m, f)
-                            * this->SO_eri->myarray[m][f][a][e];
+                            * this->SO_eri->myarray[m][a][f][e];
                 }
             }
             //Third summation: over m, n, f (occ, occ, vir)
@@ -896,7 +937,7 @@ void HF::wfn::build_Fae (void) {
                 for ( int n = 0; n < this->noccso; n++ ) {
                     for ( int f = this->noccso; f < this->nmo; f++ ) {
                         tsum3 +=  this->tautijab->myarray[m][n][a][f]
-                                * this->SO_eri->myarray[m][e][n][f]; 
+                                * this->SO_eri->myarray[m][n][e][f]; 
                     }
                 }
             }
@@ -930,7 +971,7 @@ void HF::wfn::build_Fmi (void) {
             for ( int n = 0; n < this->noccso; n++ ) {
                 for ( int e = this->noccso; e < this->nmo; e++ ) {
                     tsum2 +=  gsl_matrix_get ( this->tia, n, e )
-                            * this->SO_eri->myarray[m][i][n][e]; 
+                            * this->SO_eri->myarray[m][n][i][e]; 
                 }
             }
             
@@ -940,7 +981,7 @@ void HF::wfn::build_Fmi (void) {
                 for ( int e = this->noccso; e < this->nmo; e++ ) {
                     for ( int f = this->noccso; f < this->nmo; f++ ) {
                         tsum3 +=  this->tautijab->myarray[i][n][e][f]
-                                * this->SO_eri->myarray[m][e][n][f];
+                                * this->SO_eri->myarray[m][n][e][f];
                     }
                 }
             }
@@ -962,7 +1003,7 @@ void HF::wfn::build_Fme (void) {
             for ( int n = 0; n < this->noccso; n++ ) {
                 for ( int f = this->noccso; f < this->nmo; f++ ) {
                     tsum +=   gsl_matrix_get (this->tia, n, f)
-                            * this->SO_eri->myarray[m][e][n][f];
+                            * this->SO_eri->myarray[m][n][e][f];
                 }
             }
             gsl_matrix_set ( this->FF, m, e,
@@ -985,9 +1026,9 @@ void HF::wfn::build_Wmnij (void) {
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
                         //p(ij) - p(ji)
                         tsum1 += gsl_matrix_get ( this->tia, j, e )
-                              * this->SO_eri->myarray[m][i][n][e];
+                              * this->SO_eri->myarray[m][n][i][e];
                         tsum1 -= gsl_matrix_get ( this->tia, i, e )
-                              * this->SO_eri->myarray[m][j][n][e];
+                              * this->SO_eri->myarray[m][n][j][e];
                     }                
                     
                     //Summation 2: over e, f (vir, vir)
@@ -995,12 +1036,12 @@ void HF::wfn::build_Wmnij (void) {
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
                         for ( int f = this->noccso; f < this->nmo; f++ ) {
                             tsum2 += this->tauijab->myarray[i][j][e][f]
-                                   * this->SO_eri->myarray[m][e][n][f];       
+                                   * this->SO_eri->myarray[m][n][e][f];       
                         }
                     } 
                     tsum2 *= 0.25;
                     
-                    this->W->myarray[m][n][i][j] = this->SO_eri->myarray[m][i][n][j]
+                    this->W->myarray[m][n][i][j] = this->SO_eri->myarray[m][n][i][j]
                                                    + tsum1 + tsum2;
                 }
             }
@@ -1021,9 +1062,9 @@ void HF::wfn::build_Wabef (void) {
                 tsum1 = 0.0;
                 for ( int m = 0; m < this->noccso; m++ ) {
                     tsum1 += gsl_matrix_get ( tia, m, b )
-                           * this->SO_eri->myarray[a][e][m][f];
+                           * this->SO_eri->myarray[a][m][e][f];
                     tsum1 -= gsl_matrix_get ( tia, m, a )
-                           * this->SO_eri->myarray[b][e][m][f];
+                           * this->SO_eri->myarray[b][m][e][f];
                 }
             
                 //Summation 2: over m, n (occ, occ)
@@ -1031,12 +1072,12 @@ void HF::wfn::build_Wabef (void) {
                 for ( int m = 0; m < this->noccso; m++ ) {
                     for ( int n = 0; n < this->noccso; n++ ) {
                         tsum2 += this->tauijab->myarray[m][n][a][b]
-                               * this->SO_eri->myarray[m][e][n][f];
+                               * this->SO_eri->myarray[m][n][e][f];
                     }
                 }
                 tsum2 *= 0.25;
                 
-                this->W->myarray[a][b][e][f] = this->SO_eri->myarray[a][e][b][f]
+                this->W->myarray[a][b][e][f] = this->SO_eri->myarray[a][b][e][f]
                                              - tsum1 + tsum2;
                 }
             }
@@ -1057,14 +1098,14 @@ void HF::wfn::build_Wmbej (void) {
                     tsum1 = 0.0;
                     for ( int f = this->noccso; f < this->nmo; f++ ) {
                         tsum1 += gsl_matrix_get ( this->tia, j, f )
-                              * this->SO_eri->myarray[m][e][b][f];
+                              * this->SO_eri->myarray[m][b][e][f];
                     }
 
                     //Summation 2: over n (occ)
                     tsum2 = 0.0;
                     for ( int n = 0; n < this->noccso; n++ ) {
                         tsum2 += gsl_matrix_get ( this->tia, n, b )
-                               * this->SO_eri->myarray[m][e][n][j];
+                               * this->SO_eri->myarray[m][n][e][j];
                     }
                     
                     //Summation 3: over n, f ( occ , vir )
@@ -1075,10 +1116,10 @@ void HF::wfn::build_Wmbej (void) {
                                       + gsl_matrix_get ( this->tia, j, f)
                                       * gsl_matrix_get ( this->tia, n, b)
                                      )
-                                   * this->SO_eri->myarray[m][e][n][f];
+                                   * this->SO_eri->myarray[m][n][e][f];
                         }
                     }
-                    this->W->myarray[m][b][e][j] = this->SO_eri->myarray[m][e][b][j]
+                    this->W->myarray[m][b][e][j] = this->SO_eri->myarray[m][b][e][j]
                                                   + tsum1 - tsum2 - tsum3;
                 }
             }
@@ -1088,6 +1129,15 @@ void HF::wfn::build_Wmbej (void) {
 //-->> BUILDS (FOCK ETC) <<--//
 
 //<<-- I/O -->>//
+//
+void HF::wfn::print_F ( void ) {
+    for ( int i = 0; i < this->nmo; i++ ) {
+        for ( int j = 0; j < this->nmo; j++ ) {
+            std::cout << gsl_matrix_get (this->FSO, i, j) << " ";
+        }
+        std::cout << "\n";
+    }
+}
 
 void HF::wfn::print_Fmi ( void ) {
     for ( int i = 0; i < this->noccso; i++ ) {
@@ -1267,17 +1317,30 @@ void HF::wfn::read_2D (std::string fname, gsl_matrix * A) {
     //      int nbf; number of basis functions
     //output void;
     std::ifstream arr2d(fname);
-    int ti,tj;
+    int i = 0;
+    int j = 0;
     double s;
 
-    for (int i = 0; i < this->nbf; i++) {
-        for (int j = 0; j <= i; j++) {
+    while (!arr2d.eof()) {
+            arr2d >> std::setprecision(15) >> i >> j >> s;
+            if ( arr2d.eof() ) {
+                break;
+            }
             std::cout << i << " " << j << "\n";
-            arr2d >> std::setprecision(15) >> ti >> tj >> s;
+            i -= 1;
+            j -= 1;
             gsl_matrix_set (A, i, j, s);
             gsl_matrix_set (A, j, i, s);
-        }
     }
+
+    //for (int i = 0; i < this->nbf; i++) {
+    //    for (int j = 0; j <= i; j++) {
+    //        std::cout << i << " " << j << "\n";
+    //        arr2d >> std::setprecision(15) >> ti >> tj >> s;
+    //        gsl_matrix_set (A, i, j, s);
+    //        gsl_matrix_set (A, j, i, s);
+    //    }
+    //}
 }
 
 void HF::wfn::read_ERI (std::string fname) {

@@ -1,0 +1,34 @@
+
+# PYTHONPATH must include directory above plugin directory.
+#     Define either externally or here, then import plugin.
+sys.path.insert(0, './..')
+import ddcc
+
+molecule {
+O
+H 1 R
+H 1 R 2 A
+
+R = 1.1
+A = 104.0
+symmetry c1
+}
+
+set {
+  basis cc-pvdz
+}
+
+set ddcc {
+  print 1
+}
+set scf_type pk
+set mp2_type conv
+set E_CONVERGENCE 12
+set D_CONVERGENCE 12
+
+e = energy('ddcc')
+er = energy('scf')
+e1 = energy('mp2')
+print("MP2 Energy (Psi4) ",e1 - er)
+e2 = energy('ccsd')
+print("CCSD Energy (Psi4) ",e2 - er)

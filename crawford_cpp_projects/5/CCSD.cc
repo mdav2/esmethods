@@ -10,7 +10,9 @@
 
 int main() {
     int nbf = 7;
-    HF::wfn mywfn(nbf);
+    int nocc = 5;
+    int natom = 3;
+    HF::wfn mywfn(nbf, nocc, natom);
     mywfn.do_SCF ();
     std::cout << std::setprecision(15) << "E[SCF] " << mywfn.E << "\n";
     //for (int i = 0;  i < mywfn.nbf; i++) {

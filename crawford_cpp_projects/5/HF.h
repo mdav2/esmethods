@@ -37,10 +37,12 @@ class wfn
         gsl_matrix * FF;
         gsl_matrix * Dia;
         gsl_matrix * tia;
+        gsl_matrix * tia_new;
         tensor4p * W;
         tensor4p * tautijab;
         tensor4p * tauijab;
         tensor4p * tijab;
+        tensor4p * tijab_new;
         tensor4p * Dijab;
         gsl_eigen_symmv_workspace * w; //= gsl_eigen_symmv_alloc (nbf);
         //<Private Data
@@ -64,9 +66,12 @@ class wfn
         void build_Dia (void); //D for CC intermediates
         void build_Dijab (void);
         void build_tia (void);
+        void tiacpy (void);
         void build_tijab (void);
+        void tijabcpy (void);
         void build_tijab_MP2 (void);
         //void print_Fp (void);
+        void print_F (void);
         void print_Fae (void);
         void print_Fme (void);
         void print_Fmi (void);
@@ -115,7 +120,7 @@ class wfn
         void do_MP2 (void);
         double do_SCF (void);
         double compute_E (void);
-        wfn(int nbf);
+        wfn(int nbf, int nocc, int natom);
         ~wfn(void);
         //<Public Methods
 };

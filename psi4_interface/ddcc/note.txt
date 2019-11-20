@@ -1,0 +1,4 @@
+Notes
+PM 11.19 : failing energy, off by a reasonable amt ( not 0 and not infty)
+         : check all indices against paper directly
+         : then go through the process of checking intermediates via comparison
