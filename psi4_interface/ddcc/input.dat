@@ -15,7 +15,7 @@ symmetry c1
 }
 
 set {
-  basis cc-pvdz
+  basis dz
 }
 
 set ddcc {
@@ -23,8 +23,8 @@ set ddcc {
 }
 set scf_type pk
 set mp2_type conv
-set E_CONVERGENCE 12
-set D_CONVERGENCE 12
+set E_CONVERGENCE 14
+set D_CONVERGENCE 14
 
 e = energy('ddcc')
 er = energy('scf')

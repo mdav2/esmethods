@@ -94,6 +94,7 @@ class phfwfn
         void build_tia (void);
         void tiacpy (void);
         void build_tijab (void);
+        void build_tijab2 (void);
         void tijabcpy (void);
         //void print_Fp (void);
         void print2D (SharedMatrix A, int lb1, int ub1, int lb2, int ub2);
@@ -127,6 +128,7 @@ class phfwfn
         int nocc;
         int noccso;
         int maxiter;
+        double ccetol;
         double E;
         double Ecorr;
         double enuc;

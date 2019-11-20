@@ -109,6 +109,7 @@ phf::phfwfn::phfwfn(SharedWavefunction ref_wfn, int nbf, int nocc)
     this->nocc =      nocc;
     this->noccso =    this->nocc*2;
     this->maxiter =   50;
+    this->ccetol =    1E-14;
     this->eval =      ref_wfn->epsilon_a()->clone(); //mo energies
     this->mints =     new MintsHelper(ref_wfn->basisset()); //integrals
     this->C =         ref_wfn->Ca();
@@ -188,9 +189,10 @@ void phf::phfwfn::do_CCSD (void) {
     for ( int i = 0; i < this->maxiter; i++ ) {
         std::cout << i << "\n";
         this->cciter();
-        //if ( this->Ecorr - elast < 1E-8 ) {
-        //    break;
-        //}
+        if ( std::abs(this->Ecorr - elast) < this->ccetol ) {
+            break;
+        }
+        elast = this->Ecorr;
     }
 }
 void phf::phfwfn::cciter (void) {
@@ -602,6 +604,7 @@ void phf::phfwfn::tiacpy (void) {
         }
     }
 }
+
 void phf::phfwfn::build_tijab (void) {
     double tijabtmp = 0.0;
     double tsum1 = 0.0;
@@ -764,7 +767,7 @@ void phf::phfwfn::build_tijab (void) {
                     tsum6 = 0.0;
                     //Summation : over e (vir)
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
-                        //p(ij) part 
+                        //p(ij) part
                         tsum6 += this->tia->get( i, e )
                                * this->SO_eri->get( a, b, e, j);
 
