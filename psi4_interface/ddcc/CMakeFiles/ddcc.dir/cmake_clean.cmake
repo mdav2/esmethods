@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ddcc.dir/mointegrals.cc.o"
+  "CMakeFiles/ddcc.dir/triples.cc.o"
+  "CMakeFiles/ddcc.dir/phf.cc.o"
   "ddcc.pdb"
   "ddcc.so"
 )

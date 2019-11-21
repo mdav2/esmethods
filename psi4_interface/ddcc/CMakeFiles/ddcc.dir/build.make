@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/mmd01986/.conda/envs/p4env/bin/cmake
+CMAKE_COMMAND = /home/mmd01986/anaconda3/envs/psi4/bin/cmake
 
 # The command to remove a file.
-RM = /home/mmd01986/.conda/envs/p4env/bin/cmake -E remove -f
+RM = /home/mmd01986/anaconda3/envs/psi4/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -60,31 +60,61 @@ include CMakeFiles/ddcc.dir/flags.make
 CMakeFiles/ddcc.dir/mointegrals.cc.o: CMakeFiles/ddcc.dir/flags.make
 CMakeFiles/ddcc.dir/mointegrals.cc.o: mointegrals.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ddcc.dir/mointegrals.cc.o"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ddcc.dir/mointegrals.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ddcc.dir/mointegrals.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc
 
 CMakeFiles/ddcc.dir/mointegrals.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ddcc.dir/mointegrals.cc.i"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc > CMakeFiles/ddcc.dir/mointegrals.cc.i
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc > CMakeFiles/ddcc.dir/mointegrals.cc.i
 
 CMakeFiles/ddcc.dir/mointegrals.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ddcc.dir/mointegrals.cc.s"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc -o CMakeFiles/ddcc.dir/mointegrals.cc.s
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc -o CMakeFiles/ddcc.dir/mointegrals.cc.s
+
+CMakeFiles/ddcc.dir/triples.cc.o: CMakeFiles/ddcc.dir/flags.make
+CMakeFiles/ddcc.dir/triples.cc.o: triples.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ddcc.dir/triples.cc.o"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ddcc.dir/triples.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc
+
+CMakeFiles/ddcc.dir/triples.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ddcc.dir/triples.cc.i"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc > CMakeFiles/ddcc.dir/triples.cc.i
+
+CMakeFiles/ddcc.dir/triples.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ddcc.dir/triples.cc.s"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc -o CMakeFiles/ddcc.dir/triples.cc.s
+
+CMakeFiles/ddcc.dir/phf.cc.o: CMakeFiles/ddcc.dir/flags.make
+CMakeFiles/ddcc.dir/phf.cc.o: phf.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ddcc.dir/phf.cc.o"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ddcc.dir/phf.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc
+
+CMakeFiles/ddcc.dir/phf.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ddcc.dir/phf.cc.i"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc > CMakeFiles/ddcc.dir/phf.cc.i
+
+CMakeFiles/ddcc.dir/phf.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ddcc.dir/phf.cc.s"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc -o CMakeFiles/ddcc.dir/phf.cc.s
 
 # Object files for target ddcc
 ddcc_OBJECTS = \
-"CMakeFiles/ddcc.dir/mointegrals.cc.o"
+"CMakeFiles/ddcc.dir/mointegrals.cc.o" \
+"CMakeFiles/ddcc.dir/triples.cc.o" \
+"CMakeFiles/ddcc.dir/phf.cc.o"
 
 # External object files for target ddcc
 ddcc_EXTERNAL_OBJECTS =
 
 ddcc.so: CMakeFiles/ddcc.dir/mointegrals.cc.o
+ddcc.so: CMakeFiles/ddcc.dir/triples.cc.o
+ddcc.so: CMakeFiles/ddcc.dir/phf.cc.o
 ddcc.so: CMakeFiles/ddcc.dir/build.make
-ddcc.so: /home/mmd01986/.conda/envs/p4env/lib/python3.7/site-packages/psi4/core.cpython-37m-x86_64-linux-gnu.so
-ddcc.so: /home/mmd01986/.conda/envs/p4env/lib/libiomp5.so
-ddcc.so: /home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib/libgomp.so
-ddcc.so: /home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/libpthread.so
+ddcc.so: /home/mmd01986/anaconda3/envs/psi4/lib/python3.7/site-packages/psi4/core.cpython-37m-x86_64-linux-gnu.so
+ddcc.so: /home/mmd01986/anaconda3/envs/psi4/lib/libiomp5.so
+ddcc.so: /home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib/libgomp.so
+ddcc.so: /home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/libpthread.so
 ddcc.so: CMakeFiles/ddcc.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module ddcc.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared module ddcc.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ddcc.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

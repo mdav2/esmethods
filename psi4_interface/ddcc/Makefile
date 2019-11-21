@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/mmd01986/.conda/envs/p4env/bin/cmake
+CMAKE_COMMAND = /home/mmd01986/anaconda3/envs/psi4/bin/cmake
 
 # The command to remove a file.
-RM = /home/mmd01986/.conda/envs/p4env/bin/cmake -E remove -f
+RM = /home/mmd01986/anaconda3/envs/psi4/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/mmd01986/.conda/envs/p4env/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/mmd01986/anaconda3/envs/psi4/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/mmd01986/.conda/envs/p4env/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -150,6 +150,60 @@ mointegrals.cc.s:
 	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/mointegrals.cc.s
 .PHONY : mointegrals.cc.s
 
+phf.o: phf.cc.o
+
+.PHONY : phf.o
+
+# target to build an object file
+phf.cc.o:
+	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/phf.cc.o
+.PHONY : phf.cc.o
+
+phf.i: phf.cc.i
+
+.PHONY : phf.i
+
+# target to preprocess a source file
+phf.cc.i:
+	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/phf.cc.i
+.PHONY : phf.cc.i
+
+phf.s: phf.cc.s
+
+.PHONY : phf.s
+
+# target to generate assembly for a file
+phf.cc.s:
+	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/phf.cc.s
+.PHONY : phf.cc.s
+
+triples.o: triples.cc.o
+
+.PHONY : triples.o
+
+# target to build an object file
+triples.cc.o:
+	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/triples.cc.o
+.PHONY : triples.cc.o
+
+triples.i: triples.cc.i
+
+.PHONY : triples.i
+
+# target to preprocess a source file
+triples.cc.i:
+	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/triples.cc.i
+.PHONY : triples.cc.i
+
+triples.s: triples.cc.s
+
+.PHONY : triples.s
+
+# target to generate assembly for a file
+triples.cc.s:
+	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/triples.cc.s
+.PHONY : triples.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +216,12 @@ help:
 	@echo "... mointegrals.o"
 	@echo "... mointegrals.i"
 	@echo "... mointegrals.s"
+	@echo "... phf.o"
+	@echo "... phf.i"
+	@echo "... phf.s"
+	@echo "... triples.o"
+	@echo "... triples.i"
+	@echo "... triples.s"
 .PHONY : help
 
 
