@@ -26,11 +26,11 @@ set mp2_type conv
 set E_CONVERGENCE 14
 set D_CONVERGENCE 14
 
-e = energy('ddcc')
-er = energy('scf')
-e1 = energy('mp2')
-print("MP2 Energy (Psi4) ",e1 - er)
-e2 = energy('ccsd')
-e3 = energy('ccsd(t)')
-print("CCSD Energy (Psi4) ",e2 - er)
-print("(T) Energy (Psi4) ",e3 - e2)
+e = energy('mycis')
+#er = energy('scf')
+#e1 = energy('mp2')
+#print("MP2 Energy (Psi4) ",e1 - er)
+#e2 = energy('ccsd')
+#e3 = energy('ccsd(t)')
+#print("CCSD Energy (Psi4) ",e2 - er)
+#print("(T) Energy (Psi4) ",e3 - e2)

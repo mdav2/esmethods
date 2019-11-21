@@ -57,18 +57,18 @@ include CMakeFiles/ddcc.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ddcc.dir/flags.make
 
-CMakeFiles/ddcc.dir/mointegrals.cc.o: CMakeFiles/ddcc.dir/flags.make
-CMakeFiles/ddcc.dir/mointegrals.cc.o: mointegrals.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ddcc.dir/mointegrals.cc.o"
-	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ddcc.dir/mointegrals.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc
+CMakeFiles/ddcc.dir/ccalt.cc.o: CMakeFiles/ddcc.dir/flags.make
+CMakeFiles/ddcc.dir/ccalt.cc.o: ccalt.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ddcc.dir/ccalt.cc.o"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ddcc.dir/ccalt.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccalt.cc
 
-CMakeFiles/ddcc.dir/mointegrals.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ddcc.dir/mointegrals.cc.i"
-	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc > CMakeFiles/ddcc.dir/mointegrals.cc.i
+CMakeFiles/ddcc.dir/ccalt.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ddcc.dir/ccalt.cc.i"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccalt.cc > CMakeFiles/ddcc.dir/ccalt.cc.i
 
-CMakeFiles/ddcc.dir/mointegrals.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ddcc.dir/mointegrals.cc.s"
-	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/mointegrals.cc -o CMakeFiles/ddcc.dir/mointegrals.cc.s
+CMakeFiles/ddcc.dir/ccalt.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ddcc.dir/ccalt.cc.s"
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccalt.cc -o CMakeFiles/ddcc.dir/ccalt.cc.s
 
 CMakeFiles/ddcc.dir/triples.cc.o: CMakeFiles/ddcc.dir/flags.make
 CMakeFiles/ddcc.dir/triples.cc.o: triples.cc
@@ -98,14 +98,14 @@ CMakeFiles/ddcc.dir/phf.cc.s: cmake_force
 
 # Object files for target ddcc
 ddcc_OBJECTS = \
-"CMakeFiles/ddcc.dir/mointegrals.cc.o" \
+"CMakeFiles/ddcc.dir/ccalt.cc.o" \
 "CMakeFiles/ddcc.dir/triples.cc.o" \
 "CMakeFiles/ddcc.dir/phf.cc.o"
 
 # External object files for target ddcc
 ddcc_EXTERNAL_OBJECTS =
 
-ddcc.so: CMakeFiles/ddcc.dir/mointegrals.cc.o
+ddcc.so: CMakeFiles/ddcc.dir/ccalt.cc.o
 ddcc.so: CMakeFiles/ddcc.dir/triples.cc.o
 ddcc.so: CMakeFiles/ddcc.dir/phf.cc.o
 ddcc.so: CMakeFiles/ddcc.dir/build.make

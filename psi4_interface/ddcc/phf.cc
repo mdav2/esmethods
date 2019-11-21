@@ -1,6 +1,8 @@
 #include <cstdlib>
 #include <memory>
+#include <omp.h>
 #include "phf.h"
+#include "determinant.h"
 #include "psi4/libmints/matrix.h"
 #include "psi4/libmints/vector.h"
 #include "psi4/libmints/mintshelper.h"
@@ -37,6 +39,8 @@ phfwfn::phfwfn(SharedWavefunction ref_wfn, int nbf, int nocc)
     this->tijab =     new tensor4 (nmo);
     this->tijab_new = new tensor4 (nmo);
     this->Dijab =     new tensor4 (nmo);
+    this->MOtoSO();
+    this->FtoSO();
 }
 phfwfn::~phfwfn() {
     delete this->SO_eri;
@@ -56,7 +60,10 @@ double kron ( int p, int q ) {
 //>ENERGY ROUTINES
 double phfwfn::MP2viaCC (void) {
     double tsum = 0.0;
-    for ( int i = 0; i < this->noccso; i++ ) {
+    int low = 0;
+    int high = this->noccso;
+    #pragma omp parallel for default(shared) reduction(+:tsum)
+    for ( int i = low; i < high; ++i ) {
         for ( int j = 0; j < this->noccso; j++ ) {
             for ( int a = this->noccso; a < this->nmo; a++ ) {
                 for ( int b = this->noccso; b < this->nmo; b++ ) {
@@ -65,6 +72,7 @@ double phfwfn::MP2viaCC (void) {
             }
         }
     }
+    //} // END PRAGMA OMP PARALLEL
     return tsum*0.25;
 }
 void phf::phfwfn::do_CCSD (void) {
@@ -91,16 +99,42 @@ void phf::phfwfn::do_CCSD (void) {
 void phf::phfwfn::cciter (void) {
     this->build_tautijab(); //Eqn 9
     this->build_tauijab(); //Eqn10
-    this->build_Fae(); //Eqn 3
-    this->build_Fme(); //Eqn 5
-    this->build_Fmi(); //Eqn 4
-    this->build_Wmnij(); //Eqn 6
-    this->build_Wmbej(); //Eqn 8
-    this->build_Wabef(); //Eqn 7
+    #pragma omp parallel sections
+    {
+        #pragma omp section
+        {
+        this->build_Fae(); //Eqn 3
+        this->build_Fme(); //Eqn 5
+        this->build_Fmi(); //Eqn 4
+        }
+        #pragma omp section
+        {
+        this->build_Wmnij(); //Eqn 6
+        }
+        #pragma omp section
+        {
+        this->build_Wmbej(); //Eqn 8
+        }
+        #pragma omp section
+        {
+        this->build_Wabef(); //Eqn 7
+        }
+
+    }
+
     this->build_tia(); //Eqn 1
     this->build_tijab(); //Eqn 2
+    #pragma omp parallel sections
+    {
+    #pragma omp section
+    {
     this->tiacpy();
+    }
+    #pragma omp section
+    {
     this->tijabcpy();
+    }
+    }
     this->ccenergy();
     std::cout << "E[CC] " << this->Ecorr << "\n";
 }
@@ -531,11 +565,15 @@ void phf::phfwfn::build_tijab (void) {
             for ( int a = this->noccso; a < this->nmo; a++ ) {
                 for ( int b = this->noccso; b < this->nmo; b++ ) {
                     tijabtmp = this->SO_eri->get( i, j, a, b);
+                    #pragma omp parallel sections
+                    {
                     //term #2
                     //<<--PERMUTATION P_(ab)-->>//
                     //P_(ab) = p(ab) - p(ba)
                     //p(ab) part
                     //Summation 1: over e ( vir )
+                    #pragma omp section
+                    {
                     tsum1 = 0.0;
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
                         //Sub-Summation 1a: over m ( occ )
@@ -568,6 +606,7 @@ void phf::phfwfn::build_tijab (void) {
                                 );
                     }
                     // ... means that at this point tsum1 = p(ab) - p(ba)
+                    }
 
                     //-->>PERMUTATION P_(ab)<<--//
 
@@ -576,6 +615,8 @@ void phf::phfwfn::build_tijab (void) {
                     //P_(ij) = p(ij) - p(ji)
                     //p(ij) part
                     //Summation 2: over m ( occ )
+                    #pragma omp section
+                    {
                     tsum2 = 0.0;
                     for ( int m = 0; m < this->noccso; m++ ) {
                         //Sub-Summation 2a: over e ( vir )
@@ -608,10 +649,13 @@ void phf::phfwfn::build_tijab (void) {
                                 );
                     }
                     // ... means that at this point tsum2 = p(ij) - p(ji)
+                    }
 
                     //-->>PERMUTATION P_(ab)<<--//
                     //term #4
                     //Summation : over m, n ( occ, occ )
+                    #pragma omp section
+                    {
                     tsum3 = 0.0;
                     for ( int m = 0; m < this->noccso; m++ ) {
                         for ( int n = 0; n < this->noccso; n++ ) {
@@ -620,9 +664,12 @@ void phf::phfwfn::build_tijab (void) {
                         }
                     }
                     tsum3 *= 0.5;
+                    }
 
                     //term #5
                     //Summation : over e, f ( vir, vir )
+                    #pragma omp section
+                    {
                     tsum4 = 0.0;
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
                         for ( int f = this->noccso; f < this->nmo; f++ ) {
@@ -631,6 +678,43 @@ void phf::phfwfn::build_tijab (void) {
                         }
                     }
                     tsum4 *= 0.5;
+                    }
+                    
+                    #pragma omp section
+                    {
+                    //term #7
+                    //<<--PERMUTATION P_(ij)-->>//
+                    tsum6 = 0.0;
+                    //Summation : over e (vir)
+                    for ( int e = this->noccso; e < this->nmo; e++ ) {
+                        //p(ij) part
+                        tsum6 += this->tia->get( i, e )
+                               * this->SO_eri->get( a, b, e, j);
+
+                        //p(ji) part
+                        tsum6 -= this->tia->get( j, e )
+                               * this->SO_eri->get( a, b, e, i);
+                    }
+                    }
+                    //-->>PERMUTATION P_(ij)<<--//
+
+                    //term #8
+                    //<<--PERMUTATION P_(ab)-->>//
+                    //Summation : over m ( occ )
+                    #pragma omp section
+                    {
+                    tsum7 = 0.0;
+                    for ( int m = 0; m < this->noccso; m++ ) {
+                        //p(ab) part
+                        tsum7 += this->tia->get( m, a )
+                               * this->SO_eri->get( m, b, i, j);
+
+                        //p(ba) part
+                        tsum7 -= this->tia->get( m, b )
+                               * this->SO_eri->get( m, a, i, j);
+                    }
+                    }
+                    }//end pragma omp sections
                     //term #6
                     //<<--PERMUTATION P_(ij)P_(ab)-->>//
                     //this is a nested permutation
@@ -640,6 +724,7 @@ void phf::phfwfn::build_tijab (void) {
 
                     //Summation : over m, e ( occ , vir )
                     tsum5 = 0.0;
+                    #pragma omp parallel for default(shared) reduction(+:tsum5)
                     for ( int m = 0; m < this->noccso; m++ ) {
                         for ( int e = this->noccso; e < this->nmo; e++ ) {
                             //p(ij)p(ab) part
@@ -672,34 +757,6 @@ void phf::phfwfn::build_tijab (void) {
                         }
                     }
                     //-->>PERMUTATION P_(ij)P_(ab)<<--//
-                    //term #7
-                    //<<--PERMUTATION P_(ij)-->>//
-                    tsum6 = 0.0;
-                    //Summation : over e (vir)
-                    for ( int e = this->noccso; e < this->nmo; e++ ) {
-                        //p(ij) part
-                        tsum6 += this->tia->get( i, e )
-                               * this->SO_eri->get( a, b, e, j);
-
-                        //p(ji) part
-                        tsum6 -= this->tia->get( j, e )
-                               * this->SO_eri->get( a, b, e, i);
-                    }
-                    //-->>PERMUTATION P_(ij)<<--//
-
-                    //term #8
-                    //<<--PERMUTATION P_(ab)-->>//
-                    //Summation : over m ( occ )
-                    tsum7 = 0.0;
-                    for ( int m = 0; m < this->noccso; m++ ) {
-                        //p(ab) part
-                        tsum7 += this->tia->get( m, a )
-                               * this->SO_eri->get( m, b, i, j);
-
-                        //p(ba) part
-                        tsum7 -= this->tia->get( m, b )
-                               * this->SO_eri->get( m, a, i, j);
-                    }
                     tijabtmp += tsum1;
                     tijabtmp -= tsum2;
                     tijabtmp += tsum3;

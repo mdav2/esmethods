@@ -123,7 +123,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //No help, variable specified on the command line.
-CMAKE_PREFIX_PATH:UNINITIALIZED=/home/mmd01986/anaconda3/envs/psi4
+CMAKE_PREFIX_PATH:UNINITIALIZED=/usr
 
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
@@ -221,6 +221,12 @@ PYTHON_LIBRARY:FILEPATH=/home/mmd01986/anaconda3/envs/psi4/lib/libpython3.7m.so
 
 //The directory containing a CMake configuration file for TargetLAPACK.
 TargetLAPACK_DIR:PATH=/home/mmd01986/anaconda3/envs/psi4/share/cmake/TargetLAPACK
+
+//Dependencies for the target
+ccsd_LIB_DEPENDS:STATIC=general;psi4::core;
+
+//Dependencies for the target
+cis_LIB_DEPENDS:STATIC=general;psi4::core;
 
 //Value Computed by CMake
 ddcc_BINARY_DIR:STATIC=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc
@@ -364,6 +370,8 @@ CMAKE_UNAME:INTERNAL=/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding MathOpenMP
 FIND_PACKAGE_MESSAGE_DETAILS_MathOpenMP:INTERNAL=[1][v()]
+//Details about finding OpenMP
+FIND_PACKAGE_MESSAGE_DETAILS_OpenMP:INTERNAL=[TRUE][c ][v()]
 //Details about finding OpenMP_CXX
 FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX:INTERNAL=[-fopenmp][/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib/libgomp.so][/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/libpthread.so][v()]
 //Details about finding PYTHON

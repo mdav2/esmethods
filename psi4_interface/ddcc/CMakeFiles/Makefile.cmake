@@ -64,5 +64,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/ddcc.dir/DependInfo.cmake"
+  "CMakeFiles/ccsd.dir/DependInfo.cmake"
+  "CMakeFiles/cis.dir/DependInfo.cmake"
   )

@@ -1,4 +1,10 @@
-Notes
-PM 11.19 : failing energy, off by a reasonable amt ( not 0 and not infty)
-         : check all indices against paper directly
-         : then go through the process of checking intermediates via comparison
+procedure for adding new energy methods
+eg greatmethod
+greatmethod.cc
+    extern "C" ...
+    read_options ...
+    SharedWfn ...
+
+add to CMakeLists
+add to __init__.py 
+add to pymodule.py

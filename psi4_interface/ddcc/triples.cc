@@ -1,4 +1,5 @@
 #include "triples.h"
+//#include <omp.h>
 #include <iostream>
 #include "psi4/libmints/matrix.h"
 #include "psi4/libmints/vector.h"
@@ -73,6 +74,7 @@ double pert_triples (phfwfn * corwf) {
                             //   - f(abcjik) + f(bacjik) + f(cbajik)
                             //   - f(abckji) + f(backji) + f(cbakji)
                             temp = 0.0;
+                            #pragma omp parallel for default(shared) reduction(+:temp)
                             for ( int e = corwf->noccso; e < corwf->nmo; e++ ) {
                                temp +=   corwf->tijab->get(j,k,a,e)
                                        * corwf->SO_eri->get(e,i,b,c);
@@ -93,6 +95,7 @@ double pert_triples (phfwfn * corwf) {
                                temp +=   corwf->tijab->get(j,i,c,e)
                                             * corwf->SO_eri->get(e,k,b,a);
                             }
+                            #pragma omp parallel for default(shared) reduction(+:temp)
                             for ( int m = 0; m < corwf->noccso; m++ ) {
                                 temp -=   corwf->tijab->get(i,m,b,c)
                                         * corwf->SO_eri->get(m,a,j,k);
