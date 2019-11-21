@@ -6,6 +6,9 @@
 #include <fstream>
 #include <iomanip>
 #include <cmath>
+#include "psi4/libmints/matrix.h"
+#include "psi4/libmints/vector.h"
+#include "psi4/libmints/mintshelper.h"
 //#include <gsl/gsl_eigen.h>
 //#include <gsl/gsl_math.h>
 //#include <gsl/gsl_blas.h>
@@ -13,7 +16,7 @@
 namespace psi{ namespace phf {
 double kron (int p, int q); 
 class tensor4 //class to store 4D tensors and manage memory.
-//Access elements via varname->myarray[i][j][k][l]
+//Access elements via varname->get<set>(i,j,k,l,<val>)
 {
     private:
         SharedMatrix myarray;
@@ -52,6 +55,60 @@ class tensor4 //class to store 4D tensors and manage memory.
         int arraysize;
 };
 
+class tensor6
+//class for storing and managing rank 6 tensors (!)
+{
+    private:
+        std::unique_ptr<double***** []> data;
+    public:
+        int arraysize;
+        tensor6(int arraysize) 
+        : data{new double***** [arraysize]} 
+        {
+            this->arraysize = arraysize;
+            for ( int i = 0; i < arraysize; i++ ) {
+                this->data[i] = new double**** [arraysize];
+                for ( int j = 0; j < arraysize; j++ ) {
+                    this->data[i][j] = new double*** [arraysize];
+                    for ( int k = 0; k < arraysize; k++ ) {
+                        this->data[i][j][k] = new double** [arraysize];
+                        for ( int l = 0; l < arraysize; l++ ) {
+                            this->data[i][j][k][l] = new double* [arraysize];
+                            for ( int m = 0; m < arraysize; m++ ) {
+                                this->data[i][j][k][l][m] = new double[arraysize]; 
+                                for ( int n = 0; n < arraysize; n++ ) {
+                                    this->data[i][j][k][l][m][n] = 0.0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        ~tensor6() {
+            for ( int i = 0; i < this->arraysize; i++ ) {
+                for ( int j = 0; j < this->arraysize; j++ ) {
+                    for ( int k = 0; k < this->arraysize; k++ ) {
+                        for ( int l = 0; l < this->arraysize; l++ ) {
+                            for ( int m = 0; m < this->arraysize; m++ ) {
+                                delete[] this->data[i][j][k][l][m];
+                            }
+                            delete[] this->data[i][j][k][l];
+                        }
+                        delete[] this->data[i][j][k];
+                    }
+                    delete[] this->data[i][j];
+                }
+                delete[] this->data[i];
+            }
+        }
+        double get ( int i, int j, int k, int l, int m, int n ) {
+            return this->data[i][j][k][l][m][n];
+        }
+        void set ( int i, int j, int k, int l, int m, int n, double val ) {
+            this->data[i][j][k][l][m][n] = val; 
+        }
+};
 class phfwfn
 //class to perform SCF procedure, integral transformations, and
 //post HF (MP2 and CCSD) energy computations.
@@ -61,20 +118,14 @@ class phfwfn
         MintsHelper * mints;
         Vector * eval;
         SharedMatrix C;
-        SharedMatrix FSO;
         SharedMatrix Hcore;
         SharedMatrix HcoreSO;
         SharedMatrix FF;
         SharedMatrix Dia;
-        SharedMatrix tia;
         SharedMatrix tia_new;
-        tensor4 * SO_eri;
-        tensor4 * MO_eri;
-        tensor4 * AO_eri;
         tensor4 * W;
         tensor4 * tautijab;
         tensor4 * tauijab;
-        tensor4 * tijab;
         tensor4 * tijab_new;
         tensor4 * Dijab;
 
@@ -122,6 +173,12 @@ class phfwfn
         // tensor4p * AO_eri;
         // tensor4p * MO_eri;
         // tensor4p * SO_eri;
+        SharedMatrix FSO;
+        SharedMatrix tia;
+        tensor4 * SO_eri;
+        tensor4 * MO_eri;
+        tensor4 * AO_eri;
+        tensor4 * tijab;
         int natom;
         int nbf; 
         int nmo;

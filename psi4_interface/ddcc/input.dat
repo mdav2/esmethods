@@ -15,7 +15,7 @@ symmetry c1
 }
 
 set {
-  basis dz
+  basis sto-3g
 }
 
 set ddcc {
@@ -31,4 +31,6 @@ er = energy('scf')
 e1 = energy('mp2')
 print("MP2 Energy (Psi4) ",e1 - er)
 e2 = energy('ccsd')
+e3 = energy('ccsd(t)')
 print("CCSD Energy (Psi4) ",e2 - er)
+print("(T) Energy (Psi4) ",e3 - e2)
