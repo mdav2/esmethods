@@ -1,14 +1,7 @@
-
 # PYTHONPATH must include directory above plugin directory.
 #     Define either externally or here, then import plugin.
-memory 8 GB
-sys.path.insert(0, './..')
-import ddcc
+memory 1 GB
 
-#molecule {
-#pubchem:formaldehyde
-#symmetry c1
-#}
 molecule {
 O
 H 1 R
@@ -22,18 +15,10 @@ symmetry c1
 set {
   basis sto-3g
 }
-
-set ddcc {
-  print 1
-}
-set do_triples true
-set pertd true
 set scf_type pk
 set mp2_type conv
-set E_CONVERGENCE 10
-set D_CONVERGENCE 10
 
-e = energy('mycis')
+e = energy('mp2')
 #er = energy('scf')
 #e1 = energy('mp2')
 #print("MP2 Energy (Psi4) ",e1 - er)

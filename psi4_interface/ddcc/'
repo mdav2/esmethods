@@ -84,23 +84,16 @@ SharedWavefunction cis (SharedWavefunction ref_wfn, Options& options)
         psi::outfile->Printf(" <<---------------------------------->>\n");
 
         psi::outfile->Printf(" Initializing MP2 T2 amplitudes ...");
-        //double mp2e = corwf.mp2init();
-        //corwf.do_MP2();
-        corwf.antisymm_MO();
-        corwf.build_aijab();
-        std::cout << "EMP2 " << corwf.mp2asym() << "\n";
-        psi::outfile->Printf(" Done! \n");
-        psi::outfile->Printf("MP2 energy %20.14f\n",corwf.Ecorr);
+        double mp2e = corwf.mp2init();
         corwf.do_MP2();
-        std::cout << "EM2 " << corwf.Ecorr << "\n";
-        corwf.do_CCSD() ; 
-        std::cout << "EM2 " << corwf.Ecorr << "\n";
+        psi::outfile->Printf("MP2 energy %20.14f\n",corwf.Ecorr);
+        psi::outfile->Printf(" Done! \n");
         psi::outfile->Printf(" Building nu matrix ...");
-        SharedMatrix nu = build_nu (corwf.MO_asym, vecs, corwf.tijab, &corwf);    
+        SharedMatrix nu = build_nu (corwf.SO_eri, vecs, corwf.tijab, &corwf);    
         psi::outfile->Printf(" Done! \n");
         psi::outfile->Printf(" Building u matrix ...");
-        phf::tensor4 uijab ( corwf.nbf );
-        build_uijab ( &uijab, corwf.MO_asym, vecs, &corwf);
+        phf::tensor4 uijab ( corwf.nmo );
+        build_uijab ( &uijab, corwf.SO_eri, vecs, &corwf);
         psi::outfile->Printf(" Done! \n");
         std::cout << w_cis_d ( &uijab, corwf.Dijab, vals.get(0), vecs, nu, &corwf) << "\n";
         

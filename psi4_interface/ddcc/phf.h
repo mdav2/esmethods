@@ -115,19 +115,6 @@ class phfwfn
 {
     private:
         //>Private Data
-        MintsHelper * mints;
-        Vector * eval;
-        SharedMatrix C;
-        SharedMatrix Hcore;
-        SharedMatrix HcoreSO;
-        SharedMatrix FF;
-        SharedMatrix Dia;
-        SharedMatrix tia_new;
-        tensor4 * W;
-        tensor4 * tautijab;
-        tensor4 * tauijab;
-        tensor4 * tijab_new;
-        tensor4 * Dijab;
 
        // //>Private Methods
         void cciter (void);
@@ -159,8 +146,6 @@ class phfwfn
         void print_tijab (void);
         void print_tauijab (void);
         void print_tautijab (void);
-        void build_tijab_MP2 (void);
-        double MP2viaCC (void);
         void MOtoSO (void);
         void FtoSO (void);
         void HcoretoSO (void);
@@ -173,12 +158,27 @@ class phfwfn
         // tensor4p * AO_eri;
         // tensor4p * MO_eri;
         // tensor4p * SO_eri;
+        MintsHelper * mints;
+        Vector * eval;
+        SharedMatrix C;
+        SharedMatrix Hcore;
+        SharedMatrix HcoreSO;
+        SharedMatrix FF;
+        SharedMatrix Dia;
+        SharedMatrix tia_new;
+        tensor4 * W;
+        tensor4 * tautijab;
+        tensor4 * tauijab;
+        tensor4 * tijab_new;
+        tensor4 * Dijab;
         SharedMatrix FSO;
         SharedMatrix tia;
         tensor4 * SO_eri;
         tensor4 * MO_eri;
+        tensor4 * MO_asym;
         tensor4 * AO_eri;
         tensor4 * tijab;
+        tensor4 * aijab;
         int natom;
         int nbf; 
         int nmo;
@@ -193,8 +193,15 @@ class phfwfn
 
         // //>Public Methods
         // void do_CCSD (void);
+        void build_tijab_MP2 (void);
+        double MP2viaCC (void);
+        double mp2init (void);
         void do_MP2 (void);
         void do_CCSD (void);
+        double mp2asym (void);
+        void antisymm_MO (void);
+        void build_aijab (void);
+
         // double do_SCF (void);
         // double compute_E (void);
         phfwfn(SharedWavefunction ref_wfn, int nbf, int nocc);

@@ -60,6 +60,7 @@ int read_options(std::string name, Options &options)
         /*- The amount of information printed
             to the output file -*/
         options.add_int("PRINT", 1);
+        options.add_bool("DO_TRIPLES",false);
     }
 
     return true;
@@ -76,11 +77,18 @@ SharedWavefunction ccsd (SharedWavefunction ref_wfn, Options& options)
     int nirrep  = ref_wfn->nirrep();
     phf::phfwfn cor_wf ( ref_wfn, ref_wfn->nmo(), ref_wfn->nalpha());
 
-    cor_wf.do_MP2();
-    std::cout << std::setprecision(15) << "E[MP2] " << cor_wf.Ecorr << "\n";
+    //cor_wf.do_MP2();
+    //std::cout << std::setprecision(15) << "E[MP2] " << cor_wf.Ecorr << "\n";
+    psi::outfile->Printf("--------------\n");
+    psi::outfile->Printf("<<-- CCSD -->>\n");
+    psi::outfile->Printf("--------------\n\n");
+    int doTriples = options.get_bool("DO_TRIPLES");
+    std::cout << doTriples << "\n";
+    psi::outfile->Printf("DO_TRIPLES %d\n",doTriples);
     cor_wf.do_CCSD();
-    std::cout << "E[(T)]: " << phf::pert_triples(&cor_wf) << "\n";
-    
+    if ( doTriples == 1 ) {
+        psi::outfile->Printf("E[(T)] %20.14f\n",phf::pert_triples(&cor_wf));
+    }
     return ref_wfn;
 }
 

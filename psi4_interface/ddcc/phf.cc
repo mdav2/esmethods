@@ -3,6 +3,7 @@
 #include <omp.h>
 #include "phf.h"
 #include "determinant.h"
+#include "psi4/psi4-dec.h"
 #include "psi4/libmints/matrix.h"
 #include "psi4/libmints/vector.h"
 #include "psi4/libmints/mintshelper.h"
@@ -28,6 +29,7 @@ phfwfn::phfwfn(SharedWavefunction ref_wfn, int nbf, int nocc)
                                         this->C,this->C,this->C,this->C),
                                         this->nbf); //psi::Matrix(nmo,nmo).clone();
     this->SO_eri =    new phf::tensor4 (nmo); //spin orbital eri
+    this->MO_asym =   new tensor4 (nbf); //psi::Matrix(nmo,nmo).clone();
     this->AO_eri =    new tensor4 (nbf); //psi::Matrix(nmo,nmo).clone();
     this->FF =        Matrix(nmo,nmo).clone(); //Fancy F intermediate
     this->tia =       Matrix(nmo,nmo).clone();
@@ -39,6 +41,7 @@ phfwfn::phfwfn(SharedWavefunction ref_wfn, int nbf, int nocc)
     this->tijab =     new tensor4 (nmo);
     this->tijab_new = new tensor4 (nmo);
     this->Dijab =     new tensor4 (nmo);
+    this->aijab =     new tensor4 (nbf);
     this->MOtoSO();
     this->FtoSO();
 }
@@ -58,6 +61,12 @@ double kron ( int p, int q ) {
 }
 
 //>ENERGY ROUTINES
+double phfwfn::mp2init (void) {
+
+    this->build_Dijab();
+    this->build_tijab_MP2();
+    return this->MP2viaCC();
+}
 double phfwfn::MP2viaCC (void) {
     double tsum = 0.0;
     int low = 0;
@@ -77,20 +86,24 @@ double phfwfn::MP2viaCC (void) {
 }
 void phf::phfwfn::do_CCSD (void) {
     //this->print2D(this->C, 0, this->nbf, 0, this->nbf);
+ 
     this->MOtoSO();
     this->FtoSO();
     this->build_Dia();
     this->build_Dijab();
     this->build_tijab_MP2();
-    std::cout << "E[MP2viaCC] " << this->MP2viaCC() << "\n";
+    psi::outfile->Printf("E[MP2   ] %20.14f\n",this->MP2viaCC());
     this->ccenergy();
-    std::cout << "E[CC] " << this->Ecorr << "\n";
+    psi::outfile->Printf("E[CC;%3d] %20.14f\n", 0, this->Ecorr);
     double elast = 0.0;
     std::cout << "this->maxiter " << this->maxiter << "\n";
     for ( int i = 0; i < this->maxiter; i++ ) {
-        std::cout << i << "\n";
+        //std::cout << i << "\n";
         this->cciter();
+        psi::outfile->Printf("E[CC;%3d] %20.14f\n",i,this->Ecorr); 
         if ( std::abs(this->Ecorr - elast) < this->ccetol ) {
+            //psi::outfile->Printf("-"*40);
+            psi::outfile->Printf("\nE[CC;final] %20.14f\n",this->Ecorr); 
             break;
         }
         elast = this->Ecorr;
@@ -136,7 +149,6 @@ void phf::phfwfn::cciter (void) {
     }
     }
     this->ccenergy();
-    std::cout << "E[CC] " << this->Ecorr << "\n";
 }
 void phf::phfwfn::ccenergy (void) {
     double Ecc = 0.0;
@@ -835,6 +847,56 @@ void phf::phfwfn::HcoretoSO (void) {
             this->HcoreSO->set (p, q, spinint);
         }
     } 
+}
+
+double phf::phfwfn::mp2asym(void) {
+    double e = 0.0;
+    for ( int i = 0 ; i < this->nocc; i++ ) {
+        for ( int j = 0; j < this->nocc; j++ ) {
+            for ( int a = this->nocc; a < this->nbf; a++ ) {
+                for ( int b = this->nocc; b < this->nbf; b++ ) {
+                    //e += this->MO_eri->get(i,a,j,b)*(2*this->MO_eri->get(i,a,j,b)
+                    //                                 - this->MO_eri->get(i,b,j,a))/
+                    //                    (this->eval->get(i)
+                    //                     + this->eval->get(j)
+                    //                     - this->eval->get(a)
+                    //                     - this->eval->get(b));      
+                    e += 0.25*this->aijab->get(i,j,a,b)*this->MO_asym->get(i,j,a,b);
+                }
+            }
+        }
+    }
+    return e;
+}
+
+void phf::phfwfn::build_aijab(void) {
+    for ( int i = 0 ; i < this->nocc; i++ ) {
+        for ( int j = 0; j < this->nocc; j++ ) {
+            for ( int a = this->nocc; a < this->nbf; a++ ) {
+                for ( int b = this->nocc; b < this->nbf; b++ ) {
+                    this->aijab->set (i,j,a,b,this->MO_asym->get(a,b,i,j)/(
+                                  this->eval->get(i) + this->eval->get(j)
+                                - this->eval->get(a) - this->eval->get(b)));
+                }
+            }
+        }
+    }
+}
+
+void phf::phfwfn::antisymm_MO (void) {
+    double int1 = 0.0;
+    double int2 = 0.0;
+    for ( int p = 0; p < this->nbf; p++ ) {
+        for ( int q = 0; q < this->nbf; q++ ) {
+            for ( int r = 0; r < this->nbf; r++ ) {
+                for ( int s = 0; s < this->nbf; s++ ) {
+                    int1 = this->MO_eri->get(p,q,r,s);
+                    int2 = this->MO_eri->get(p,s,q,r);
+                    this->MO_asym->set(p,r,q,s, int1 - int2);
+                }
+            }
+        }
+    }
 }
 
 void phf::phfwfn::MOtoSO (void) {
