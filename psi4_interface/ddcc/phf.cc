@@ -329,22 +329,15 @@ void phf::phfwfn::build_Fae (void) {
             //std::cout << a << " " << e << "\n";
             //First summation: over m (occ)
             tsum1 = 0.0;
+            tsum2 = 0.0;
+            tsum3 = 0.0;
             for ( int m = 0; m < this->noccso; m++ ) {
                 tsum1 +=  this->FSO->get( m, e )
                         * this->tia->get( m, a );
-            }
-            tsum1 *= 0.5;
-            //Second summation: over m, f (occ, vir)
-            tsum2 = 0.0;
-            for ( int m = 0; m < this->noccso; m++ ) {
                 for ( int f = this->noccso; f < this->nmo; f++ ) {
                     tsum2 +=  this->tia->get( m, f)
                             * this->SO_eri->get( m, a, f, e);
                 }
-            }
-            ////Third summation: over m, n, f (occ, occ, vir)
-            tsum3 = 0.0;
-            for ( int m = 0; m < this->noccso; m++ ) {
                 for ( int n = 0; n < this->noccso; n++ ) {
                     for ( int f = this->noccso; f < this->nmo; f++ ) {
                         tsum3 +=  this->tautijab->get( m, n, a, f)
@@ -352,6 +345,9 @@ void phf::phfwfn::build_Fae (void) {
                     }
                 }
             }
+            tsum1 *= 0.5;
+            //Second summation: over m, f (occ, vir)
+            ////Third summation: over m, n, f (occ, occ, vir)
             tsum3 *= 0.5;
             this->FF->set( a, e,
                              ((1.0 - psi::phf::kron(a,e))*this->FSO->get( a, e)
@@ -371,30 +367,26 @@ void phf::phfwfn::build_Fmi (void) {
             //First summation: over e (vir)
             tsum1 = 0.0;
             for ( int e = this->noccso; e < this->nmo; e++ ) {
-                tsum1 +=  this->tia->get( i, e )
-                        * this->FSO->get( m, e );
             }
             tsum1 *= 0.5;
 
             //Second summation: over n, e (occ, vir)
             tsum2 = 0.0;
-            for ( int n = 0; n < this->noccso; n++ ) {
-                for ( int e = this->noccso; e < this->nmo; e++ ) {
+            tsum3 = 0.0;
+            for ( int e = this->noccso; e < this->nmo; e++ ) {
+                tsum1 +=  this->tia->get( i, e )
+                        * this->FSO->get( m, e );
+                for ( int n = 0; n < this->noccso; n++ ) {
                     tsum2 +=  this->tia->get( n, e )
                             * this->SO_eri->get(m,n,i,e);
-                }
-            }
-
-            //Third summation: over n, e , f (occ, vir, vir)
-            tsum3 = 0.0;
-            for ( int n = 0; n < this->noccso; n++ ) {
-                for ( int e = this->noccso; e < this->nmo; e++ ) {
                     for ( int f = this->noccso; f < this->nmo; f++ ) {
                         tsum3 +=  this->tautijab->get( i, n, e, f)
                                 * this->SO_eri->get( m, n, e, f);
                     }
                 }
             }
+
+            //Third summation: over n, e , f (occ, vir, vir)
             tsum3 *= 0.5;
             this->FF->set( m, i,
                         ((1.0 - kron(m,i))*this->FSO->get( m, i )
@@ -541,10 +533,7 @@ void phf::phfwfn::build_tia (void) {
                 }
             }
 
-            //Summation 5: over m, e, f ( occ, vir, vir )
             tsum5 *= 0.5;
-
-            //Summation 6: over m, e , n ( occ, vir, occ )
             tsum6 *= 0.5;
 
             tiatmp = this->FSO->get ( i , a )
@@ -571,6 +560,7 @@ void phf::phfwfn::build_tijab (void) {
                     double tijabtmp = 0.0;
                     double tsum1 = 0.0;
                     double tsum1a = 0.0;
+                    double tsum1b = 0.0;
                     double tsum2 = 0.0;
                     double tsum2a = 0.0;
                     double tsum3 = 0.0;
@@ -587,25 +577,23 @@ void phf::phfwfn::build_tijab (void) {
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
                         //Sub-Summation 1a: over m ( occ )
                         tsum1a = 0.0;
+                        tsum1b = 0.0;
                         for ( int m = 0; m < this->noccso; m++ ) {
                             tsum1a += this->tia->get( m, b )
                                   * this->FF->get( m, e );
+                            tsum1b += this->tia->get( m, a )
+                                    * this->FF->get( m, e );
                         }
                         tsum1a *= 0.5;
+                        tsum1b *= 0.5;
                         tsum1 += this->tijab->get( i, j, a, e)
                                * ( this->FF->get( b, e )
                                  - tsum1a
                                  );
-                        tsum1a = 0.0;
-                        for ( int m = 0; m < this->noccso; m++ ) {
-                            tsum1a += this->tia->get( m, a )
-                                    * this->FF->get( m, e );
-                        }
-                        tsum1a *= 0.5;
                         // -= here ...
                         tsum1 -= this->tijab->get( i, j, b, e)
                               * ( this->FF->get( a, e )
-                                - tsum1a
+                                - tsum1b
                                 );
                     }
 
@@ -629,6 +617,7 @@ void phf::phfwfn::build_tijab (void) {
                                  + tsum2a
                                  );
                     //}
+
                     //at this point tsum2 = p(ij) part
                     //p(ji) part
                     //Summation 2': over m ( occ )
@@ -658,7 +647,7 @@ void phf::phfwfn::build_tijab (void) {
                     tsum3 *= 0.5;
 
                     //term #5
-                    //Summation : over e, f ( vir, vir )https://bisqwit.iki.fi/story/howto/openmp/#PrefaceImportanceOfMultithreading
+                    //Summation : over e, f ( vir, vir )
                     for ( int e = this->noccso; e < this->nmo; e++ ) {
                         //p(ij) part
                         tsum6 += this->tia->get( i, e )

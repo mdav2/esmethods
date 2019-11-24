@@ -20,7 +20,7 @@ class tensor4 //class to store 4D tensors and manage memory.
 {
     private:
         SharedMatrix myarray;
-        int ijtoa (int i, int j) {
+        inline int ijtoa (int i, int j) {
             return i*this->arraysize + j;
         }
     public:
@@ -40,13 +40,13 @@ class tensor4 //class to store 4D tensors and manage memory.
                 }
             }
         }
-        double get (int i, int j, int k, int l) {
+        inline double get (int i, int j, int k, int l) {
             //Retrieve a value from the tensor
             int a = this->ijtoa(i,j);
             int b = this->ijtoa(k,l);;
             return this->myarray->get(a,b);
         }
-        void set (int i, int j, int k, int l, double val) {
+        inline void set (int i, int j, int k, int l, double val) {
             //Set a value in the tensor
             int a = this->ijtoa(i, j);
             int b = this->ijtoa(k,l);
