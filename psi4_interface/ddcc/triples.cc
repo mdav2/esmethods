@@ -14,21 +14,23 @@ double pert_triples (phfwfn * corwf) {
     int nmo = corwf->nmo;
     int noccso = corwf->noccso;
     double Ept = 0.0;
-    double Dijkabc = 0.0;
-    double tijkabc_c = 0.0;
-    double tijkabc_d = 0.0;
     //tensor6 Dijkabc (nmo);
     //tensor6 tijkabc_c (nmo);
     //tensor6 tijkabc_d (nmo);
 
     //build Dijkabc denominator array
-    double temp = 0.0;
+    
+    #pragma omp parallel for collapse(6) default(shared) reduction(+:Ept)
     for ( int i = 0; i < noccso; i++ ) {
         for ( int j = 0; j < noccso; j++ ) {
             for ( int k = 0; k < noccso; k++ ) {
                 for ( int a = noccso; a < nmo; a++ ) {
                     for ( int b = noccso; b < nmo; b++ ) {
                         for ( int c = noccso; c < nmo; c++ ) {
+                            double Dijkabc = 0.0;
+                            double tijkabc_c = 0.0;
+                            double tijkabc_d = 0.0;
+                            double temp = 0.0;
                             tijkabc_c = 0.0;
                             tijkabc_d = 0.0;
                             Dijkabc =      corwf->FSO->get( i, i)
@@ -119,6 +121,7 @@ double pert_triples (phfwfn * corwf) {
                             temp /= Dijkabc;
                             tijkabc_c = temp;
 
+                            #pragma omp critical
                             Ept += (1.0/36.0)*tijkabc_c*Dijkabc*(
                                                         tijkabc_c + tijkabc_d);
                 

@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/mmd01986/.conda/envs/p4env/bin/cmake
+CMAKE_COMMAND = /home/mmd01986/anaconda3/envs/psi4/bin/cmake
 
 # The command to remove a file.
-RM = /home/mmd01986/.conda/envs/p4env/bin/cmake -E remove -f
+RM = /home/mmd01986/anaconda3/envs/psi4/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -60,41 +60,41 @@ include CMakeFiles/ccsd.dir/flags.make
 CMakeFiles/ccsd.dir/ccsd.cc.o: CMakeFiles/ccsd.dir/flags.make
 CMakeFiles/ccsd.dir/ccsd.cc.o: ccsd.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ccsd.dir/ccsd.cc.o"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ccsd.dir/ccsd.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccsd.cc
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ccsd.dir/ccsd.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccsd.cc
 
 CMakeFiles/ccsd.dir/ccsd.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ccsd.dir/ccsd.cc.i"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccsd.cc > CMakeFiles/ccsd.dir/ccsd.cc.i
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccsd.cc > CMakeFiles/ccsd.dir/ccsd.cc.i
 
 CMakeFiles/ccsd.dir/ccsd.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ccsd.dir/ccsd.cc.s"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccsd.cc -o CMakeFiles/ccsd.dir/ccsd.cc.s
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/ccsd.cc -o CMakeFiles/ccsd.dir/ccsd.cc.s
 
 CMakeFiles/ccsd.dir/triples.cc.o: CMakeFiles/ccsd.dir/flags.make
 CMakeFiles/ccsd.dir/triples.cc.o: triples.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ccsd.dir/triples.cc.o"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ccsd.dir/triples.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ccsd.dir/triples.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc
 
 CMakeFiles/ccsd.dir/triples.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ccsd.dir/triples.cc.i"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc > CMakeFiles/ccsd.dir/triples.cc.i
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc > CMakeFiles/ccsd.dir/triples.cc.i
 
 CMakeFiles/ccsd.dir/triples.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ccsd.dir/triples.cc.s"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc -o CMakeFiles/ccsd.dir/triples.cc.s
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/triples.cc -o CMakeFiles/ccsd.dir/triples.cc.s
 
 CMakeFiles/ccsd.dir/phf.cc.o: CMakeFiles/ccsd.dir/flags.make
 CMakeFiles/ccsd.dir/phf.cc.o: phf.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ccsd.dir/phf.cc.o"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ccsd.dir/phf.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ccsd.dir/phf.cc.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc
 
 CMakeFiles/ccsd.dir/phf.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ccsd.dir/phf.cc.i"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc > CMakeFiles/ccsd.dir/phf.cc.i
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc > CMakeFiles/ccsd.dir/phf.cc.i
 
 CMakeFiles/ccsd.dir/phf.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ccsd.dir/phf.cc.s"
-	/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc -o CMakeFiles/ccsd.dir/phf.cc.s
+	/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/phf.cc -o CMakeFiles/ccsd.dir/phf.cc.s
 
 # Object files for target ccsd
 ccsd_OBJECTS = \
@@ -109,10 +109,10 @@ ccsd.so: CMakeFiles/ccsd.dir/ccsd.cc.o
 ccsd.so: CMakeFiles/ccsd.dir/triples.cc.o
 ccsd.so: CMakeFiles/ccsd.dir/phf.cc.o
 ccsd.so: CMakeFiles/ccsd.dir/build.make
-ccsd.so: /home/mmd01986/.conda/envs/p4env/lib/python3.7/site-packages/psi4/core.cpython-37m-x86_64-linux-gnu.so
-ccsd.so: /home/mmd01986/.conda/envs/p4env/lib/libiomp5.so
-ccsd.so: /home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib/libgomp.so
-ccsd.so: /home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/libpthread.so
+ccsd.so: /home/mmd01986/anaconda3/envs/psi4/lib/python3.7/site-packages/psi4/core.cpython-37m-x86_64-linux-gnu.so
+ccsd.so: /home/mmd01986/anaconda3/envs/psi4/lib/libiomp5.so
+ccsd.so: /home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib/libgomp.so
+ccsd.so: /home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/libpthread.so
 ccsd.so: CMakeFiles/ccsd.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared module ccsd.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ccsd.dir/link.txt --verbose=$(VERBOSE)

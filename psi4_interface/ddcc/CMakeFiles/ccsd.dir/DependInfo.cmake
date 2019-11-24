@@ -17,8 +17,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/mmd01986/.conda/envs/p4env/include"
-  "/home/mmd01986/.conda/envs/p4env/include/python3.7m"
+  "/home/mmd01986/anaconda3/envs/psi4/include"
   )
 
 # Targets to which this target links.
