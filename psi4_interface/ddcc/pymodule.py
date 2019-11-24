@@ -31,8 +31,7 @@
 import psi4
 import psi4.driver.p4util as p4util
 from psi4.driver.procrouting import proc_util
-
-def run_ddcc(name, **kwargs):
+def run_cis(name, **kwargs):
     r"""Function encoding sequence of PSI module and plugin calls so that
     ddcc can be called via :py:func:`~driver.energy`. For post-scf plugins.
 
@@ -57,13 +56,43 @@ def run_ddcc(name, **kwargs):
 
     # Call the Psi4 plugin
     # Please note that setting the reference wavefunction in this way is ONLY for plugins
-    ddcc_wfn = psi4.core.plugin('ddcc.so', ref_wfn)
+    ddcc_wfn = psi4.core.plugin('cis.so', ref_wfn)
+
+    return ddcc_wfn
+
+def run_ccsd(name, **kwargs):
+    r"""Function encoding sequence of PSI module and plugin calls so that
+    ddcc can be called via :py:func:`~driver.energy`. For post-scf plugins.
+
+    >>> energy('_ccsd')
+
+    """
+    lowername = name.lower()
+    kwargs = p4util.kwargs_lower(kwargs)
+
+    # Your plugin's psi4 run sequence goes here
+    psi4.core.set_local_option('DDCC', 'PRINT', 1)
+
+    # Compute a SCF reference, a wavefunction is return which holds the molecule used, orbitals
+    # Fock matrices, and more
+    print('Attention! This SCF may be density-fitted.')
+    ref_wfn = kwargs.get('ref_wfn', None)
+    if ref_wfn is None:
+        ref_wfn = psi4.driver.scf_helper(name, **kwargs)
+
+    # Ensure IWL files have been written when not using DF/CD
+    proc_util.check_iwl_file_from_scf_type(psi4.core.get_option('SCF', 'SCF_TYPE'), ref_wfn)
+
+    # Call the Psi4 plugin
+    # Please note that setting the reference wavefunction in this way is ONLY for plugins
+    ddcc_wfn = psi4.core.plugin('ccsd.so', ref_wfn)
 
     return ddcc_wfn
 
 
 # Integration with driver routines
-psi4.driver.procedures['energy']['ddcc'] = run_ddcc
+psi4.driver.procedures['energy']['myccsd'] = run_ccsd
+psi4.driver.procedures['energy']['mycis'] = run_cis
 
 
 def exampleFN():

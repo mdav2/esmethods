@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/mmd01986/anaconda3/envs/psi4/bin/cmake
+CMAKE_COMMAND = /home/mmd01986/.conda/envs/p4env/bin/cmake
 
 # The command to remove a file.
-RM = /home/mmd01986/anaconda3/envs/psi4/bin/cmake -E remove -f
+RM = /home/mmd01986/.conda/envs/p4env/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -56,27 +56,27 @@ CMAKE_BINARY_DIR = /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/mmd01986/anaconda3/envs/psi4/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/mmd01986/.conda/envs/p4env/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/home/mmd01986/.conda/envs/p4env/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -111,44 +111,111 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ddcc
+# Target rules for targets named ccsd
 
 # Build rule for target.
-ddcc: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 ddcc
-.PHONY : ddcc
+ccsd: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ccsd
+.PHONY : ccsd
 
 # fast build rule for target.
-ddcc/fast:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/build
-.PHONY : ddcc/fast
+ccsd/fast:
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/build
+.PHONY : ccsd/fast
 
-mointegrals.o: mointegrals.cc.o
+#=============================================================================
+# Target rules for targets named cis
 
-.PHONY : mointegrals.o
+# Build rule for target.
+cis: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cis
+.PHONY : cis
+
+# fast build rule for target.
+cis/fast:
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/build
+.PHONY : cis/fast
+
+ccsd.o: ccsd.cc.o
+
+.PHONY : ccsd.o
 
 # target to build an object file
-mointegrals.cc.o:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/mointegrals.cc.o
-.PHONY : mointegrals.cc.o
+ccsd.cc.o:
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/ccsd.cc.o
+.PHONY : ccsd.cc.o
 
-mointegrals.i: mointegrals.cc.i
+ccsd.i: ccsd.cc.i
 
-.PHONY : mointegrals.i
+.PHONY : ccsd.i
 
 # target to preprocess a source file
-mointegrals.cc.i:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/mointegrals.cc.i
-.PHONY : mointegrals.cc.i
+ccsd.cc.i:
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/ccsd.cc.i
+.PHONY : ccsd.cc.i
 
-mointegrals.s: mointegrals.cc.s
+ccsd.s: ccsd.cc.s
 
-.PHONY : mointegrals.s
+.PHONY : ccsd.s
 
 # target to generate assembly for a file
-mointegrals.cc.s:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/mointegrals.cc.s
-.PHONY : mointegrals.cc.s
+ccsd.cc.s:
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/ccsd.cc.s
+.PHONY : ccsd.cc.s
+
+ci.o: ci.cc.o
+
+.PHONY : ci.o
+
+# target to build an object file
+ci.cc.o:
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/ci.cc.o
+.PHONY : ci.cc.o
+
+ci.i: ci.cc.i
+
+.PHONY : ci.i
+
+# target to preprocess a source file
+ci.cc.i:
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/ci.cc.i
+.PHONY : ci.cc.i
+
+ci.s: ci.cc.s
+
+.PHONY : ci.s
+
+# target to generate assembly for a file
+ci.cc.s:
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/ci.cc.s
+.PHONY : ci.cc.s
+
+cis.o: cis.cc.o
+
+.PHONY : cis.o
+
+# target to build an object file
+cis.cc.o:
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/cis.cc.o
+.PHONY : cis.cc.o
+
+cis.i: cis.cc.i
+
+.PHONY : cis.i
+
+# target to preprocess a source file
+cis.cc.i:
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/cis.cc.i
+.PHONY : cis.cc.i
+
+cis.s: cis.cc.s
+
+.PHONY : cis.s
+
+# target to generate assembly for a file
+cis.cc.s:
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/cis.cc.s
+.PHONY : cis.cc.s
 
 phf.o: phf.cc.o
 
@@ -156,7 +223,8 @@ phf.o: phf.cc.o
 
 # target to build an object file
 phf.cc.o:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/phf.cc.o
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/phf.cc.o
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/phf.cc.o
 .PHONY : phf.cc.o
 
 phf.i: phf.cc.i
@@ -165,7 +233,8 @@ phf.i: phf.cc.i
 
 # target to preprocess a source file
 phf.cc.i:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/phf.cc.i
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/phf.cc.i
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/phf.cc.i
 .PHONY : phf.cc.i
 
 phf.s: phf.cc.s
@@ -174,7 +243,8 @@ phf.s: phf.cc.s
 
 # target to generate assembly for a file
 phf.cc.s:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/phf.cc.s
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/phf.cc.s
+	$(MAKE) -f CMakeFiles/cis.dir/build.make CMakeFiles/cis.dir/phf.cc.s
 .PHONY : phf.cc.s
 
 triples.o: triples.cc.o
@@ -183,7 +253,7 @@ triples.o: triples.cc.o
 
 # target to build an object file
 triples.cc.o:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/triples.cc.o
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/triples.cc.o
 .PHONY : triples.cc.o
 
 triples.i: triples.cc.i
@@ -192,7 +262,7 @@ triples.i: triples.cc.i
 
 # target to preprocess a source file
 triples.cc.i:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/triples.cc.i
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/triples.cc.i
 .PHONY : triples.cc.i
 
 triples.s: triples.cc.s
@@ -201,7 +271,7 @@ triples.s: triples.cc.s
 
 # target to generate assembly for a file
 triples.cc.s:
-	$(MAKE) -f CMakeFiles/ddcc.dir/build.make CMakeFiles/ddcc.dir/triples.cc.s
+	$(MAKE) -f CMakeFiles/ccsd.dir/build.make CMakeFiles/ccsd.dir/triples.cc.s
 .PHONY : triples.cc.s
 
 # Help Target
@@ -210,12 +280,19 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... ddcc"
 	@echo "... edit_cache"
-	@echo "... mointegrals.o"
-	@echo "... mointegrals.i"
-	@echo "... mointegrals.s"
+	@echo "... ccsd"
+	@echo "... rebuild_cache"
+	@echo "... cis"
+	@echo "... ccsd.o"
+	@echo "... ccsd.i"
+	@echo "... ccsd.s"
+	@echo "... ci.o"
+	@echo "... ci.i"
+	@echo "... ci.s"
+	@echo "... cis.o"
+	@echo "... cis.i"
+	@echo "... cis.s"
 	@echo "... phf.o"
 	@echo "... phf.i"
 	@echo "... phf.s"

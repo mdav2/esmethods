@@ -1,4 +1,4 @@
-set(CMAKE_CXX_COMPILER "/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++")
+set(CMAKE_CXX_COMPILER "/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_COMPILER_VERSION "7.3.0")
@@ -72,7 +72,7 @@ endif()
 
 
 
-set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include;/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include")
+set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include;/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include")
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "stdc++;m;gcc_s;gcc;c;gcc_s;gcc")
-set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "/home/mmd01986/anaconda3/envs/psi4/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0;/home/mmd01986/anaconda3/envs/psi4/lib/gcc;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/lib;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib")
+set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "/home/mmd01986/.conda/envs/p4env/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0;/home/mmd01986/.conda/envs/p4env/lib/gcc;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/lib;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")

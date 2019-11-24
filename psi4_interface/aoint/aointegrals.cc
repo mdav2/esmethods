@@ -28,6 +28,7 @@
  * @END LICENSE
  */
 
+#include "test.h"
 #include "psi4/psi4-dec.h"
 #include "psi4/libpsi4util/PsiOutStream.h"
 #include "psi4/liboptions/liboptions.h"
@@ -59,6 +60,7 @@ SharedWavefunction aoint(SharedWavefunction ref_wfn, Options& options)
     // Grab options from the options object
     int print = options.get_int("PRINT");
     int doTei = options.get_bool("DO_TEI");
+    print_hello_world();
 
     // Have the Wavefunction from python-side
 

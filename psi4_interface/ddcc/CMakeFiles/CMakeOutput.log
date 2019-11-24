@@ -1,6 +1,6 @@
-The system is: Linux - 4.15.0-70-generic - x86_64
+The system is: Linux - 5.0.0-32-generic - x86_64
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-Compiler: /home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++ 
+Compiler: /home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++ 
 Build flags: -march=native
 Id flags:  
 
@@ -15,171 +15,171 @@ The CXX compiler identification is GNU, found in "/home/mmd01986/Dropbox/dev/esm
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_db9d7/fast 
-/usr/bin/make -f CMakeFiles/cmTC_db9d7.dir/build.make CMakeFiles/cmTC_db9d7.dir/build
+Run Build Command(s):/usr/bin/make cmTC_3e1b5/fast 
+/usr/bin/make -f CMakeFiles/cmTC_3e1b5.dir/build.make CMakeFiles/cmTC_3e1b5.dir/build
 make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_db9d7.dir/testCXXCompiler.cxx.o
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -o CMakeFiles/cmTC_db9d7.dir/testCXXCompiler.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_db9d7
-/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_db9d7.dir/link.txt --verbose=1
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_db9d7.dir/testCXXCompiler.cxx.o  -o cmTC_db9d7 
+Building CXX object CMakeFiles/cmTC_3e1b5.dir/testCXXCompiler.cxx.o
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -o CMakeFiles/cmTC_3e1b5.dir/testCXXCompiler.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_3e1b5
+/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3e1b5.dir/link.txt --verbose=1
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_3e1b5.dir/testCXXCompiler.cxx.o  -o cmTC_3e1b5 
 make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_fea1d/fast 
-/usr/bin/make -f CMakeFiles/cmTC_fea1d.dir/build.make CMakeFiles/cmTC_fea1d.dir/build
+Run Build Command(s):/usr/bin/make cmTC_929ef/fast 
+/usr/bin/make -f CMakeFiles/cmTC_929ef.dir/build.make CMakeFiles/cmTC_929ef.dir/build
 make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -v -o CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o -c /home/mmd01986/anaconda3/envs/psi4/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp
-Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
-COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++
+Building CXX object CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -v -o CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o -c /home/mmd01986/.conda/envs/p4env/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp
+Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
+COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++
 Target: x86_64-conda_cos6-linux-gnu
 Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie
 Thread model: posix
 gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) 
-COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
- /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE /home/mmd01986/anaconda3/envs/psi4/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mno-rtm -mno-hle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=6144 -mtune=generic -quiet -dumpbase CMakeCXXCompilerABI.cpp -auxbase-strip CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccQG8NVI.s
+COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
+ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE /home/mmd01986/.conda/envs/p4env/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=12288 -mtune=generic -quiet -dumpbase CMakeCXXCompilerABI.cpp -auxbase-strip CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccW1KG4z.s
 GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)
 	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"
-ignoring nonexistent directory "/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"
+ignoring nonexistent directory "/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"
 #include "..." search starts here:
 #include <...> search starts here:
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include
- /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include
+ /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include
 End of search list.
 GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)
 	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 2f61739646e29ad60d2358d78f3bd7b4
-COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccQG8NVI.s
+COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccW1KG4z.s
 GNU assembler version 2.31.1 (x86_64-conda_cos6-linux-gnu) using BFD version (crosstool-NG 1.23.0.444-4ea7) 2.31.1
-COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
-LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
-COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
-Linking CXX executable cmTC_fea1d
-/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fea1d.dir/link.txt --verbose=1
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -v -rdynamic CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_fea1d 
-Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
-COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++
-COLLECT_LTO_WRAPPER=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper
+COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
+LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
+COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc'
+Linking CXX executable cmTC_929ef
+/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_929ef.dir/link.txt --verbose=1
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -v -rdynamic CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_929ef 
+Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
+COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++
+COLLECT_LTO_WRAPPER=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper
 Target: x86_64-conda_cos6-linux-gnu
 Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie
 Thread model: posix
 gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) 
-COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
-LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
-COLLECT_GCC_OPTIONS='-march=native' '-v' '-rdynamic' '-o' 'cmTC_fea1d' '-shared-libgcc'
- /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEP3G5K.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_fea1d /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/anaconda3/envs/psi4/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o
-COLLECT_GCC_OPTIONS='-march=native' '-v' '-rdynamic' '-o' 'cmTC_fea1d' '-shared-libgcc'
+COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
+LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
+COLLECT_GCC_OPTIONS='-march=native' '-v' '-rdynamic' '-o' 'cmTC_929ef' '-shared-libgcc'
+ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccHEl9BC.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_929ef /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/.conda/envs/p4env/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o
+COLLECT_GCC_OPTIONS='-march=native' '-v' '-rdynamic' '-o' 'cmTC_929ef' '-shared-libgcc'
 make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
 
 
 Parsed CXX implicit include dir info from above output: rv=done
   found start of include info
   found start of implicit include info
-    add: [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0]
-    add: [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu]
-    add: [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward]
-    add: [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include]
-    add: [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed]
-    add: [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include]
-    add: [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
+    add: [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0]
+    add: [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu]
+    add: [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward]
+    add: [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include]
+    add: [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed]
+    add: [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include]
+    add: [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
   end of search list found
-  implicit include dirs: [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed;/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include;/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
+  implicit include dirs: [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed;/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include;/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
 
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make cmTC_fea1d/fast ]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_fea1d.dir/build.make CMakeFiles/cmTC_fea1d.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_929ef/fast ]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_929ef.dir/build.make CMakeFiles/cmTC_929ef.dir/build]
   ignore line: [make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -v -o CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o -c /home/mmd01986/anaconda3/envs/psi4/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
-  ignore line: [COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++]
+  ignore line: [Building CXX object CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -v -o CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o -c /home/mmd01986/.conda/envs/p4env/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
+  ignore line: [COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++]
   ignore line: [Target: x86_64-conda_cos6-linux-gnu]
   ignore line: [Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE /home/mmd01986/anaconda3/envs/psi4/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mno-rtm -mno-hle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=6144 -mtune=generic -quiet -dumpbase CMakeCXXCompilerABI.cpp -auxbase-strip CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccQG8NVI.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE /home/mmd01986/.conda/envs/p4env/share/cmake-3.14/Modules/CMakeCXXCompilerABI.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=12288 -mtune=generic -quiet -dumpbase CMakeCXXCompilerABI.cpp -auxbase-strip CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o -version -o /tmp/ccW1KG4z.s]
   ignore line: [GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)]
   ignore line: [	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"]
-  ignore line: [ignoring nonexistent directory "/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"]
+  ignore line: [ignoring nonexistent directory "/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"]
   ignore line: [#include "..." search starts here:]
   ignore line: [#include <...> search starts here:]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
   ignore line: [End of search list.]
   ignore line: [GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)]
   ignore line: [	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 2f61739646e29ad60d2358d78f3bd7b4]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccQG8NVI.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccW1KG4z.s]
   ignore line: [GNU assembler version 2.31.1 (x86_64-conda_cos6-linux-gnu) using BFD version (crosstool-NG 1.23.0.444-4ea7) 2.31.1]
-  ignore line: [COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
-  ignore line: [LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
-  ignore line: [Linking CXX executable cmTC_fea1d]
-  ignore line: [/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fea1d.dir/link.txt --verbose=1]
-  ignore line: [/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -v -rdynamic CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_fea1d ]
-  ignore line: [Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
-  ignore line: [COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++]
-  ignore line: [COLLECT_LTO_WRAPPER=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper]
+  ignore line: [COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-o' 'CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc']
+  ignore line: [Linking CXX executable cmTC_929ef]
+  ignore line: [/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_929ef.dir/link.txt --verbose=1]
+  ignore line: [/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -v -rdynamic CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_929ef ]
+  ignore line: [Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
+  ignore line: [COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper]
   ignore line: [Target: x86_64-conda_cos6-linux-gnu]
   ignore line: [Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) ]
-  ignore line: [COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
-  ignore line: [LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-rdynamic' '-o' 'cmTC_fea1d' '-shared-libgcc']
-  link line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccEP3G5K.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_fea1d /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/anaconda3/envs/psi4/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o]
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2] ==> ignore
+  ignore line: [COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-v' '-rdynamic' '-o' 'cmTC_929ef' '-shared-libgcc']
+  link line: [ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccHEl9BC.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_929ef /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/.conda/envs/p4env/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o]
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so] ==> ignore
-    arg [-plugin-opt=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccEP3G5K.res] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccHEl9BC.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-    arg [--sysroot=/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot] ==> ignore
+    arg [--sysroot=/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot] ==> ignore
     arg [--eh-frame-hdr] ==> ignore
     arg [-m] ==> ignore
     arg [elf_x86_64] ==> ignore
@@ -188,20 +188,20 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_fea1d] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o] ==> ignore
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+    arg [cmTC_929ef] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o] ==> ignore
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
     arg [-rpath] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/lib] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/lib] ==> ignore
     arg [-O2] ==> ignore
     arg [--sort-common] ==> ignore
     arg [--as-needed] ==> ignore
@@ -209,7 +209,7 @@ Parsed CXX implicit link information from above output:
     arg [-znow] ==> ignore
     arg [--disable-new-dtags] ==> ignore
     arg [--gc-sections] ==> ignore
-    arg [CMakeFiles/cmTC_fea1d.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_929ef.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -217,18 +217,18 @@ Parsed CXX implicit link information from above output:
     arg [-lc] ==> lib [c]
     arg [-lgcc_s] ==> lib [gcc_s]
     arg [-lgcc] ==> lib [gcc]
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o] ==> ignore
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> [/home/mmd01986/anaconda3/envs/psi4/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc] ==> [/home/mmd01986/anaconda3/envs/psi4/lib/gcc]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o] ==> ignore
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> [/home/mmd01986/.conda/envs/p4env/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc] ==> [/home/mmd01986/.conda/envs/p4env/lib/gcc]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
   implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
-  implicit dirs: [/home/mmd01986/anaconda3/envs/psi4/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0;/home/mmd01986/anaconda3/envs/psi4/lib/gcc;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/lib;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+  implicit dirs: [/home/mmd01986/.conda/envs/p4env/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0;/home/mmd01986/.conda/envs/p4env/lib/gcc;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/lib;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
   implicit fwks: []
 
 
@@ -237,14 +237,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++1z] compiler features compiled with the following output:
 Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_23cf4/fast 
-/usr/bin/make -f CMakeFiles/cmTC_23cf4.dir/build.make CMakeFiles/cmTC_23cf4.dir/build
+Run Build Command(s):/usr/bin/make cmTC_8016a/fast 
+/usr/bin/make -f CMakeFiles/cmTC_8016a.dir/build.make CMakeFiles/cmTC_8016a.dir/build
 make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_23cf4.dir/feature_tests.cxx.o
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++1z -o CMakeFiles/cmTC_23cf4.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_23cf4
-/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_23cf4.dir/link.txt --verbose=1
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_23cf4.dir/feature_tests.cxx.o  -o cmTC_23cf4 
+Building CXX object CMakeFiles/cmTC_8016a.dir/feature_tests.cxx.o
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++1z -o CMakeFiles/cmTC_8016a.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_8016a
+/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8016a.dir/link.txt --verbose=1
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_8016a.dir/feature_tests.cxx.o  -o cmTC_8016a 
 make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
 
 
@@ -310,14 +310,14 @@ make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_df8c3/fast 
-/usr/bin/make -f CMakeFiles/cmTC_df8c3.dir/build.make CMakeFiles/cmTC_df8c3.dir/build
+Run Build Command(s):/usr/bin/make cmTC_c9a9a/fast 
+/usr/bin/make -f CMakeFiles/cmTC_c9a9a.dir/build.make CMakeFiles/cmTC_c9a9a.dir/build
 make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_df8c3.dir/feature_tests.cxx.o
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++14 -o CMakeFiles/cmTC_df8c3.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_df8c3
-/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_df8c3.dir/link.txt --verbose=1
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_df8c3.dir/feature_tests.cxx.o  -o cmTC_df8c3 
+Building CXX object CMakeFiles/cmTC_c9a9a.dir/feature_tests.cxx.o
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++14 -o CMakeFiles/cmTC_c9a9a.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c9a9a
+/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c9a9a.dir/link.txt --verbose=1
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_c9a9a.dir/feature_tests.cxx.o  -o cmTC_c9a9a 
 make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
 
 
@@ -383,14 +383,14 @@ make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_86771/fast 
-/usr/bin/make -f CMakeFiles/cmTC_86771.dir/build.make CMakeFiles/cmTC_86771.dir/build
+Run Build Command(s):/usr/bin/make cmTC_8371d/fast 
+/usr/bin/make -f CMakeFiles/cmTC_8371d.dir/build.make CMakeFiles/cmTC_8371d.dir/build
 make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_86771.dir/feature_tests.cxx.o
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++11 -o CMakeFiles/cmTC_86771.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_86771
-/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_86771.dir/link.txt --verbose=1
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_86771.dir/feature_tests.cxx.o  -o cmTC_86771 
+Building CXX object CMakeFiles/cmTC_8371d.dir/feature_tests.cxx.o
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++11 -o CMakeFiles/cmTC_8371d.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_8371d
+/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8371d.dir/link.txt --verbose=1
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_8371d.dir/feature_tests.cxx.o  -o cmTC_8371d 
 make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
 
 
@@ -456,14 +456,14 @@ make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_9490c/fast 
-/usr/bin/make -f CMakeFiles/cmTC_9490c.dir/build.make CMakeFiles/cmTC_9490c.dir/build
+Run Build Command(s):/usr/bin/make cmTC_a7cf3/fast 
+/usr/bin/make -f CMakeFiles/cmTC_a7cf3.dir/build.make CMakeFiles/cmTC_a7cf3.dir/build
 make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_9490c.dir/feature_tests.cxx.o
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++98 -o CMakeFiles/cmTC_9490c.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_9490c
-/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9490c.dir/link.txt --verbose=1
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_9490c.dir/feature_tests.cxx.o  -o cmTC_9490c 
+Building CXX object CMakeFiles/cmTC_a7cf3.dir/feature_tests.cxx.o
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native    -std=c++98 -o CMakeFiles/cmTC_a7cf3.dir/feature_tests.cxx.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_a7cf3
+/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a7cf3.dir/link.txt --verbose=1
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native   -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_a7cf3.dir/feature_tests.cxx.o  -o cmTC_a7cf3 
 make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
 
 
@@ -527,67 +527,67 @@ make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/
 Detecting CXX OpenMP compiler ABI info compiled with the following output:
 Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_2813a/fast 
-/usr/bin/make -f CMakeFiles/cmTC_2813a.dir/build.make CMakeFiles/cmTC_2813a.dir/build
+Run Build Command(s):/usr/bin/make cmTC_ef788/fast 
+/usr/bin/make -f CMakeFiles/cmTC_ef788.dir/build.make CMakeFiles/cmTC_ef788.dir/build
 make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native -fopenmp -v   -o CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp
-Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
-COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++
+Building CXX object CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native -fopenmp -v   -o CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp
+Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
+COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++
 Target: x86_64-conda_cos6-linux-gnu
 Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie
 Thread model: posix
 gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) 
-COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread'
- /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE -D_REENTRANT /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mno-rtm -mno-hle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=6144 -mtune=generic -quiet -dumpbase OpenMPTryFlag.cpp -auxbase-strip CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o -version -fopenmp -o /tmp/ccCbGzO7.s
+COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread'
+ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE -D_REENTRANT /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=12288 -mtune=generic -quiet -dumpbase OpenMPTryFlag.cpp -auxbase-strip CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o -version -fopenmp -o /tmp/ccq7H8dZ.s
 GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)
 	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"
-ignoring nonexistent directory "/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"
-ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"
+ignoring nonexistent directory "/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"
+ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"
 #include "..." search starts here:
 #include <...> search starts here:
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include
- /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include
+ /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include
 End of search list.
 GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)
 	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 2f61739646e29ad60d2358d78f3bd7b4
-COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread'
- /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o /tmp/ccCbGzO7.s
+COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread'
+ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o /tmp/ccq7H8dZ.s
 GNU assembler version 2.31.1 (x86_64-conda_cos6-linux-gnu) using BFD version (crosstool-NG 1.23.0.444-4ea7) 2.31.1
-COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
-LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
-COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread'
-Linking CXX executable cmTC_2813a
-/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2813a.dir/link.txt --verbose=1
-/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native -fopenmp -v  -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o  -o cmTC_2813a -v 
-Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
-COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++
-COLLECT_LTO_WRAPPER=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper
+COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
+LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
+COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread'
+Linking CXX executable cmTC_ef788
+/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ef788.dir/link.txt --verbose=1
+/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native -fopenmp -v  -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o  -o cmTC_ef788 -v 
+Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs
+COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++
+COLLECT_LTO_WRAPPER=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper
 Target: x86_64-conda_cos6-linux-gnu
 Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie
 Thread model: posix
 gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) 
-COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
-LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
-Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/libgomp.spec
-COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-rdynamic' '-o' 'cmTC_2813a' '-v' '-shared-libgcc' '-pthread'
- /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cc3Mxmva.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_2813a /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/anaconda3/envs/psi4/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o
-COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-rdynamic' '-o' 'cmTC_2813a' '-v' '-shared-libgcc' '-pthread'
+COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/
+LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/
+Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/libgomp.spec
+COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-rdynamic' '-o' 'cmTC_ef788' '-v' '-shared-libgcc' '-pthread'
+ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccth5jA1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ef788 /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/.conda/envs/p4env/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o
+COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-rdynamic' '-o' 'cmTC_ef788' '-v' '-shared-libgcc' '-pthread'
 make[1]: Leaving directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp'
 
 
@@ -595,78 +595,78 @@ Parsed CXX OpenMP implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/make cmTC_2813a/fast ]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_2813a.dir/build.make CMakeFiles/cmTC_2813a.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/make cmTC_ef788/fast ]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_ef788.dir/build.make CMakeFiles/cmTC_ef788.dir/build]
   ignore line: [make[1]: Entering directory '/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o]
-  ignore line: [/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native -fopenmp -v   -o CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp]
-  ignore line: [Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
-  ignore line: [COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++]
+  ignore line: [Building CXX object CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o]
+  ignore line: [/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++    -march=native -fopenmp -v   -o CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o -c /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp]
+  ignore line: [Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
+  ignore line: [COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++]
   ignore line: [Target: x86_64-conda_cos6-linux-gnu]
   ignore line: [Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread']
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE -D_REENTRANT /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mno-rtm -mno-hle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=6144 -mtune=generic -quiet -dumpbase OpenMPTryFlag.cpp -auxbase-strip CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o -version -fopenmp -o /tmp/ccCbGzO7.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread']
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/cc1plus -quiet -v -iprefix /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/ -isysroot /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot -D_GNU_SOURCE -D_REENTRANT /home/mmd01986/Dropbox/dev/esmethods/psi4_interface/ddcc/CMakeFiles/FindOpenMP/OpenMPTryFlag.cpp -march=broadwell -mmmx -mno-3dnow -msse -msse2 -msse3 -mssse3 -mno-sse4a -mcx16 -msahf -mmovbe -maes -mno-sha -mpclmul -mpopcnt -mabm -mno-lwp -mfma -mno-fma4 -mno-xop -mbmi -msgx -mbmi2 -mno-tbm -mavx -mavx2 -msse4.2 -msse4.1 -mlzcnt -mrtm -mhle -mrdrnd -mf16c -mfsgsbase -mrdseed -mprfchw -madx -mfxsr -mxsave -mxsaveopt -mno-avx512f -mno-avx512er -mno-avx512cd -mno-avx512pf -mno-prefetchwt1 -mclflushopt -mxsavec -mxsaves -mno-avx512dq -mno-avx512bw -mno-avx512vl -mno-avx512ifma -mno-avx512vbmi -mno-avx5124fmaps -mno-avx5124vnniw -mno-clwb -mno-mwaitx -mno-clzero -mno-pku -mno-rdpid --param l1-cache-size=32 --param l1-cache-line-size=64 --param l2-cache-size=12288 -mtune=generic -quiet -dumpbase OpenMPTryFlag.cpp -auxbase-strip CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o -version -fopenmp -o /tmp/ccq7H8dZ.s]
   ignore line: [GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)]
   ignore line: [	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"]
-  ignore line: [ignoring nonexistent directory "/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"]
-  ignore line: [ignoring duplicate directory "/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include"]
+  ignore line: [ignoring nonexistent directory "/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot/include"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed"]
+  ignore line: [ignoring duplicate directory "/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/../../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include"]
   ignore line: [#include "..." search starts here:]
   ignore line: [#include <...> search starts here:]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include]
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/x86_64-conda_cos6-linux-gnu]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include/c++/7.3.0/backward]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/include-fixed]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/include]
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/include]
   ignore line: [End of search list.]
   ignore line: [GNU C++14 (crosstool-NG 1.23.0.449-a04d0) version 7.3.0 (x86_64-conda_cos6-linux-gnu)]
   ignore line: [	compiled by GNU C version 4.4.7 20120313 (Red Hat 4.4.7-18), GMP version 6.1.2, MPFR version 4.0.1, MPC version 1.1.0, isl version isl-0.19-GMP]
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 2f61739646e29ad60d2358d78f3bd7b4]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread']
-  ignore line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o /tmp/ccCbGzO7.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread']
+  ignore line: [ /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/as -v --64 -o CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o /tmp/ccq7H8dZ.s]
   ignore line: [GNU assembler version 2.31.1 (x86_64-conda_cos6-linux-gnu) using BFD version (crosstool-NG 1.23.0.444-4ea7) 2.31.1]
-  ignore line: [COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
-  ignore line: [LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread']
-  ignore line: [Linking CXX executable cmTC_2813a]
-  ignore line: [/home/mmd01986/anaconda3/envs/psi4/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2813a.dir/link.txt --verbose=1]
-  ignore line: [/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native -fopenmp -v  -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o  -o cmTC_2813a -v ]
-  ignore line: [Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
-  ignore line: [COLLECT_GCC=/home/mmd01986/anaconda3/envs/psi4/bin/x86_64-conda_cos6-linux-gnu-g++]
-  ignore line: [COLLECT_LTO_WRAPPER=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper]
+  ignore line: [COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-o' 'CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o' '-c' '-shared-libgcc' '-pthread']
+  ignore line: [Linking CXX executable cmTC_ef788]
+  ignore line: [/home/mmd01986/.conda/envs/p4env/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ef788.dir/link.txt --verbose=1]
+  ignore line: [/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++  -march=native -fopenmp -v  -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections  -rdynamic CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o  -o cmTC_ef788 -v ]
+  ignore line: [Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/specs]
+  ignore line: [COLLECT_GCC=/home/mmd01986/.conda/envs/p4env/bin/x86_64-conda_cos6-linux-gnu-g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper]
   ignore line: [Target: x86_64-conda_cos6-linux-gnu]
   ignore line: [Configured with: /home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/src/gcc/configure --build=x86_64-build_pc-linux-gnu --host=x86_64-build_pc-linux-gnu --target=x86_64-conda_cos6-linux-gnu --prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built --with-sysroot=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-languages=c,c++,fortran,objc,obj-c++ --with-pkgversion='crosstool-NG 1.23.0.449-a04d0' --enable-__cxa_atexit --disable-libmudflap --enable-libgomp --disable-libssp --enable-libquadmath --enable-libquadmath-support --enable-libsanitizer --enable-libmpx --with-gmp=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpfr=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-mpc=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --with-isl=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/.build/x86_64-conda_cos6-linux-gnu/buildtools --enable-lto --enable-threads=posix --enable-target-optspace --enable-plugin --enable-gold --disable-nls --disable-multilib --with-local-prefix=/home/rdonnelly/mc/conda-bld/compilers_linux-64_1534865402226/work/gcc_built/x86_64-conda_cos6-linux-gnu/sysroot --enable-long-long --enable-default-pie]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 7.3.0 (crosstool-NG 1.23.0.449-a04d0) ]
-  ignore line: [COMPILER_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
-  ignore line: [LIBRARY_PATH=/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
-  ignore line: [Reading specs from /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/libgomp.spec]
-  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-rdynamic' '-o' 'cmTC_2813a' '-v' '-shared-libgcc' '-pthread']
-  link line: [ /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/cc3Mxmva.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_2813a /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/anaconda3/envs/psi4/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o]
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2] ==> ignore
+  ignore line: [COMPILER_PATH=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/bin/]
+  ignore line: [LIBRARY_PATH=/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/:/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/:/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/]
+  ignore line: [Reading specs from /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib/libgomp.spec]
+  ignore line: [COLLECT_GCC_OPTIONS='-march=native' '-fopenmp' '-v' '-rdynamic' '-o' 'cmTC_ef788' '-v' '-shared-libgcc' '-pthread']
+  link line: [ /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2 -plugin /home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so -plugin-opt=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccth5jA1.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -pie -o cmTC_ef788 /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0 -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib -L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib -L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib -rpath /home/mmd01986/.conda/envs/p4env/lib -O2 --sort-common --as-needed -z relro -z now --disable-new-dtags --gc-sections CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o /home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o]
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so] ==> ignore
-    arg [-plugin-opt=/home/mmd01986/anaconda3/envs/psi4/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/cc3Mxmva.res] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/home/mmd01986/.conda/envs/p4env/bin/../libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccth5jA1.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-    arg [--sysroot=/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot] ==> ignore
+    arg [--sysroot=/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot] ==> ignore
     arg [--eh-frame-hdr] ==> ignore
     arg [-m] ==> ignore
     arg [elf_x86_64] ==> ignore
@@ -675,20 +675,20 @@ Parsed CXX OpenMP implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-pie] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_2813a] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o] ==> ignore
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib]
-    arg [-L/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+    arg [cmTC_ef788] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/Scrt1.o] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crti.o] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtbeginS.o] ==> ignore
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib]
+    arg [-L/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
     arg [-rpath] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/lib] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/lib] ==> ignore
     arg [-O2] ==> ignore
     arg [--sort-common] ==> ignore
     arg [--as-needed] ==> ignore
@@ -696,7 +696,7 @@ Parsed CXX OpenMP implicit link information from above output:
     arg [-znow] ==> ignore
     arg [--disable-new-dtags] ==> ignore
     arg [--gc-sections] ==> ignore
-    arg [CMakeFiles/cmTC_2813a.dir/OpenMPTryFlag.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_ef788.dir/OpenMPTryFlag.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgomp] ==> lib [gomp]
@@ -706,18 +706,18 @@ Parsed CXX OpenMP implicit link information from above output:
     arg [-lc] ==> lib [c]
     arg [-lgcc_s] ==> lib [gcc_s]
     arg [-lgcc] ==> lib [gcc]
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o] ==> ignore
-    arg [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o] ==> ignore
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> [/home/mmd01986/anaconda3/envs/psi4/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc] ==> [/home/mmd01986/anaconda3/envs/psi4/lib/gcc]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib]
-  collapse library dir [/home/mmd01986/anaconda3/envs/psi4/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> [/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/crtendS.o] ==> ignore
+    arg [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib/crtn.o] ==> ignore
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0] ==> [/home/mmd01986/.conda/envs/p4env/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc] ==> [/home/mmd01986/.conda/envs/p4env/lib/gcc]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib/../lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib/../lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib/../lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/../../../../x86_64-conda_cos6-linux-gnu/lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib]
+  collapse library dir [/home/mmd01986/.conda/envs/p4env/bin/../x86_64-conda_cos6-linux-gnu/sysroot/usr/lib] ==> [/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
   implicit libs: [stdc++;m;gomp;gcc_s;gcc;pthread;c;gcc_s;gcc]
-  implicit dirs: [/home/mmd01986/anaconda3/envs/psi4/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0;/home/mmd01986/anaconda3/envs/psi4/lib/gcc;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/lib;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/lib;/home/mmd01986/anaconda3/envs/psi4/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
+  implicit dirs: [/home/mmd01986/.conda/envs/p4env/lib/gcc/x86_64-conda_cos6-linux-gnu/7.3.0;/home/mmd01986/.conda/envs/p4env/lib/gcc;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/lib;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/lib;/home/mmd01986/.conda/envs/p4env/x86_64-conda_cos6-linux-gnu/sysroot/usr/lib]
   implicit fwks: []
 
 
