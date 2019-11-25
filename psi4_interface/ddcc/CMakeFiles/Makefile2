@@ -50,10 +50,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/mmd01986/anaconda3/envs/psi4/bin/cmake
+CMAKE_COMMAND = /home/mmd01986/.conda/envs/p4env/bin/cmake
 
 # The command to remove a file.
-RM = /home/mmd01986/anaconda3/envs/psi4/bin/cmake -E remove -f
+RM = /home/mmd01986/.conda/envs/p4env/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =

@@ -19,11 +19,11 @@ class tensor4 //class to store 4D tensors and manage memory.
 //Access elements via varname->get<set>(i,j,k,l,<val>)
 {
     private:
-        SharedMatrix myarray;
         inline int ijtoa (int i, int j) {
             return i*this->arraysize + j;
         }
     public:
+        SharedMatrix myarray;
         tensor4 (SharedMatrix, int parraysize);
         tensor4 (int parraysize);
         ~tensor4 ();
@@ -40,10 +40,75 @@ class tensor4 //class to store 4D tensors and manage memory.
                 }
             }
         }
+
+        //These slice functions produce a 2D matrix for gemms etc
+        //via constant e.g. i and j -> matrix of k,l
+
+        double** get_pointer(int h) {
+            double** pointy = this->myarray->pointer(h);
+            return pointy;
+        }
+        double** sliceij (int i, int j) {
+            const int sz = this->arraysize;
+            //SharedMatrix slice = Matrix(this->arraysize,this->arraysize).clone();
+            //for ( int k = 0; k < sz; k++ ) {
+            //    for ( int l = 0; l  < sz; l++ ) {
+            //        slice->set(k,l, this->get(i,j,k,l));
+            //    }
+            //}
+            int a = ijtoa(i,j);
+            int stride = this->arraysize;
+            double** slice = this->myarray->pointer();
+            return &slice[a*stride];
+        }
+
+        SharedMatrix sliceik (int i, int k) {
+            const int sz = this->arraysize;
+            SharedMatrix slice = Matrix(this->arraysize,this->arraysize).clone();
+            for ( int j = 0; j < sz; j++ ) {
+                for ( int l = 0; l  < sz; l++ ) {
+                    slice->set(i,k, this->get(i,j,k,l));
+                }
+            }
+            return slice;
+        }
+
+        SharedMatrix slicejk (int j, int k) {
+            const int sz = this->arraysize;
+            SharedMatrix slice = Matrix(this->arraysize,this->arraysize).clone();
+            for ( int i = 0; i < sz; i++ ) {
+                for ( int l = 0; l  < sz; l++ ) {
+                    slice->set(i,l, this->get(i,j,k,l));
+                }
+            }
+            return slice;
+        }
+
+        SharedMatrix slicejl (int j, int l) {
+            const int sz = this->arraysize;
+            SharedMatrix slice = Matrix(this->arraysize,this->arraysize).clone();
+            for ( int i = 0; i < sz; i++ ) {
+                for ( int k = 0; k  < sz; k++ ) {
+                    slice->set(i,k, this->get(i,j,k,l));
+                }
+            }
+            return slice;
+        }
+
+        SharedMatrix slicekl (int k, int l) {
+            const int sz = this->arraysize;
+            SharedMatrix slice = Matrix(this->arraysize,this->arraysize).clone();
+            for ( int i = 0; i < sz; i++ ) {
+                for ( int j = 0; j  < sz; j++ ) {
+                    slice->set(i,j, this->get(i,j,k,l));
+                }
+            }
+            return slice;
+        }
         inline double get (int i, int j, int k, int l) {
             //Retrieve a value from the tensor
-            int a = this->ijtoa(i,j);
-            int b = this->ijtoa(k,l);;
+            int a = this->ijtoa(i,j); //i*szj + j;
+            int b = this->ijtoa(k,l);;//k*szl + l;
             return this->myarray->get(a,b);
         }
         inline void set (int i, int j, int k, int l, double val) {
