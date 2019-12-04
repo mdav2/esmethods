@@ -159,7 +159,7 @@ def form_WmBEj(iJaB,tia,tiJaB):
     WmBEj += np.einsum('jnfb,nmef->mbej',temp_1,iJaB[:ndocc,:ndocc,ndocc:,ndocc:])
     return WmBEj
 
-def update_T1(tia,Fae,tiJaB,iJaB):
+def update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB):
     _tia = np.zeros_like(tia)
     _tia += np.einsum('ie,ae->ia',tia,Fae)
     _tia -= np.einsum('ma,mi->ia',tia,Fmi)
@@ -235,6 +235,7 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
     _tiJaB -= np.einsum('ma,mbij->ijab',tia,iJaB[:ndocc,ndocc:,:ndocc,:ndocc])
     #term 17
     _tiJaB -= np.einsum('mb,amij->ijab',tia,iJaB[ndocc:,:ndocc,:ndocc,:ndocc])
+    return _tiJaB
 
 def ccenergy(tia,tiJaB,iJaB):
     ecc = 0
@@ -245,8 +246,7 @@ def ccenergy(tia,tiJaB,iJaB):
     ecc -= np.einsum('ijab,jiab->',iJaB[:ndocc,:ndocc,ndocc:,ndocc:],temp_1)
     return ecc
 
-print(ccenergy(tia,tiJaB,iJaB))
-def cciter(Fae,Fmi,Fme,Wmnij,WmBeJ,WmBEj,Wabef,tia,tiJaB):
+def cciter(tia,tiJaB,iJaB):
     Fae       = form_Fae(tia,iJaB,tiJaB)
     Fmi       = form_Fmi(tia,iJaB,tiJaB,tijab)
     Fme       = form_Fme(tia,iJaB)
@@ -254,7 +254,16 @@ def cciter(Fae,Fmi,Fme,Wmnij,WmBeJ,WmBEj,Wabef,tia,tiJaB):
     Wabef     = form_Wabef(iJaB,tia,tiJaB)
     WmBeJ     = form_WmBeJ(iJaB,tia,tiJaB)
     WmBEj     = form_WmBEj(iJaB,tia,tiJaB)
-    tia_new   = update_T1(tia,Fae,tiJaB,iJaB)
-    tijab_new = update_T2(tia,Fae,Fme,Fmi,\
+    tia_new   = update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB)
+    tiJaB_new = update_T2(tia,Fae,Fme,Fmi,\
                           tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,\
                           iJaB)
+    ecc = ccenergy(tia_new,tiJaB_new,iJaB)
+    tia = tia_new
+    tiJaB = tiJaB_new
+    return tia,tiJaB
+
+for i in range(10):
+    print(ccenergy(tia,tiJaB,iJaB))
+    tia,tiJaB = cciter(tia,tiJaB,iJaB)
+
