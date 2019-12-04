@@ -1,7 +1,7 @@
 
 # PYTHONPATH must include directory above plugin directory.
 #     Define either externally or here, then import plugin.
-memory 8 GB
+memory 16 GB
 sys.path.insert(0, './..')
 import ddcc
 

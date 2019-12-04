@@ -20,17 +20,17 @@ double pert_triples (phfwfn * corwf) {
 
     //build Dijkabc denominator array
     
-    #pragma omp parallel for collapse(6) default(shared) reduction(+:Ept)
+    #pragma omp parallel for collapse(4) default(shared) reduction(+:Ept)
     for ( int i = 0; i < noccso; i++ ) {
         for ( int j = 0; j < noccso; j++ ) {
             for ( int k = 0; k < noccso; k++ ) {
                 for ( int a = noccso; a < nmo; a++ ) {
+                    double Dijkabc = 0.0;
+                    double tijkabc_c = 0.0;
+                    double tijkabc_d = 0.0;
+                    double temp = 0.0;
                     for ( int b = noccso; b < nmo; b++ ) {
                         for ( int c = noccso; c < nmo; c++ ) {
-                            double Dijkabc = 0.0;
-                            double tijkabc_c = 0.0;
-                            double tijkabc_d = 0.0;
-                            double temp = 0.0;
                             tijkabc_c = 0.0;
                             tijkabc_d = 0.0;
                             Dijkabc =      corwf->FSO->get( i, i)
