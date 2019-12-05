@@ -178,14 +178,13 @@ def update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB):
 
 def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
     "Equation 47"
-
     _tiJaB = np.zeros_like(tiJaB)
     #term 1
     _tiJaB += iJaB[o,o,v,v]
     #term 2 
-    temp = np.einsum('mb,me->be',tia,Fme)/2
-    _tiJaB += np.einsum('ijae,be->ijab',tiJaB,Fae)
-    _tiJaB -= np.einsum('ijae,be->ijab',tiJaB,temp)
+    temp    = np.einsum( 'mb,me->be',     tia,   Fme  )/2
+    _tiJaB += np.einsum( 'ijae,be->ijab', tiJaB, Fae  )
+    _tiJaB -= np.einsum( 'ijae,be->ijab', tiJaB, temp )
     #term 3
     temp = np.einsum('ma,me->ae',tia,Fme)/2
     _tiJaB += np.einsum('ijeb,ae->ijab',tiJaB,Fae)
@@ -245,9 +244,13 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
 def ccenergy(tia,tiJaB,iJaB):
     ecc = 0
     temp_1 = np.einsum('ia,jb->ijab',tia,tia)
+    print('COMPONENT 1: ', np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*tiJaB))
     ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*tiJaB)
+    print('COMPONENT 2: ',  np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*temp_1))
     ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*temp_1)
+    print('COMPONENT 3: ', -np.einsum('ijab,jiab->',iJaB[o,o,v,v],tiJaB))
     ecc -= np.einsum('ijab,jiab->',iJaB[o,o,v,v],tiJaB)
+    print('COMPONENT 4: ', -np.einsum('ijab,jiab->',iJaB[o,o,v,v],temp_1))
     ecc -= np.einsum('ijab,jiab->',iJaB[o,o,v,v],temp_1)
     return ecc
 
@@ -260,15 +263,16 @@ def cciter(tia,tiJaB,iJaB):
     WmBeJ     = form_WmBeJ(iJaB,tia,tiJaB)
     WmBEj     = form_WmBEj(iJaB,tia,tiJaB)
     tia_new   = update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB)
+    print(tia_new)
     tiJaB_new = update_T2(tia,Fae,Fme,Fmi,\
                           tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,\
                           iJaB)
-    ecc = ccenergy(tia_new,tiJaB_new,iJaB)
-    tia = deepcopy(tia_new)
-    tiJaB = deepcopy(tiJaB_new)
-    return tia,tiJaB
+    #ecc = ccenergy(tia_new,tiJaB_new,iJaB)
+    #tia = deepcopy(tia_new)
+    #iJaB = deepcopy(tiJaB_new)
+    return tia_new,tiJaB_new
 
-for i in range(10):
+for i in range(3):
     print(ccenergy(tia,tiJaB,iJaB))
     tia,tiJaB = cciter(tia,tiJaB,iJaB)
 
