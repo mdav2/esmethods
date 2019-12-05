@@ -2,14 +2,18 @@ import psi4
 import numpy as np
 from time import time
 from copy import deepcopy
+cimport cython
+cimport numpy as np
+#ctypedef np.float64_t DTYPE_t
+
 np.set_printoptions(precision=6, linewidth=200, suppress=True)
 psi4.core.be_quiet()
 psi4.core.set_num_threads(4)
 psi4.core.set_output_file("output.dat")
-t1p = 0
-t2p = 0
-tecc = 0 
-tmem = 0
+cdef double t1p = 0
+cdef double t2p = 0
+cdef double tecc = 0 
+cdef double tmem = 0
 
 mol = psi4.geometry ( """
         O
@@ -19,7 +23,7 @@ mol = psi4.geometry ( """
         """)
 enuc = mol.nuclear_repulsion_energy()
 
-psi4.set_options({'basis':'cc-pvtz',
+psi4.set_options({'basis':'cc-pvqz',
                   'e_convergence':1e-12,
                   'd_convergence':1e-10,
                   'scf_type':'pk'})
@@ -34,7 +38,7 @@ ea = wfn.epsilon_a().to_array()
 nbf = len(ea)
 _Ca = wfn.Ca()
 Ca = _Ca.to_array()
-mo_eri = mints.mo_eri(_Ca,_Ca,_Ca,_Ca)
+mo_eri1 = mints.mo_eri(_Ca,_Ca,_Ca,_Ca)
 _h = wfn.H().to_array()
 ndocc = wfn.nalpha()
 o = slice(0,ndocc)
@@ -54,26 +58,27 @@ escf = 2*np.einsum('ii->',h[:ndocc,:ndocc])
 #                            
 # +----- ... and this einsum do the same thing
 # V
-escf += 2*np.einsum('iijj->',mo_eri.np[:ndocc,:ndocc,:ndocc,:ndocc]) - np.einsum('ijij->',mo_eri.np[:ndocc,:ndocc,:ndocc,:ndocc])
+escf += 2*np.einsum('iijj->',mo_eri1.np[:ndocc,:ndocc,:ndocc,:ndocc]) - np.einsum('ijij->',mo_eri1.np[:ndocc,:ndocc,:ndocc,:ndocc])
 
 print("E[SCF]: ", escf + enuc)
 print("E[SCF/Psi4]: ", e)
+#form antisymmetrized MO integrals
+_mo_eri = mo_eri1.np
+cdef mo_eri = np.array(_mo_eri,dtype=prec)
 
 #form fock matrix in MO basis
-f =  np.zeros_like(h,dtype=prec)
+cdef np.ndarray f =  np.zeros_like(h,dtype=prec)
 f += h
-f += 2*np.einsum('pqkk->pq',mo_eri.np[:,:,:ndocc,:ndocc])
-f -= np.einsum('pkqk->pq',mo_eri.np[:,:ndocc,:,:ndocc])
+f += 2*np.einsum('pqkk->pq',mo_eri[:,:,:ndocc,:ndocc])
+f -= np.einsum('pkqk->pq',mo_eri[:,:ndocc,:,:ndocc])
 
-#form antisymmetrized MO integrals
-mo_eri = mo_eri.np
-mo_eri = np.array(mo_eri,dtype=prec)
 
 print('Transforming MO -> antisymmetrized SpO')
 ta = time()
 tb = time()
 print('Done in {} s'.format(tb-ta))
 
+cdef np.ndarray iJaB
 if disk_iJaB:
     print('Using disk arrays')
     mmo_iJaB = np.memmap('iJaB.npy',dtype=prec,mode='write',shape=(mo_eri.shape))
@@ -95,13 +100,13 @@ else:
     iJaB = mo_eri.transpose(0,2,1,3)
 #form denominator array
 #just one spin case
-Dia = np.zeros((ndocc,nbf-ndocc))
+cdef np.ndarray Dia = np.zeros((ndocc,nbf-ndocc))
 for i in range(ndocc):
     for a in range(nbf-ndocc):
         aa = a + ndocc
         Dia[i][a] = f[i][i] - f[aa][aa]
 
-Dijab = np.zeros((ndocc,ndocc,nbf-ndocc,nbf-ndocc))
+cdef np.ndarray Dijab = np.zeros((ndocc,ndocc,nbf-ndocc,nbf-ndocc))
 for i in range(ndocc):
     for j in range(ndocc):
         for a in range(nbf-ndocc):
@@ -109,11 +114,13 @@ for i in range(ndocc):
                 aa = a + ndocc
                 bb = b + ndocc
                 Dijab[i][j][a][b] = f[i][i] + f[j][j]  - f[aa][aa] - f[bb][bb]
+
 #form initial T1
-tia = f[:ndocc,ndocc:]/Dia
+cdef np.ndarray tia = f[:ndocc,ndocc:]/Dia
 
 #form initial T2
-tijab = ijab[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
+cdef np.ndarray tijab = ijab[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
+cdef np.ndarray tiJaB
 if disk_T2:
     print('Using disk T2')
     tiJaB = np.memmap('T2.npy',dtype=prec,mode='w+',shape=(ndocc,ndocc,nbf-ndocc,nbf-ndocc))
@@ -121,22 +128,34 @@ if disk_T2:
 else:
     print('Using in core T2')
     tiJaB = iJaB[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
-tiJAb = iJAb[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
+cdef np.ndarray tiJAb = iJAb[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
 
-emp2 = 0.0
-emp2 = np.einsum('ijab,ijab->',ijab[:ndocc,:ndocc,ndocc:,ndocc:],tijab)/2
+cdef double emp2 = np.einsum('ijab,ijab->',ijab[:ndocc,:ndocc,ndocc:,ndocc:],tijab)/2
 emp2 += np.einsum('ijab,ijab->',iJaB[:ndocc,:ndocc,ndocc:,ndocc:],tiJaB)/2
 emp2 += np.einsum('ijab,ijab->',iJAb[:ndocc,:ndocc,ndocc:,ndocc:],tiJAb)/2
 print(emp2)
+cdef np.ndarray Fmi
+cdef np.ndarray Fme
+cdef np.ndarray Fae
+cdef np.ndarray Wmnij
+cdef np.ndarray Wabef
+cdef np.ndarray WmBeJ
+cdef np.ndarray WmBEj
+cdef np.ndarray _tia
+cdef np.ndarray _tiJaB
 
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 def form_Fae(tia,iJaB,tiJaB):
-    temp_1 =  tiJaB + np.einsum('ma,nf->mnaf',tia,tia)/2
+    cdef np.ndarray[np.float_t,ndim=4] temp_1 =  tiJaB + np.einsum('ma,nf->mnaf',tia,tia)/2
     temp_2 =  2*iJaB - iJaB.transpose((1,0,2,3))
     Fae    =  np.zeros( (nbf-ndocc,nbf-ndocc))
     Fae   +=  np.einsum('mf,amef->ae'  , tia   , temp_2[v,o,v,v]   )
     Fae   -=  np.einsum('mnaf,mnef->ae', temp_1, temp_2[o,o,v,v]   )
     return Fae
 
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 def form_Fmi(tia,iJaB,tiJaB):
     Fmi    =   np.zeros((ndocc,ndocc))
     temp_1 =   np.einsum( 'ie,nf->inef'  , tia   , tia             )/2
@@ -147,12 +166,16 @@ def form_Fmi(tia,iJaB,tiJaB):
     Fmi   +=   np.einsum( 'inef,mnef->mi',  temp_1, temp_3[o,o,v,v])
     return Fmi
 
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 def form_Fme(tia,iJaB):
     Fme  =  np.zeros_like(tia)
     temp_1 = 2*iJaB - iJaB.transpose(1,0,2,3)
     Fme +=  np.einsum( 'nf,mnef->me', tia, temp_1[o,o,v,v])
     return Fme
 
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 def form_Wmnij(iJaB,tia,tiJaB):
     Wmnij  = np.zeros_like(iJaB[o,o,o,o])
     Wmnij += iJaB[o,o,o,o]
@@ -163,11 +186,14 @@ def form_Wmnij(iJaB,tia,tiJaB):
     Wmnij += np.einsum( 'ijef,mnef->mnij', temp_1, iJaB[o,o,v,v] )/2
     return Wmnij
 
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 def form_Wabef( iJaB,tia,tiJaB):
+    cdef np.ndarray Wabef
     if disk_T2:
         Wabef = np.memmap('Wabef.npy',dtype=prec,mode='w+',shape=iJaB[v,v,v,v].shape)
     else:
-        Wabef  = np.zeros_like(iJaB[v,v,v,v])
+        Wabef  = np.zeros_like(iJaB[v,v,v,v],dtype=prec)
     Wabef += iJaB[v,v,v,v]
     temp_1 = np.einsum( 'ma,nb->mnab'    , tia   , tia           )
     Wabef -= np.einsum( 'mb,amef->abef'  , tia   , iJaB[v,o,v,v] )
@@ -176,13 +202,16 @@ def form_Wabef( iJaB,tia,tiJaB):
     Wabef += np.einsum( 'mnab,mnef'      , temp_1, iJaB[o,o,v,v] )/2
     return Wabef
 
-def form_WmBeJ(iJaB,tia,tiJaB):
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
+def form_WmBeJ(np.ndarray iJaB,np.ndarray tia,np.ndarray tiJaB):
+    cdef np.ndarray WmBeJ
     if disk_T2:
         WmBeJ = np.memmap('WmBeJ.npy',dtype=prec,mode='w+',shape=iJaB[o,v,v,o].shape)
     else:
         WmBeJ  = np.zeros_like(iJaB[o,v,v,o])
     WmBeJ += iJaB[o,v,v,o]
-    temp_1 = np.einsum( 'jf,nb->jnfb'    , tia     , tia                                 )
+    cdef np.ndarray temp_1 = np.einsum( 'jf,nb->jnfb'    , tia     , tia                                 )
     WmBeJ += np.einsum( 'jf,mbef->mbej'  , tia     , iJaB[o,v,v,v]   )
     WmBeJ -= np.einsum( 'nb,mnej->mbej'  , tia     , iJaB[o,o,v,o]   )
     WmBeJ -= np.einsum( 'jnfb,mnef->mbej', tiJaB   , iJaB[o,o,v,v]   )/2
@@ -191,12 +220,15 @@ def form_WmBeJ(iJaB,tia,tiJaB):
     WmBeJ -= np.einsum( 'njfb,nmef->mbej', tiJaB   , iJaB[o,o,v,v]   )/2
     return WmBeJ
 
-def form_WmBEj(iJaB,tia,tiJaB):
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
+def form_WmBEj(np.ndarray iJaB,np.ndarray tia,np.ndarray tiJaB):
+    cdef np.ndarray WmBEj 
     if disk_T2:
         WmBEj = np.memmap('WmBEj.npy',dtype=prec,mode='w+',shape=iJaB[o,v,v,o].shape)
     else:
         WmBEj  = np.zeros_like(iJaB[o,v,v,o])
-    temp_1 = np.einsum('jf,nb->jnfb',tia,tia)
+    cdef np.ndarray temp_1 = np.einsum('jf,nb->jnfb',tia,tia)
     WmBEj -= iJaB.transpose((1,0,2,3))[o,v,v,o]
     WmBEj -= np.einsum( 'jf,mbfe->mbej'  , tia   , iJaB[o,v,v,v] )
     WmBEj += np.einsum( 'nb,nmej->mbej'  , tia   , iJaB[o,o,v,o] )
@@ -204,8 +236,10 @@ def form_WmBEj(iJaB,tia,tiJaB):
     #WmBEj += np.einsum( 'jnfb,nmef->mbej', temp_1, iJaB[o,o,v,v] )
     return WmBEj
 
-def update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB):
-    _tia  = np.zeros_like(tia)
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
+def update_T1(np.ndarray tia,np.ndarray Fae,np.ndarray Fme,np.ndarray Fmi,np.ndarray tiJaB,np.ndarray iJaB):
+    cdef np.ndarray _tia  = np.zeros_like(tia)
     _tia += np.einsum( 'ie,ae->ia'     ,tia   , Fae             )
     _tia -= np.einsum( 'ma,mi->ia'     ,tia   , Fmi             )
     _tia += np.einsum( 'me,imae->ia'   ,Fme   , 2*tiJaB - tiJaB.transpose(1,0,2,3)        )
@@ -219,8 +253,11 @@ def update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB):
     _tia /= Dia
     return _tia
 
-def update_T2(tia,Fae,Fme,Fmi,tiJaB,iJaB):
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
+def update_T2(np.ndarray tia,np.ndarray Fae,np.ndarray Fme,np.ndarray Fmi,np.ndarray tiJaB,np.ndarray iJaB):
     "Equation 47"
+    cdef np.ndarray _tiJaB
     if disk_T2:
         _tiJaB = np.memmap('_T2.npy',dtype=prec,mode='w+',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
         _tiJaB[:] = 0
@@ -228,12 +265,9 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,iJaB):
         _tiJaB = np.zeros_like(tiJaB)
     _tiJaB += iJaB[o,o,v,v]
 
-    #Fae = form_Fae(tia,iJaB,tiJaB)
-    #Fmi = form_Fmi(tia,iJaB,tiJaB)
-    #Fme = form_Fme(tia,iJaB)
     _tiJaB += np.einsum( 'ijae,be->ijab', tiJaB, Fae  , optimize=True)
     _tiJaB += np.einsum('ijeb,ae->ijab',tiJaB,Fae, optimize=True)
-    temp    = np.einsum( 'mb,me->be',     tia,   Fme  , optimize=True)/2
+    cdef np.ndarray temp    = np.einsum( 'mb,me->be',     tia,   Fme  , optimize=True)/2
     _tiJaB -= np.einsum( 'ijae,be->ijab', tiJaB, temp , optimize=True)
     temp = np.einsum('ma,me->ae',tia,Fme, optimize=True)/2
     _tiJaB -= np.einsum('ijeb,ae->ijab',tiJaB,temp, optimize=True)
@@ -249,27 +283,27 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,iJaB):
     del Fme
     del temp
 
-    temp_1  = np.einsum('ma,nb->mnab',tia,tia, optimize=True)
+    cdef np.ndarray temp_1  = np.einsum('ma,nb->mnab',tia,tia, optimize=True)
     _tiJaB -= np.einsum('jmea,bmei->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
     _tiJaB -= np.einsum('imeb,amej->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
     _tiJaB -= np.einsum('imea,mbej->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
 
-    Wmnij = form_Wmnij(iJaB,tia,tiJaB)
+    cdef np.ndarray Wmnij = form_Wmnij(iJaB,tia,tiJaB)
     _tiJaB += np.einsum('mnab,mnij->ijab',(tiJaB + temp_1),Wmnij, optimize=True)
     del Wmnij
 
-    Wabef = form_Wabef(iJaB,tia,tiJaB)
+    cdef np.ndarray Wabef = form_Wabef(iJaB,tia,tiJaB)
     _tiJaB += np.einsum('ijef,abef->ijab',(tiJaB + temp_1),Wabef, optimize=True)
     del Wabef
 
-    WmBeJ = form_WmBeJ(iJaB,tia,tiJaB)
+    cdef np.ndarray WmBeJ = form_WmBeJ(iJaB,tia,tiJaB)
     _tiJaB += np.einsum('imae,mbej->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
 
     _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,WmBeJ , optimize=True) 
     _tiJaB += np.einsum('jmbe,maei->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
     _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBeJ, optimize=True)
     del WmBeJ
-    WmBEj = form_WmBEj(iJaB,tia,tiJaB)
+    cdef np.ndarray WmBEj = form_WmBEj(iJaB,tia,tiJaB)
     _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,(WmBEj), optimize=True)
     _tiJaB += np.einsum('mibe,maej->ijab',tiJaB,WmBEj, optimize=True)
     _tiJaB += np.einsum('mjae,mbei->ijab',tiJaB,WmBEj, optimize=True)
@@ -283,6 +317,8 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,iJaB):
     _tiJaB /= Dijab
     return _tiJaB
 
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 def ccenergy(tia,tiJaB,iJaB,tecc):
     t1 = time()
     ecc = 0
@@ -292,6 +328,8 @@ def ccenergy(tia,tiJaB,iJaB,tecc):
     tecc += t2 - t1
     return ecc,tecc
 
+#@cython.boundscheck(False)
+#@cython.wraparound(False)
 def cciter(tia,tiJaB,iJaB,t1p,t2p,tecc):
     t1 = time()
     Fae       = form_Fae(tia,iJaB,tiJaB)
@@ -315,15 +353,15 @@ for i in range(10):
     e,tecc = ccenergy(tia_new,tiJaB_new,iJaB,tecc)
     print(e)
     if disk_T2:
-        del tiJaB
+        #del tiJaB
         tiJaB = np.memmap('T2.npy',dtype=prec,mode='write',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
     tia[:] = tia_new[:]
     tiJaB[:] = tiJaB_new[:]
     if disk_T2:
-        tiJaB.flush()
-        del tiJaB
-        del tia_new
-        del tiJaB_new
+       tiJaB.flush()
+       #del tiJaB
+       del tia_new
+       del tiJaB_new
     #tia,tiJaB = cciter(tia,tiJaB,iJaB)
 print('T[1particle] : ', t1p)
 print('T[2particle] : ', t2p)
