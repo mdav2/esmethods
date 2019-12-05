@@ -4,6 +4,7 @@ from time import time
 from copy import deepcopy
 np.set_printoptions(precision=6, linewidth=200, suppress=True)
 psi4.core.be_quiet()
+psi4.core.set_num_threads(4)
 psi4.core.set_output_file("output.dat")
 
 mol = psi4.geometry ( """
@@ -14,11 +15,11 @@ mol = psi4.geometry ( """
         """)
 enuc = mol.nuclear_repulsion_energy()
 
-psi4.set_options({'basis':'cc-pvtz',
+psi4.set_options({'basis':'cc-pvqz',
                   'e_convergence':1e-14,
                   'd_convergence':1e-10,
                   'scf_type':'pk'})
-disk_T2 = False
+disk_T2   = False
 disk_iJaB = False
 
 e,wfn = psi4.energy('scf',mol=mol,return_wfn=True)
@@ -60,24 +61,32 @@ f += 2*np.einsum('pqkk->pq',mo_eri.np[:,:,:ndocc,:ndocc])
 f -= np.einsum('pkqk->pq',mo_eri.np[:,:ndocc,:,:ndocc])
 
 #form antisymmetrized MO integrals
-ijab = np.zeros_like(mo_eri.np)
-iJaB = np.zeros_like(mo_eri.np)
-iJAb = np.zeros_like(mo_eri.np)
+#ijab = np.zeros_like(mo_eri.np)
+#iJaB = np.zeros_like(mo_eri.np)
+#iJAb = np.zeros_like(mo_eri.np)
 print('Transforming MO -> antisymmetrized SpO')
 ta = time()
-ijab = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,1,2)
-iJaB = mo_eri.np.transpose(0,2,1,3)
-iJAb = -mo_eri.np.transpose(0,3,1,2)
 tb = time()
 print('Done in {} s'.format(tb-ta))
 if disk_iJaB:
+    print('Using disk arrays')
     mmo_iJaB = np.memmap('iJaB.npy',dtype='float64',mode='write',shape=(mo_eri.np.shape))
-    mmo_iJaB[:] = iJaB[:]
+    mmo_iJaB[:] = mo_eri.np.transpose(0,2,1,3)[:]
     del mmo_iJaB
-    del iJaB
+    mmo_iJAb = np.memmap('iJAb.npy',dtype='float64',mode='write',shape=(mo_eri.np.shape))
+    mmo_iJAb[:] = -mo_eri.np.transpose(0,3,1,2)[:]
+    del mmo_iJAb
+    mmo_ijab = np.memmap('ijab.npy',dtype='float64',mode='write',shape=(mo_eri.np.shape))
+    mmo_ijab[:] = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,1,2)
+    del mmo_ijab
+    iJAb = np.memmap('iJAb.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
     iJaB = np.memmap('iJaB.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
+    ijab = np.memmap('ijab.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
 else:
     print('Using in core arrays')
+    ijab = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,1,2)
+    iJAb = -mo_eri.np.transpose(0,3,1,2)
+    iJaB = mo_eri.np.transpose(0,2,1,3)
 #form denominator array
 #just one spin case
 Dia = np.zeros((ndocc,nbf-ndocc))
@@ -149,7 +158,10 @@ def form_Wmnij(iJaB,tia,tiJaB):
     return Wmnij
 
 def form_Wabef( iJaB,tia,tiJaB):
-    Wabef  = np.zeros_like(iJaB[v,v,v,v])
+    if disk_T2:
+        Wabef = np.memmap('Wabef.npy',dtype='float64',mode='w+',shape=iJaB[v,v,v,v].shape)
+    else:
+        Wabef  = np.zeros_like(iJaB[v,v,v,v])
     Wabef += iJaB[v,v,v,v]
     temp_1 = np.einsum( 'ma,nb->mnab'    , tia   , tia           )
     Wabef -= np.einsum( 'mb,amef->abef'  , tia   , iJaB[v,o,v,v] )
@@ -159,7 +171,10 @@ def form_Wabef( iJaB,tia,tiJaB):
     return Wabef
 
 def form_WmBeJ(iJaB,tia,tiJaB):
-    WmBeJ  = np.zeros_like(iJaB[o,v,v,o])
+    if disk_T2:
+        WmBeJ = np.memmap('WmBeJ.npy',dtype='float64',mode='w+',shape=iJaB[o,v,v,o].shape)
+    else:
+        WmBeJ  = np.zeros_like(iJaB[o,v,v,o])
     WmBeJ += iJaB[o,v,v,o]
     temp_1 = np.einsum( 'jf,nb->jnfb'    , tia     , tia                                 )
     WmBeJ += np.einsum( 'jf,mbef->mbej'  , tia     , iJaB[o,v,v,v]   )
@@ -171,7 +186,10 @@ def form_WmBeJ(iJaB,tia,tiJaB):
     return WmBeJ
 
 def form_WmBEj(iJaB,tia,tiJaB):
-    WmBEj  = np.zeros_like(iJaB[o,v,v,o])
+    if disk_T2:
+        WmBEj = np.memmap('WmBEj.npy',dtype='float64',mode='w+',shape=iJaB[o,v,v,o].shape)
+    else:
+        WmBEj  = np.zeros_like(iJaB[o,v,v,o])
     temp_1 = np.einsum('jf,nb->jnfb',tia,tia)
     WmBEj -= iJaB.transpose((1,0,2,3))[o,v,v,o]
     WmBEj -= np.einsum( 'jf,mbfe->mbej'  , tia   , iJaB[o,v,v,v] )
@@ -290,18 +308,26 @@ def cciter(tia,tiJaB,iJaB):
     tiJaB_new = update_T2(tia,Fae,Fme,Fmi,\
                           tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,\
                           iJaB)
-    #print(type(tiJaB_new))
-    #del tia
-    #del tiJaB
+    del Wabef
+    del WmBeJ
+    del WmBEj
     return tia_new,tiJaB_new
 
 print(ccenergy(tia,tiJaB,iJaB))
 for i in range(10):
+    if disk_T2:
+        tiJaB = np.memmap('T2.npy',dtype='float64',mode='r',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
     tia_new,tiJaB_new = cciter(tia,tiJaB,iJaB)
+    print(ccenergy(tia_new,tiJaB_new,iJaB))
+    if disk_T2:
+        del tiJaB
+        tiJaB = np.memmap('T2.npy',dtype='float64',mode='write',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
     tia[:] = tia_new[:]
     tiJaB[:] = tiJaB_new[:]
-    del tia_new
-    del tiJaB_new
+    if disk_T2:
+        tiJaB.flush()
+        del tiJaB
+        del tia_new
+        del tiJaB_new
     #tia,tiJaB = cciter(tia,tiJaB,iJaB)
-    print(ccenergy(tia,tiJaB,iJaB))
 
