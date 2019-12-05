@@ -18,6 +18,8 @@ psi4.set_options({'basis':'cc-pvtz',
                   'e_convergence':1e-14,
                   'd_convergence':1e-10,
                   'scf_type':'pk'})
+disk_T2 = False
+disk_iJaB = False
 
 e,wfn = psi4.energy('scf',mol=mol,return_wfn=True)
 mints = psi4.core.MintsHelper(wfn.basisset())
@@ -68,8 +70,14 @@ iJaB = mo_eri.np.transpose(0,2,1,3)
 iJAb = -mo_eri.np.transpose(0,3,1,2)
 tb = time()
 print('Done in {} s'.format(tb-ta))
-
-
+if disk_iJaB:
+    mmo_iJaB = np.memmap('iJaB.npy',dtype='float64',mode='write',shape=(mo_eri.np.shape))
+    mmo_iJaB[:] = iJaB[:]
+    del mmo_iJaB
+    del iJaB
+    iJaB = np.memmap('iJaB.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
+else:
+    print('Using in core arrays')
 #form denominator array
 #just one spin case
 Dia = np.zeros((ndocc,nbf-ndocc))
@@ -91,7 +99,13 @@ tia = f[:ndocc,ndocc:]/Dia
 
 #form initial T2
 tijab = ijab[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
-tiJaB = iJaB[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
+if disk_T2:
+    print('Using disk T2')
+    tiJaB = np.memmap('T2.npy',dtype='float64',mode='w+',shape=(ndocc,ndocc,nbf-ndocc,nbf-ndocc))
+    tiJaB[:] = iJaB[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
+else:
+    print('Using in core T2')
+    tiJaB = iJaB[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
 tiJAb = iJAb[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
 
 emp2 = 0.0
@@ -183,7 +197,11 @@ def update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB):
 
 def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
     "Equation 47"
-    _tiJaB = np.zeros_like(tiJaB)
+    if disk_T2:
+        _tiJaB = np.memmap('_T2.npy',dtype='float64',mode='w+',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
+        _tiJaB[:] = 0
+    else:
+        _tiJaB = np.zeros_like(tiJaB)
     #term 1
     _tiJaB += iJaB[o,o,v,v]
     #term 2 
@@ -272,9 +290,18 @@ def cciter(tia,tiJaB,iJaB):
     tiJaB_new = update_T2(tia,Fae,Fme,Fmi,\
                           tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,\
                           iJaB)
+    #print(type(tiJaB_new))
+    #del tia
+    #del tiJaB
     return tia_new,tiJaB_new
 
-for i in range(46):
-    tia,tiJaB = cciter(tia,tiJaB,iJaB)
+print(ccenergy(tia,tiJaB,iJaB))
+for i in range(10):
+    tia_new,tiJaB_new = cciter(tia,tiJaB,iJaB)
+    tia[:] = tia_new[:]
+    tiJaB[:] = tiJaB_new[:]
+    del tia_new
+    del tiJaB_new
+    #tia,tiJaB = cciter(tia,tiJaB,iJaB)
     print(ccenergy(tia,tiJaB,iJaB))
 
