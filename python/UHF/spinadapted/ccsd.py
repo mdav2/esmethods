@@ -565,6 +565,20 @@ def form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB):
     #expansion of (tia)(tia)
     tiatia = np.einsum('jf,nb->jnfb',tia,tia)
 
+    WMbEj = np.zeros_like(IjAb[ob,va,vb,oa])
+    #term 1
+    WMbEj += IjAb[ob,va,vb,oa]
+    #term 2
+    WMbEj += np.einsum('jf,mbef->mbej',tia,IjAb[ob,va,vb,va])
+    #term 3
+    WMbEj -= np.einsum('nb,mnej->mbej',tia,IjAb[ob,oa,vb,oa])
+    #term 4
+    WMbEj -= np.einsum('jnfb,mnef->mbej',(1/2)*tijab + tiatia, IjAb[ob,oa,vb,va])
+    #term 5
+    WMbEj -= (1/2)*np.einsum('jnfb,mnef->mbej',tiJAb,IJAB[ob,ob,vb,vb])
+    return WMbEj
+
+
 Fae = form_Fae(fa,tia,tIA,tijab,tiJaB,tIjaB,ijab,iJaB,IjaB)
 FAE = form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb)
 Fmi = form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb)
@@ -591,3 +605,4 @@ WmBeJ = form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab)
 WmBEj = form_WmBEj(tia,tIA,tiJaB,iJAb)
 WMBEJ = form_WMBEJ(tIA,tIJAB,IJAB,IjAb)
 WMbEj = form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB)
+#WMbeJ = form_WMbeJ(tia,tIA,tIjAb,IjaB)
