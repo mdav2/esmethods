@@ -402,6 +402,169 @@ def form_Wabef(tia,tijab,ijab):
     Wabef += (1/4)*np.einsum('mnab,mnef->abef',tijab + tiatia - tiatia.transpose(0,1,3,2),ijab[oa,oa,va,va])
     return Wabef
 
+def form_WaBeF(tia,tIA,tiJaB,tIjaB,iJaB,IjaB):
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('ma,nb->mnab',tia,tIA)
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('ma,nb->mnab',tIA,tia)
+    WaBeF = np.zeros_like(iJaB[va,vb,va,vb])
+    #term 1
+    WaBeF += iJaB[va,vb,va,vb]
+    #term 2
+    WaBeF -= np.einsum('mb,amef->abef',tIA,iJaB[va,ob,va,vb])
+    #term 3
+    WaBeF += np.einsum('ma,bmef->abef',tia,IjaB[vb,oa,va,vb])
+    #term 4
+    WaBeF += (1/4)*np.einsum('mnab,mnef->abef',tiJaB + tiatIA,iJaB[oa,ob,va,vb])
+    #term 5
+    WaBeF += (1/4)*np.einsum('mnab,mnef->abef',tIjaB - tIAtia.transpose(0,1,3,2),IjaB[ob,oa,va,vb])
+    return WaBeF
+
+def form_WaBEf(tia,tIA,tiJaB,tIjaB,iJaB,IjAb):
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('ma,nb->mnab',tia,tIA)
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('ma,nb->mnab',tIA,tia)
+
+    WaBEf = np.zeros_like(iJAb[va,vb,vb,va])
+    #term 1
+    WaBEf += iJAb[va,vb,vb,va]
+    #term 2
+    WaBEf -= np.einsum('mb,amef->abef',tIA,iJAb[va,ob,vb,va])
+    #term 3
+    WaBEf += np.einsum('ma,bmef->abef',tia,IjAb[vb,oa,vb,va])
+    #term 4
+    WaBEf += (1/4)*np.einsum('mnab,mnef->abef',tiJaB + tiatIA,iJAb[oa,ob,vb,va])
+    #term 5
+    WaBEf += (1/4)*np.einsum('mnab,mnef->abef',tIjaB - tIAtia.transpose(0,1,3,2),IjAb[ob,oa,vb,va])
+    return WaBEf
+
+def form_WABEF(tIA,tIJAB,IJAB):
+    #expansion of tIAtIA
+    tIAtIA = np.einsum('ma,nb->mnab',tIA,tIA)
+
+    WABEF = np.zeros_like(IJAB[vb,vb,vb,vb])
+    #term 1
+    WABEF += IJAB[vb,vb,vb,vb]
+    #term 2
+    WABEF -= np.einsum('mb,amef->abef',tIA,IJAB[vb,ob,vb,vb])
+    #term 3
+    WABEF += np.einsum('ma,bmef->abef',tIA,IJAB[vb,ob,vb,vb])
+    #term 4
+    WABEF += (1/4)*np.einsum('mnab,mnef->abef',tIJAB + tIAtIA - tIAtIA.transpose(0,1,3,2), IJAB[ob,ob,vb,vb])
+    return WABEF
+
+def form_WAbEf(tia,tIA,tIjAb,tiJAb,IjAb,iJAb):
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('ma,nb->mnab',tIA,tia)
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('ma,nb->mnab',tia,tIA)
+
+    WAbEf = np.zeros_like(IjAb[vb,va,vb,va])
+
+    #term 1
+    WAbEf += IjAb[vb,va,vb,va]
+    #term 2
+    WAbEf -= np.einsum('mb,amef->abef',tia,IjAb[vb,oa,vb,va])
+    #term 3
+    WAbEf += np.einsum('ma,bmef->abef',tIA,iJAb[va,ob,vb,va])
+    #term 4
+    WAbEf += (1/4)*np.einsum('mnab,mnef->abef',tIjAb + tIAtia,IjAb[ob,oa,vb,va])
+    #term 5
+    WAbEf += (1/4)*np.einsum('mnab,mnef->abef',tiJAb - tiatIA.transpose(0,1,3,2),iJAb[oa,ob,vb,va])
+    return WAbEf
+
+def form_WAbeF(tia,tIA,tIjAb,tijab,IjaB,iJaB):
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('ma,nb->mnab',tIA,tia)
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('ma,nb->mnab',tia,tIA)
+
+    WAbeF = np.zeros_like(IjaB[vb,va,va,vb])
+    #term 1
+    WAbeF += IjaB[vb,va,va,vb]
+    #term 2
+    WAbeF -= np.einsum('mb,amef->abef',tia,IjaB[vb,oa,va,vb])
+    #term 3
+    WAbeF += np.einsum('ma,bmef->abef',tIA,iJaB[va,ob,va,vb])
+    #term 4
+    WAbeF += (1/4)*np.einsum('mnab,mnef->abef',tIjAb + tIAtia,IjaB[ob,oa,va,vb])
+    #term 5
+    WAbeF += (1/4)*np.einsum('mnab,mnef->abef',tiJAb - tiatIA.transpose(0,1,3,2),iJaB[oa,ob,va,vb])
+    return WAbeF
+
+def form_Wmbej(tia,tijab,tiJAb,ijab,iJaB):
+    #expansion of (tia)(tia)
+    tiatia = np.einsum('jf,nb->jnfb',tia,tia)
+
+    Wmbej = np.zeros_like(ijab[oa,va,va,oa])
+    #term 1
+    Wmbej += ijab[oa,va,va,oa]
+    #term 2
+    Wmbej += np.einsum('jf,mbef->mbej',tia,ijab[oa,va,va,va])
+    #term 3
+    Wmbej -= np.einsum('nb,mnej->mbej',tia,ijab[oa,oa,va,oa])
+    #term 4 
+    Wmbej -= np.einsum('jnfb,mnef->mbej',(1/2)*tijab + tiatia,ijab[oa,oa,va,va])
+    #term 5
+    Wmbej -= (1/2)*np.einsum('jnfb,mnef->mbej',tiJAb,iJaB[oa,ob,va,vb])
+
+    return Wmbej
+
+def form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab):
+    #expansion of (tIA)(tIA)
+    tIAtIA = np.einsum('jf,nb->jnfb',tIA,tIA)
+
+    WmBeJ = np.zeros_like(iJaB[oa,vb,va,ob])
+    #term 1
+    WmBeJ += iJaB[oa,vb,va,ob]
+    #term 2
+    WmBeJ += np.einsum('jf,mbef->mbej',tIA,iJaB[oa,vb,va,vb])
+    #term 3
+    WmBeJ -= np.einsum('nb,mnej->mbej',tIA,iJaB[oa,ob,va,ob])
+    #term 4
+    WmBeJ -= np.einsum('jnfb,mnef->mbej',(1/2)*tIJAB + tIAtIA, iJaB[oa,ob,va,vb])
+    #term 5
+    WmBeJ -= (1/2)*np.einsum('jnfb,mnef->mbej',tIjaB,ijab[oa,oa,va,va])
+    return WmBeJ
+
+def form_WmBEj(tia,tIA,tiJaB,iJAb):
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('jf,nb->jnfb',tia,tIA)
+
+    WmBEj = np.zeros_like(iJAb[oa,vb,vb,oa])
+
+    #term 1
+    WmBEj += iJAb[oa,vb,vb,oa]
+    #term 2
+    WmBEj += np.einsum('jf,mbef->mbej',tia,iJAb[oa,vb,vb,va])
+    #term 3
+    WmBEj -= np.einsum('nb,mnej->mbej',tIA,iJAb[oa,ob,vb,oa])
+    #term 4
+    WmBEj -= np.einsum('jnfb,mnef->mbej',(1/2)*tiJaB + tiatIA, iJAb[oa,ob,vb,va])
+    return WmBEj
+
+def form_WMBEJ(tIA,tIJAB,IJAB,IjAb):
+    #expansion of (tIA)(tIA)
+    tIAtIA = np.einsum('jf,nb->jnfb',tIA,tIA)
+
+    WMBEJ = np.zeros_like(IJAB[ob,vb,vb,ob])
+    #term 1
+    WMBEJ += IJAB[ob,vb,vb,ob]
+    #term 2
+    WMBEJ += np.einsum('jf,mbef->mbej',tIA,IJAB[ob,vb,vb,vb])
+    #term 3
+    WMBEJ -= np.einsum('nb,mnej->mbej',tIA,IJAB[ob,ob,vb,ob])
+    #term 4
+    WMBEJ -= np.einsum('jnfb,mnef->mbej',(1/2)*tIJAB + tIAtIA, IJAB[ob,ob,vb,vb])
+    #term 5
+    WMBEJ -= (1/2)*np.einsum('jnfb,mnef->mbej', tIjaB, IjAb[ob,oa,vb,va])
+    return WMBEJ
+
+def form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB):
+    #expansion of (tia)(tia)
+    tiatia = np.einsum('jf,nb->jnfb',tia,tia)
+
 Fae = form_Fae(fa,tia,tIA,tijab,tiJaB,tIjaB,ijab,iJaB,IjaB)
 FAE = form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb)
 Fmi = form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb)
@@ -417,3 +580,14 @@ WMnIj = form_WMnIj(tia,tIA,tIjAb,tIjaB,IjAb,IjaB)
 WMniJ = form_WMniJ(tia,tIA,tIjAb,tiJAb,IjaB,IjAb)
 
 Wabef = form_Wabef(tia,tijab,ijab)
+WaBeF = form_WaBeF(tia,tIA,tiJaB,tIjaB,iJaB,IjaB)
+WaBEf = form_WaBEf(tia,tIA,tiJaB,tIjaB,iJAb,IjAb)
+WABEF = form_WABEF(tIA,tIJAB,IJAB)
+WAbEf = form_WAbEf(tia,tIA,tIjAb,tiJAb,IjAb,iJAb)
+WAbeF = form_WAbeF(tia,tIA,tIjAb,tiJAb,IjaB,iJaB)
+
+Wmbej = form_Wmbej(tia,tijab,tiJAb,ijab,iJaB)
+WmBeJ = form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab)
+WmBEj = form_WmBEj(tia,tIA,tiJaB,iJAb)
+WMBEJ = form_WMBEJ(tIA,tIJAB,IJAB,IjAb)
+WMbEj = form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB)
