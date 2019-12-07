@@ -221,7 +221,7 @@ def form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb):
     FAE -= (1/2)*np.einsum('mnaf,mnef->ae',(tIjAb + (1/2)*tIAtia),IjAb[ob,oa,vb,va])
     #term 7
     FAE -= (1/2)*np.einsum('mnaf,mnef->ae',(tiJAb - (1/2)*(tiatIA)),iJAb[oa,ob,vb,va])
-    return Fae
+    return FAE
 
 def form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb):
     #expansion of (tia)(tia)
@@ -578,13 +578,96 @@ def form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB):
     WMbEj -= (1/2)*np.einsum('jnfb,mnef->mbej',tiJAb,IJAB[ob,ob,vb,vb])
     return WMbEj
 
+def form_WMbeJ(tia,tIA,tIjAb,IjaB):
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('jf,nb->jnfb',tIA,tia)
 
-Fae = form_Fae(fa,tia,tIA,tijab,tiJaB,tIjaB,ijab,iJaB,IjaB)
-FAE = form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb)
-Fmi = form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb)
-FMI = form_FMI(fb,tia,tIA,tIJAB,tIjAb,tIjaB,IJAB,IjAb,IjaB)
-Fme = form_Fme(fa,tia,tIA,ijab,iJaB)
-FME = form_FME(fb,tia,tIA,IJAB,IjAb)
+    WMbeJ = np.zeros_like(IjaB[ob,va,va,ob])
+    #term 1
+    WMbeJ += IjaB[ob,va,va,ob]
+    #term 2
+    WMbeJ += np.einsum('jf,mbef->mbej',tIA,IjaB[ob,va,va,vb])
+    #term 3
+    WMbeJ -= np.einsum('nb,mnej->mbej',tia,IjaB[ob,oa,va,ob])
+    #term 4
+    WMbeJ -= np.einsum('jnfb,mnef->mbej',(1/2)*tIjAb + tIAtia,IjaB[ob,oa,va,vb])
+    return WMbeJ
+
+def update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia):
+    # one particle intermediates
+    Fae = form_Fae(fa,tia,tIA,tijab,tiJaB,tIjaB,ijab,iJaB,IjaB)
+    Fmi = form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb)
+    Fme = form_Fme(fa,tia,tIA,ijab,iJaB)
+    FME = form_FME(fb,tia,tIA,IJAB,IjAb)
+
+    _tia = np.zeros_like(tia)
+    #term 1
+    _tia += fa[oa,va]
+    #term 2
+    _tia += np.einsum('ie,ae->ia',tia,Fae)
+    #term 3
+    _tia -= np.einsum('ma,mi->ia',tia,Fmi)
+    #term 4
+    _tia += np.einsum('imae,me->ia',tijab,Fme)
+    #term 5
+    _tia += np.einsum('imae,me->ia',tiJaB,FME)
+    #term 6
+    _tia += np.einsum('me,amie->ia',tia,ijab[va,oa,oa,va])
+    #term 7
+    _tia += np.einsum('me,amie->ia',tIA,iJaB[va,ob,oa,vb])
+    #term 8
+    _tia -= (1/2)*np.einsum('mnae,mnie->ia',tijab,ijab[oa,oa,oa,va])
+    #term 9
+    _tia -= (1/2)*np.einsum('mnae,mnie->ia',tiJaB,iJaB[oa,ob,oa,vb])
+    #term 10
+    _tia -= (1/2)*np.einsum('mnae,mnie->ia',tIjaB,IjaB[ob,oa,oa,vb])
+    #term 11
+    _tia += (1/2)*np.einsum('imef,amef->ia',tijab,ijab[va,oa,va,va])
+    #term 12
+    _tia += (1/2)*np.einsum('imef,amef->ia',tiJaB,iJaB[va,ob,va,vb])
+    #term 13
+    _tia += (1/2)*np.einsum('imef,amef->ia',tiJAb,iJAb[va,ob,vb,va])
+    _tia /= Dia
+    return _tia
+
+def update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA):
+    # one particle intermediates
+    FAE = form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb)
+    FMI = form_FMI(fb,tia,tIA,tIJAB,tIjAb,tIjaB,IJAB,IjAb,IjaB)
+    Fme = form_Fme(fa,tia,tIA,ijab,iJaB)
+    FME = form_FME(fb,tia,tIA,IJAB,IjAb)
+
+    _tIA = np.zeros_like(tIA)
+    #term 1
+    _tIA += fb[ob,vb]
+    #term 2
+    _tIA += np.einsum('ie,ae->ia',tIA,FAE)
+    #term 3
+    _tIA -= np.einsum('ma,mi->ia',tIA,FMI)
+    #term 4
+    _tIA += np.einsum('imae,me->ia',tIJAB,FME)
+    #term 5
+    _tIA += np.einsum('imae,me->ia',tIjAb,Fme)
+    #term 6
+    _tIA += np.einsum('me,amie->ia',tIA,IJAB[vb,ob,ob,vb])
+    #term 7
+    _tIA += np.einsum('me,amie->ia',tia,IjAb[vb,oa,ob,va])
+    #term 8
+    _tIA -= (1/2)*np.einsum('mnae,mnie->ia',tIJAB,IJAB[ob,ob,ob,vb])
+    #term 9
+    _tIA -= (1/2)*np.einsum('mnae,mnie->ia',tIjAb,IjAb[ob,oa,ob,va])
+    #term 10
+    _tIA -= (1/2)*np.einsum('mnae,mnie->ia',tiJAb,iJAb[oa,ob,ob,va])
+    #term 11
+    _tIA += (1/2)*np.einsum('imef,amef->ia',tIJAB,IJAB[vb,ob,vb,vb])
+    #term 12
+    _tIA += (1/2)*np.einsum('imef,amef->ia',tIjAb,IjAb[vb,oa,vb,va])
+    #term 13
+    _tIA += (1/2)*np.einsum('imef,amef->ia',tIjaB,IjaB[vb,oa,va,vb])
+
+    _tIA /= DIA
+
+    return _tIA
 
 Wmnij = form_Wmnij(tia,tijab,ijab)
 WmNiJ = form_WmNiJ(tia,tIA,tiJaB,tiJAb,iJaB,iJAb)
@@ -605,4 +688,7 @@ WmBeJ = form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab)
 WmBEj = form_WmBEj(tia,tIA,tiJaB,iJAb)
 WMBEJ = form_WMBEJ(tIA,tIJAB,IJAB,IjAb)
 WMbEj = form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB)
-#WMbeJ = form_WMbeJ(tia,tIA,tIjAb,IjaB)
+WMbeJ = form_WMbeJ(tia,tIA,tIjAb,IjaB)
+
+tia_new = update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia)
+tIA_new = update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA)
