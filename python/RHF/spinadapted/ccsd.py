@@ -6,10 +6,6 @@ np.set_printoptions(precision=6, linewidth=200, suppress=True)
 psi4.core.be_quiet()
 psi4.core.set_num_threads(4)
 psi4.core.set_output_file("output.dat")
-t1p = 0
-t2p = 0
-tecc = 0 
-tmem = 0
 
 mol = psi4.geometry ( """
         O
@@ -19,13 +15,12 @@ mol = psi4.geometry ( """
         """)
 enuc = mol.nuclear_repulsion_energy()
 
-psi4.set_options({'basis':'cc-pvtz',
-                  'e_convergence':1e-12,
+psi4.set_options({'basis':'cc-pvqz',
+                  'e_convergence':1e-14,
                   'd_convergence':1e-10,
                   'scf_type':'pk'})
-disk_T2   = True
-disk_iJaB = True
-prec = 'float32' #increase to float64 if you need bunches of precision
+disk_T2   = False
+disk_iJaB = False
 
 e,wfn = psi4.energy('scf',mol=mol,return_wfn=True)
 mints = psi4.core.MintsHelper(wfn.basisset())
@@ -60,39 +55,38 @@ print("E[SCF]: ", escf + enuc)
 print("E[SCF/Psi4]: ", e)
 
 #form fock matrix in MO basis
-f =  np.zeros_like(h,dtype=prec)
+f =  np.zeros_like(h)
 f += h
 f += 2*np.einsum('pqkk->pq',mo_eri.np[:,:,:ndocc,:ndocc])
 f -= np.einsum('pkqk->pq',mo_eri.np[:,:ndocc,:,:ndocc])
 
 #form antisymmetrized MO integrals
-mo_eri = mo_eri.np
-mo_eri = np.array(mo_eri,dtype=prec)
-
+#ijab = np.zeros_like(mo_eri.np)
+#iJaB = np.zeros_like(mo_eri.np)
+#iJAb = np.zeros_like(mo_eri.np)
 print('Transforming MO -> antisymmetrized SpO')
 ta = time()
 tb = time()
 print('Done in {} s'.format(tb-ta))
-
 if disk_iJaB:
     print('Using disk arrays')
-    mmo_iJaB = np.memmap('iJaB.npy',dtype=prec,mode='write',shape=(mo_eri.shape))
-    mmo_iJaB[:] = mo_eri.transpose(0,2,1,3)[:]
+    mmo_iJaB = np.memmap('iJaB.npy',dtype='float64',mode='write',shape=(mo_eri.np.shape))
+    mmo_iJaB[:] = mo_eri.np.transpose(0,2,1,3)[:]
     del mmo_iJaB
-    mmo_iJAb = np.memmap('iJAb.npy',dtype=prec,mode='write',shape=(mo_eri.shape))
-    mmo_iJAb[:] = -mo_eri.transpose(0,3,1,2)[:]
+    mmo_iJAb = np.memmap('iJAb.npy',dtype='float64',mode='write',shape=(mo_eri.np.shape))
+    mmo_iJAb[:] = -mo_eri.np.transpose(0,3,1,2)[:]
     del mmo_iJAb
-    mmo_ijab = np.memmap('ijab.npy',dtype=prec,mode='write',shape=(mo_eri.shape))
-    mmo_ijab[:] = mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,1,2)
+    mmo_ijab = np.memmap('ijab.npy',dtype='float64',mode='write',shape=(mo_eri.np.shape))
+    mmo_ijab[:] = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,1,2)
     del mmo_ijab
-    iJAb = np.memmap('iJAb.npy',dtype=prec,mode='r',shape=(mo_eri.shape))
-    iJaB = np.memmap('iJaB.npy',dtype=prec,mode='r',shape=(mo_eri.shape))
-    ijab = np.memmap('ijab.npy',dtype=prec,mode='r',shape=(mo_eri.shape))
+    iJAb = np.memmap('iJAb.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
+    iJaB = np.memmap('iJaB.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
+    ijab = np.memmap('ijab.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
 else:
     print('Using in core arrays')
-    ijab = mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,1,2)
-    iJAb = -mo_eri.transpose(0,3,1,2)
-    iJaB = mo_eri.transpose(0,2,1,3)
+    ijab = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,1,2)
+    iJAb = -mo_eri.np.transpose(0,3,1,2)
+    iJaB = mo_eri.np.transpose(0,2,1,3)
 #form denominator array
 #just one spin case
 Dia = np.zeros((ndocc,nbf-ndocc))
@@ -116,7 +110,7 @@ tia = f[:ndocc,ndocc:]/Dia
 tijab = ijab[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
 if disk_T2:
     print('Using disk T2')
-    tiJaB = np.memmap('T2.npy',dtype=prec,mode='w+',shape=(ndocc,ndocc,nbf-ndocc,nbf-ndocc))
+    tiJaB = np.memmap('T2.npy',dtype='float64',mode='w+',shape=(ndocc,ndocc,nbf-ndocc,nbf-ndocc))
     tiJaB[:] = iJaB[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
 else:
     print('Using in core T2')
@@ -165,7 +159,7 @@ def form_Wmnij(iJaB,tia,tiJaB):
 
 def form_Wabef( iJaB,tia,tiJaB):
     if disk_T2:
-        Wabef = np.memmap('Wabef.npy',dtype=prec,mode='w+',shape=iJaB[v,v,v,v].shape)
+        Wabef = np.memmap('Wabef.npy',dtype='float64',mode='w+',shape=iJaB[v,v,v,v].shape)
     else:
         Wabef  = np.zeros_like(iJaB[v,v,v,v])
     Wabef += iJaB[v,v,v,v]
@@ -178,7 +172,7 @@ def form_Wabef( iJaB,tia,tiJaB):
 
 def form_WmBeJ(iJaB,tia,tiJaB):
     if disk_T2:
-        WmBeJ = np.memmap('WmBeJ.npy',dtype=prec,mode='w+',shape=iJaB[o,v,v,o].shape)
+        WmBeJ = np.memmap('WmBeJ.npy',dtype='float64',mode='w+',shape=iJaB[o,v,v,o].shape)
     else:
         WmBeJ  = np.zeros_like(iJaB[o,v,v,o])
     WmBeJ += iJaB[o,v,v,o]
@@ -193,130 +187,141 @@ def form_WmBeJ(iJaB,tia,tiJaB):
 
 def form_WmBEj(iJaB,tia,tiJaB):
     if disk_T2:
-        WmBEj = np.memmap('WmBEj.npy',dtype=prec,mode='w+',shape=iJaB[o,v,v,o].shape)
+        WmBEj = np.memmap('WmBEj.npy',dtype='float64',mode='w+',shape=iJaB[o,v,v,o].shape)
     else:
         WmBEj  = np.zeros_like(iJaB[o,v,v,o])
     temp_1 = np.einsum('jf,nb->jnfb',tia,tia)
     WmBEj -= iJaB.transpose((1,0,2,3))[o,v,v,o]
     WmBEj -= np.einsum( 'jf,mbfe->mbej'  , tia   , iJaB[o,v,v,v] )
     WmBEj += np.einsum( 'nb,nmej->mbej'  , tia   , iJaB[o,o,v,o] )
-    WmBEj += np.einsum( 'jnfb,nmef->mbej', tiJaB + 2*temp_1, iJaB[o,o,v,v] )/2
-    #WmBEj += np.einsum( 'jnfb,nmef->mbej', temp_1, iJaB[o,o,v,v] )
+    WmBEj += np.einsum( 'jnfb,nmef->mbej', tiJaB , iJaB[o,o,v,v] )/2
+    WmBEj += np.einsum( 'jnfb,nmef->mbej', temp_1, iJaB[o,o,v,v] )
     return WmBEj
 
 def update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB):
     _tia  = np.zeros_like(tia)
     _tia += np.einsum( 'ie,ae->ia'     ,tia   , Fae             )
     _tia -= np.einsum( 'ma,mi->ia'     ,tia   , Fmi             )
-    _tia += np.einsum( 'me,imae->ia'   ,Fme   , 2*tiJaB - tiJaB.transpose(1,0,2,3)        )
-    #_tia -= np.einsum( 'me,miae->ia'   ,Fme   , tiJaB           )
+    _tia += np.einsum( 'me,imae->ia'   ,Fme   , 2*tiJaB         )
+    _tia -= np.einsum( 'me,miae->ia'   ,Fme   , tiJaB           )
     _tia += np.einsum( 'me,amie->ia'   ,tia   , 2*iJaB[v,o,o,v] )
     _tia -= np.einsum( 'me,maie->ia'   ,tia   , iJaB[o,v,o,v]   )
-    _tia -= np.einsum( 'mnae,mnie->ia' ,tiJaB , 2*iJaB[o,o,o,v] - iJaB[o,o,o,v].transpose(1,0,2,3))
-    #_tia += np.einsum( 'mnae,nmie->ia' ,tiJaB , iJaB[o,o,o,v]   )
-    _tia += np.einsum( 'imef,amef->ia' ,tiJaB , 2*iJaB[v,o,v,v] - iJaB[v,o,v,v].transpose(0,1,3,2))
+    _tia -= np.einsum( 'mnae,mnie->ia' ,tiJaB , 2*iJaB[o,o,o,v] )
+    _tia += np.einsum( 'mnae,nmie->ia' ,tiJaB , iJaB[o,o,o,v]   )
+    _tia += np.einsum( 'imef,amef->ia' ,tiJaB , 2*iJaB[v,o,v,v] )
     _tia -= np.einsum( 'imef,amfe->ia' ,tiJaB , iJaB[v,o,v,v]   )
     _tia /= Dia
     return _tia
 
-def update_T2(tia,Fae,Fme,Fmi,tiJaB,iJaB):
+def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
     "Equation 47"
     if disk_T2:
-        _tiJaB = np.memmap('_T2.npy',dtype=prec,mode='w+',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
+        _tiJaB = np.memmap('_T2.npy',dtype='float64',mode='w+',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
         _tiJaB[:] = 0
     else:
         _tiJaB = np.zeros_like(tiJaB)
+    #term 1
     _tiJaB += iJaB[o,o,v,v]
-
-    #Fae = form_Fae(tia,iJaB,tiJaB)
-    #Fmi = form_Fmi(tia,iJaB,tiJaB)
-    #Fme = form_Fme(tia,iJaB)
-    _tiJaB += np.einsum( 'ijae,be->ijab', tiJaB, Fae  , optimize=True)
-    _tiJaB += np.einsum('ijeb,ae->ijab',tiJaB,Fae, optimize=True)
+    #term 2 
     temp    = np.einsum( 'mb,me->be',     tia,   Fme  , optimize=True)/2
+    _tiJaB += np.einsum( 'ijae,be->ijab', tiJaB, Fae  , optimize=True)
     _tiJaB -= np.einsum( 'ijae,be->ijab', tiJaB, temp , optimize=True)
+    #term 3
     temp = np.einsum('ma,me->ae',tia,Fme, optimize=True)/2
+    _tiJaB += np.einsum('ijeb,ae->ijab',tiJaB,Fae, optimize=True)
     _tiJaB -= np.einsum('ijeb,ae->ijab',tiJaB,temp, optimize=True)
 
-    _tiJaB -= np.einsum('imab,mj->ijab',tiJaB,Fmi, optimize=True)
-    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,Fmi, optimize=True)
-
+    #term 4
     temp = np.einsum('je,me->mj',tia,Fme, optimize=True)/2
+    _tiJaB -= np.einsum('imab,mj->ijab',tiJaB,Fmi, optimize=True)
     _tiJaB -= np.einsum('imab,mj->ijab',tiJaB,temp, optimize=True)
-    temp = np.einsum('ie,me->mi',tia,Fme, optimize=True)/2
-    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,temp, optimize=True)
-    del Fmi
-    del Fme
-    del temp
 
+    #term 5
+    temp = np.einsum('ie,me->mi',tia,Fme, optimize=True)/2
+    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,Fmi, optimize=True)
+    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,temp, optimize=True)
+
+    # --> expansion of (tia)(tia) 
     temp_1  = np.einsum('ma,nb->mnab',tia,tia, optimize=True)
-    _tiJaB -= np.einsum('jmea,bmei->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
-    _tiJaB -= np.einsum('imeb,amej->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
+    #term 6 
+    _tiJaB += np.einsum('mnab,mnij->ijab',(tiJaB + temp_1),Wmnij, optimize=True)
+
+    #term 7
+    _tiJaB += np.einsum('ijef,abef->ijab',(tiJaB + temp_1),Wabef, optimize=True)
+
+    #term 8
+    _tiJaB += np.einsum('imae,mbej->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
     _tiJaB -= np.einsum('imea,mbej->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
 
-    Wmnij = form_Wmnij(iJaB,tia,tiJaB)
-    _tiJaB += np.einsum('mnab,mnij->ijab',(tiJaB + temp_1),Wmnij, optimize=True)
-    del Wmnij
+    #term 9
+    _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,(WmBeJ + WmBEj), optimize=True)
 
-    Wabef = form_Wabef(iJaB,tia,tiJaB)
-    _tiJaB += np.einsum('ijef,abef->ijab',(tiJaB + temp_1),Wabef, optimize=True)
-    del Wabef
-
-    WmBeJ = form_WmBeJ(iJaB,tia,tiJaB)
-    _tiJaB += np.einsum('imae,mbej->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
-
-    _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,WmBeJ , optimize=True) 
-    _tiJaB += np.einsum('jmbe,maei->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
-    _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBeJ, optimize=True)
-    del WmBeJ
-    WmBEj = form_WmBEj(iJaB,tia,tiJaB)
-    _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,(WmBEj), optimize=True)
+    #term 10
     _tiJaB += np.einsum('mibe,maej->ijab',tiJaB,WmBEj, optimize=True)
+    _tiJaB -= np.einsum('imeb,amej->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
+    
+    #term 11
     _tiJaB += np.einsum('mjae,mbei->ijab',tiJaB,WmBEj, optimize=True)
+    _tiJaB -= np.einsum('jmea,bmei->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
+
+    #term 12
+    _tiJaB += np.einsum('jmbe,maei->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
+    _tiJaB -= np.einsum('jmeb,maei->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
+
+    #term 13
+    _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBeJ, optimize=True)
     _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBEj, optimize=True)
 
-    _tiJaB -= np.einsum('jmeb,maei->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
+    #term 14
     _tiJaB += np.einsum('ie,abej->ijab',tia,iJaB[v,v,v,o],optimize=True)
+    #term 15
     _tiJaB += np.einsum('je,abie->ijab',tia,iJaB[v,v,o,v],optimize=True)
+    #term 16
     _tiJaB -= np.einsum('ma,mbij->ijab',tia,iJaB[o,v,o,o],optimize=True)
+    #term 17
     _tiJaB -= np.einsum('mb,amij->ijab',tia,iJaB[v,o,o,o],optimize=True)
     _tiJaB /= Dijab
     return _tiJaB
 
-def ccenergy(tia,tiJaB,iJaB,tecc):
-    t1 = time()
+def ccenergy(tia,tiJaB,iJaB):
     ecc = 0
     temp_1 = np.einsum('ia,jb->ijab',tia,tia)
-    ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*tiJaB + 2*temp_1 - tiJaB.transpose(1,0,2,3) - temp_1.transpose(1,0,2,3))
-    t2 = time()
-    tecc += t2 - t1
-    return ecc,tecc
+    #print('COMPONENT 1: ', np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*tiJaB))
+    ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*tiJaB)
+    #print('COMPONENT 2: ',  np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*temp_1))
+    ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*temp_1)
+    #print('COMPONENT 3: ', -np.einsum('ijab,jiab->',iJaB[o,o,v,v],tiJaB))
+    ecc -= np.einsum('ijab,jiab->',iJaB[o,o,v,v],tiJaB)
+    #print('COMPONENT 4: ', -np.einsum('ijab,jiab->',iJaB[o,o,v,v],temp_1))
+    ecc -= np.einsum('ijab,jiab->',iJaB[o,o,v,v],temp_1)
+    return ecc
 
-def cciter(tia,tiJaB,iJaB,t1p,t2p,tecc):
-    t1 = time()
+def cciter(tia,tiJaB,iJaB):
     Fae       = form_Fae(tia,iJaB,tiJaB)
     Fmi       = form_Fmi(tia,iJaB,tiJaB)
     Fme       = form_Fme(tia,iJaB)
+    Wmnij     = form_Wmnij(iJaB,tia,tiJaB)
+    Wabef     = form_Wabef(iJaB,tia,tiJaB)
+    WmBeJ     = form_WmBeJ(iJaB,tia,tiJaB)
+    WmBEj     = form_WmBEj(iJaB,tia,tiJaB)
     tia_new   = update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB)
-    t2 = time()
-    t1p += t2 - t1
-    t1 = time()
-    tiJaB_new = update_T2(tia,Fae,Fme,Fmi,tiJaB,iJaB)
-    t2 = time()
-    t2p += t2 - t1
-    return tia_new,tiJaB_new,t1p,t2p
+    tiJaB_new = update_T2(tia,Fae,Fme,Fmi,\
+                          tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,\
+                          iJaB)
+    del Wabef
+    del WmBeJ
+    del WmBEj
+    return tia_new,tiJaB_new
 
-e,tecc = ccenergy(tia,tiJaB,iJaB,tecc)
-print(e)
+print(ccenergy(tia,tiJaB,iJaB))
 for i in range(10):
     if disk_T2:
-        tiJaB = np.memmap('T2.npy',dtype=prec,mode='r',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
-    tia_new,tiJaB_new,t1p,t2p = cciter(tia,tiJaB,iJaB,t1p,t2p,tecc)
-    e,tecc = ccenergy(tia_new,tiJaB_new,iJaB,tecc)
-    print(e)
+        tiJaB = np.memmap('T2.npy',dtype='float64',mode='r',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
+    tia_new,tiJaB_new = cciter(tia,tiJaB,iJaB)
+    print(ccenergy(tia_new,tiJaB_new,iJaB))
     if disk_T2:
         del tiJaB
-        tiJaB = np.memmap('T2.npy',dtype=prec,mode='write',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
+        tiJaB = np.memmap('T2.npy',dtype='float64',mode='write',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
     tia[:] = tia_new[:]
     tiJaB[:] = tiJaB_new[:]
     if disk_T2:
@@ -325,7 +330,4 @@ for i in range(10):
         del tia_new
         del tiJaB_new
     #tia,tiJaB = cciter(tia,tiJaB,iJaB)
-print('T[1particle] : ', t1p)
-print('T[2particle] : ', t2p)
-print('T[ccenergy_] : ', tecc)
 

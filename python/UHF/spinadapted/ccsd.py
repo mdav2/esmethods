@@ -625,7 +625,7 @@ def update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia):
     _tia += (1/2)*np.einsum('imef,amef->ia',tijab,ijab[va,oa,va,va])
     #term 12
     _tia += (1/2)*np.einsum('imef,amef->ia',tiJaB,iJaB[va,ob,va,vb])
-    #term 13
+    #term 133
     _tia += (1/2)*np.einsum('imef,amef->ia',tiJAb,iJAb[va,ob,vb,va])
     _tia /= Dia
     return _tia
@@ -1132,33 +1132,54 @@ def update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB
     _tIjaB /= DIjaB
     return _tIjaB
 
-Wmnij = form_Wmnij(tia,tijab,ijab)
-WmNiJ = form_WmNiJ(tia,tIA,tiJaB,tiJAb,iJaB,iJAb)
-WmNIj = form_WmNIj(tia,tIA,tIjAb,tIjaB,iJAb,iJaB)
-WMNIJ = form_WMNIJ(tIA,tIJAB,IJAB)
-WMnIj = form_WMnIj(tia,tIA,tIjAb,tIjaB,IjAb,IjaB)
-WMniJ = form_WMniJ(tia,tIA,tIjAb,tiJAb,IjaB,IjAb)
+def ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJAB,IjAb,IjaB):
+    #expansion of (tia)(tia)
+    tiatia = np.einsum('ma,nb->mnab',tia,tia)
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('ma,nb->mnab',tia,tIA)
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('ma,nb->mnab',tIA,tia)
+    #expansion of (tIA)(tIA)
+    tIAtIA = np.einsum('ma,nb->mnab',tIA,tIA)
+    ecc = 0
+    #term 1
+    ecc += np.einsum('ia,ia->',fa[oa,va],tia)
+    #term 2
+    ecc += np.einsum('ia,ia->',fb[ob,vb],tIA)
+    #term 3
+    ecc += (1/4)*np.einsum('ijab,ijab->',tijab + 2*tiatia, ijab[oa,oa,va,va])
+    #term 4
+    ecc += (1/4)*np.einsum('ijab,ijab->',tiJaB + 2*tiatIA, iJaB[oa,ob,va,vb])
+    #term 5
+    ecc += (1/4)*np.einsum('ijab,ijab->',tiJAb,iJAb[oa,ob,vb,va])
+    #term 6
+    ecc += (1/4)*np.einsum('ijab,ijab->',tIJAB + 2*tIAtIA,IJAB[ob,ob,vb,vb])
+    #term 7
+    ecc += (1/4)*np.einsum('ijab,ijab->',tIjAb + 2*tIAtia,IjAb[ob,oa,vb,va])
+    #term 8
+    ecc += (1/4)*np.einsum('ijab,ijab->',tIjaB,IjaB[ob,oa,va,vb])
+    return ecc
 
-Wabef = form_Wabef(tia,tijab,ijab)
-WaBeF = form_WaBeF(tia,tIA,tiJaB,tIjaB,iJaB,IjaB)
-WaBEf = form_WaBEf(tia,tIA,tiJaB,tIjaB,iJAb,IjAb)
-WABEF = form_WABEF(tIA,tIJAB,IJAB)
-WAbEf = form_WAbEf(tia,tIA,tIjAb,tiJAb,IjAb,iJAb)
-WAbeF = form_WAbeF(tia,tIA,tIjAb,tiJAb,IjaB,iJaB)
 
-Wmbej = form_Wmbej(tia,tijab,tiJAb,ijab,iJaB)
-WmBeJ = form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab)
-WmBEj = form_WmBEj(tia,tIA,tiJaB,iJAb)
-WMBEJ = form_WMBEJ(tIA,tIJAB,IJAB,IjAb)
-WMbEj = form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB)
-WMbeJ = form_WMbeJ(tia,tIA,tIjAb,IjaB)
-
-tia_new = update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia)
-tIA_new = update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA)
-
-tijab_new = update_tijab(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,IjAb)
-tiJaB_new = update_tiJaB(tia,tIA,tiJaB,tiJAb,tIjaB,tIjAb,tIJAB,iJaB,IjaB,iJAb,IjAb)
-tiJAb_new = update_tiJAb(tia,tIA,tiJAb,tiJaB,tIjAb,tijab,tIJAB,tIjaB,IjaB,iJaB,IjAb)
-tIJAB_new = update_tIJAB(fb,tia,tIA,tIJAB,tIjAb,tiJaB,tIjaB,IJAB,ijab,iJaB,IjAb)
-tIjAb_new = update_tIjAb(tia,tIA,tIjAb,tIjaB,tiJAb,tijab,iJAb,IjaB,iJaB,ijab,IJAB)
-tIjaB_new = update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB)
+ecc = ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJAB,IjAb,IjaB)
+print(ecc)
+for i in range(20):
+    tia_new = update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia)
+    tIA_new = update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA)
+    
+    tijab_new = update_tijab(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,IjAb)
+    tiJaB_new = update_tiJaB(tia,tIA,tiJaB,tiJAb,tIjaB,tIjAb,tIJAB,iJaB,IjaB,iJAb,IjAb)
+    tiJAb_new = update_tiJAb(tia,tIA,tiJAb,tiJaB,tIjAb,tijab,tIJAB,tIjaB,IjaB,iJaB,IjAb)
+    tIJAB_new = update_tIJAB(fb,tia,tIA,tIJAB,tIjAb,tiJaB,tIjaB,IJAB,ijab,iJaB,IjAb)
+    tIjAb_new = update_tIjAb(tia,tIA,tIjAb,tIjaB,tiJAb,tijab,iJAb,IjaB,iJaB,ijab,IJAB)
+    tIjaB_new = update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB)
+    tia = deepcopy(tia_new)
+    tIA = deepcopy(tIA_new)
+    tijab = deepcopy(tijab_new)
+    tiJaB = deepcopy(tiJaB_new)
+    tiJAb = deepcopy(tiJAb_new)
+    tIJAB = deepcopy(tIJAB_new)
+    tIjAb = deepcopy(tIjAb_new)
+    tIjaB = deepcopy(tIjaB_new)
+    ecc = ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJAB,IjAb,IjaB)
+    print(ecc)
