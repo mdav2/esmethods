@@ -911,7 +911,226 @@ def update_tIJAB(fb,tia,tIA,tIJAB,tIjAb,tiJaB,tIjaB,IJAB,ijab,iJaB,IjAb):
     WABEF = form_WABEF(tIA,tIJAB,IJAB)
     WMBEJ = form_WMBEJ(tIA,tIJAB,IJAB,IjAb)
     WmBeJ = form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab)
+    #expansion of (tIA)(tIA)
+    tIAtIA = np.einsum('ma,nb->mnab',tIA,tIA)
 
+    _tIJAB = np.zeros_like(IJAB[ob,ob,vb,vb])
+    #term 1
+    _tIJAB += IJAB[ob,ob,vb,vb]
+    #term 2
+    _tIJAB += np.einsum('ijae,be->ijab',tIJAB,FAE -\
+              (1/2)*np.einsum('mb,me->be',tIA,FME))
+    #term 3
+    _tIJAB -= np.einsum('ijbe,ae->ijab',tIJAB,FAE -\
+              (1/2)*np.einsum('ma,me->ae',tIA,FME))
+    #term 4
+    _tIJAB -= np.einsum('imab,mj->ijab',tIJAB,FMI +\
+              (1/2)*np.einsum('je,me->mj',tIA,FME))
+    #term 5
+    _tIJAB += np.einsum('jmab,mi->ijab',tIJAB,FMI +\
+              (1/2)*np.einsum('ie,me->mi',tIA,FME))
+    #term 6
+    _tIJAB += (1/2)*np.einsum('mnab,mnij->ijab',tIJAB + tIAtIA - tIAtIA.transpose(0,1,3,2), WMNIJ)
+    #term 7
+    _tIJAB += (1/2)*np.einsum('ijef,abef->ijab',tIJAB + tIAtIA - tIAtIA.transpose(0,1,3,2), WABEF)
+    #term 8a
+    _tIJAB += np.einsum('imae,mbej->ijab',tIJAB,WMBEJ)
+    #term 8b
+    _tIJAB -= np.einsum('imea,mbej->ijab',tIAtIA,IJAB[ob,vb,vb,ob])
+    #term 9
+    _tIJAB += np.einsum('imae,mbej->ijab',tIjAb,WmBeJ)
+    #term 10a
+    _tIJAB -= np.einsum('imbe,maej->ijab',tIJAB,WMBEJ)
+    #term 10b
+    _tIJAB += np.einsum('imeb,maej->ijab',tIAtIA,IJAB[ob,vb,vb,ob])
+    #term 11
+    _tIJAB -= np.einsum('imbe,maej->ijab',tIjAb,WmBeJ)
+    #term 12a
+    _tIJAB -= np.einsum('jmae,mbei->ijab',tIJAB,WMBEJ)
+    #term 12b
+    _tIJAB += np.einsum('jmea,mbei->ijab',tIAtIA,IJAB[ob,vb,vb,ob])
+    #term 13
+    _tIJAB -= np.einsum('jmae,mbei->ijab',tIjAb,WmBeJ)
+    #term 14a
+    _tIJAB += np.einsum('jmbe,maei->ijab',tIJAB,WMBEJ)
+    #term 14b
+    _tIJAB -= np.einsum('jmeb,maei->ijab',tIAtIA,IJAB[ob,vb,vb,ob])
+    #term 15
+    _tIJAB += np.einsum('jmbe,maei->ijab',tIjAb,WmBeJ)
+    #term 16
+    _tIJAB += np.einsum('ie,abej->ijab',tIA,IJAB[vb,vb,vb,ob])
+    #term 17
+    _tIJAB -= np.einsum('je,abei->ijab',tIA,IJAB[vb,vb,vb,ob])
+    #term 18
+    _tIJAB -= np.einsum('ma,mbij->ijab',tIA,IJAB[ob,vb,ob,ob])
+    #term 19
+    _tIJAB += np.einsum('mb,maij->ijab',tIA,IJAB[ob,vb,ob,ob])
+    _tIJAB /= DIJAB
+    return _tIJAB
+
+def update_tIjAb(tia,tIA,tIjAb,tIjaB,tiJAb,tijab,iJAb,IjaB,iJaB,ijab,IJAB):
+    # one particle intermediates
+    FAE = form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb)
+    Fae = form_Fae(fa,tia,tIA,tijab,tiJaB,tIjaB,ijab,iJaB,IjaB)
+    FME = form_FME(fb,tia,tIA,IJAB,IjAb)
+    Fme = form_Fme(fa,tia,tIA,ijab,iJaB)
+    FMI = form_FMI(fb,tia,tIA,tIJAB,tIjAb,tIjaB,IJAB,IjAb,IjaB)
+    Fmi = form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb)
+    # two particle intermediates
+    WAbeF = form_WAbeF(tia,tIA,tIjAb,tiJAb,IjaB,iJaB)
+    WAbEf = form_WAbEf(tia,tIA,tIjAb,tiJAb,IjAb,iJAb)
+    WMnIj = form_WMnIj(tia,tIA,tIjAb,tIjaB,IjAb,IjaB)
+    WmNIj = form_WmNIj(tia,tIA,tIjAb,tIjaB,iJAb,iJaB)
+    WmBeJ = form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab)
+    WMBEJ = form_WMBEJ(tIA,tIJAB,IJAB,IjAb)
+    WMbeJ = form_WMbeJ(tia,tIA,tIjAb,IjaB)
+    WmBEj = form_WmBEj(tia,tIA,tiJaB,iJAb)
+    WMbEj = form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB)
+    Wmbej = form_Wmbej(tia,tijab,tiJAb,ijab,iJaB)
+    #expansion of (tia)(tia)
+    tiatia = np.einsum('ma,nb->mnab',tia,tia)
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('ma,nb->mnab',tia,tIA)
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('ma,nb->mnab',tIA,tia)
+    #expansion of (tIA)(tIA)
+    tIAtIA = np.einsum('ma,nb->mnab',tIA,tIA)
+    
+    _tIjAb = np.zeros_like(IjAb[ob,oa,vb,va])
+    #term 1
+    _tIjAb += IjAb[ob,oa,vb,va]
+    #term 2
+    _tIjAb += np.einsum('ijae,be->ijab',tIjAb,Fae -\
+             (1/2)*np.einsum('mb,me->be',tia,Fme))
+    #term 3
+    _tIjAb -= np.einsum('ijbe,ae->ijab',tIjaB,FAE -\
+             (1/2)*np.einsum('ma,me->ae',tIA,FME))
+    #term 4
+    _tIjAb -= np.einsum('imab,mj->ijab',tIjAb,Fmi +\
+             (1/2)*np.einsum('je,me->mj',tia,Fme))
+    #term 5
+    _tIjAb += np.einsum('jmab,mi->ijab',tiJAb,FMI +\
+             (1/2)*np.einsum('ie,me->mi',tIA,FME))
+    #term 6
+    _tIjAb += (1/2)*np.einsum('mnab,mnij->ijab',tIjAb + tIAtia, WMnIj)
+    #term 7
+    _tIjAb += (1/2)*np.einsum('mnab,mnij->ijab',tiJAb - tiatIA, WmNIj)
+    #term 8
+    _tIjAb += (1/2)*np.einsum('ijef,abef->ijab',tIjAb + tIAtia, WAbEf)
+    #term 9
+    _tIjAb += (1/2)*np.einsum('ijef,abef->ijab',tIjaB - tIAtia, WAbeF)
+    #term 10a
+    _tIjAb += np.einsum('imae,mbej->ijab',tIJAB,WMbEj)
+    #term 10b
+    _tIjAb -= np.einsum('imea,mbej->ijab',tIAtIA,IjAb[ob,va,vb,oa])
+    #term 11
+    _tIjAb += np.einsum('imae,mbej->ijab',tIjAb,Wmbej)
+    #term 12a
+    _tIjAb -= np.einsum('imbe,maej->ijab',tIjaB,WmBEj)
+    #term 12b
+    _tIjAb += np.einsum('imeb,maej->ijab',tIAtia,iJAb[oa,vb,vb,oa])
+    #term 13a
+    _tIjAb -= np.einsum('jmae,mbei->ijab',tiJAb,WMbeJ)
+    #term 13b
+    _tIjAb += np.einsum('jmea,mbei->ijab',tiatIA,IjaB[ob,va,va,ob])
+    #term 14a
+    _tIjAb += np.einsum('jmbe,maei->ijab',tijab,WmBeJ)
+    #term 14b
+    _tIjAb -= np.einsum('jmeb,maei->ijab',tiatIA,iJaB[oa,vb,va,ob])
+    #term 15
+    _tIjAb += np.einsum('jmbe,maei->ijab',tiJaB,WMBEJ)
+    #term 16
+    _tIjAb += np.einsum('ie,abej->ijab',tIA,IjAb[vb,va,vb,oa])
+    #term 17
+    _tIjAb -= np.einsum('je,abei->ijab',tia,IjaB[vb,va,va,ob])
+    #term 18
+    _tIjAb -= np.einsum('ma,mbij->ijab',tIA,IjAb[ob,va,ob,oa])
+    #term 19
+    _tIjAb += np.einsum('mb,maij->ijab',tia,iJAb[oa,vb,ob,oa])
+    _tIjAb /= DIjAb
+    return _tIjAb
+
+def update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB):
+    # one particle intermediates
+    FAE = form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb)
+    Fae = form_Fae(fa,tia,tIA,tijab,tiJaB,tIjaB,ijab,iJaB,IjaB)
+    FME = form_FME(fb,tia,tIA,IJAB,IjAb)
+    Fme = form_Fme(fa,tia,tIA,ijab,iJaB)
+    FMI = form_FMI(fb,tia,tIA,tIJAB,tIjAb,tIjaB,IJAB,IjAb,IjaB)
+    Fmi = form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb)
+    # two particle intermediates
+    WmNIj = form_WmNIj(tia,tIA,tIjAb,tIjaB,iJAb,iJaB)
+    WMnIj = form_WMnIj(tia,tIA,tIjAb,tIjaB,IjAb,IjaB)
+    WaBEf = form_WaBEf(tia,tIA,tiJaB,tIjaB,iJAb,IjAb)
+    WaBeF = form_WaBeF(tia,tIA,tiJaB,tIjaB,iJaB,IjaB)
+    WmBEj = form_WmBEj(tia,tIA,tiJaB,iJAb)
+    WMbEj = form_WMbEj(tia,tijab,tiJAb,IjAb,IJAB)
+    Wmbej = form_Wmbej(tia,tijab,tiJAb,ijab,iJaB)
+    WmBeJ = form_WmBeJ(tIA,tIJAB,tIjaB,iJaB,ijab)
+    WMBEJ = form_WMBEJ(tIA,tIJAB,IJAB,IjAb)
+    WMbeJ = form_WMbeJ(tia,tIA,tIjAb,IjaB)
+    #expansion of (tia)(tia)
+    tiatia = np.einsum('ma,nb->mnab',tia,tia)
+    #expansion of (tia)(tIA)
+    tiatIA = np.einsum('ma,nb->mnab',tia,tIA)
+    #expansion of (tIA)(tia)
+    tIAtia = np.einsum('ma,nb->mnab',tIA,tia)
+    #expansion of (tIA)(tIA)
+    tIAtIA = np.einsum('ma,nb->mnab',tIA,tIA)
+
+    _tIjaB = np.zeros_like(tIjaB)
+    #term 1
+    _tIjaB += IjaB[ob,oa,va,vb]
+    #term 2
+    _tIjaB += np.einsum('ijae,be->ijab',tIjaB,FAE -\
+              (1/2)*np.einsum('mb,me->be',tIA,FME))
+    #term 3
+    _tIjaB -= np.einsum('ijbe,ae->ijab',tIjAb,Fae -\
+              (1/2)*np.einsum('ma,me->ae',tia,Fme))
+    #term 4
+    _tIjaB -= np.einsum('imab,mj->ijab',tIjaB,Fmi +\
+              (1/2)*np.einsum('je,me->mj',tia,Fme))
+    #term 5
+    _tIjaB += np.einsum('jmab,mi->ijab',tiJaB,FMI +\
+              (1/2)*np.einsum('ie,me->mi',tIA,FME))
+    #term 6
+    _tIjaB += (1/2)*np.einsum('mnab,mnij->ijab',tiJaB + tiatIA,WmNIj)
+    #term 7
+    _tIjaB += (1/2)*np.einsum('mnab,mnij->ijab',tIjaB - tIAtia,WMnIj)
+    #term 8
+    _tIjaB += (1/2)*np.einsum('ijef,abef->ijab',tIjAb + tIAtia,WaBEf)
+    #term 9
+    _tIjaB += (1/2)*np.einsum('ijef,abef->ijab',tIjaB - tIAtia,WaBeF)
+    #term 10a
+    _tIjaB += np.einsum('imae,mbej->ijab',tIjaB,WmBEj)
+    #term 10b
+    _tIjaB -= np.einsum('imea,mbej->ijab',tIjAb,iJAb[oa,vb,vb,oa])
+    #term 11a
+    _tIjaB -= np.einsum('imbe,maej->ijab',tIJAB,WMbEj)
+    #term 11b
+    _tIjaB += np.einsum('imeb,maej->ijab',tIAtIA,IjAb[ob,va,vb,oa])
+    #term 12
+    _tIjaB -= np.einsum('imbe,maej->ijab',tIjAb,Wmbej)
+    #term 13a
+    _tIjaB -= np.einsum('jmae,mbei->ijab',tijab,WmBeJ)
+    #term 13b
+    _tIjaB += np.einsum('jmea,mbei->ijab',tiatia,iJaB[oa,vb,va,ob])
+    #term 14
+    _tIjaB -= np.einsum('jmae,mbei->ijab',tiJaB,WMBEJ)
+    #term 15a
+    _tIjaB += np.einsum('jmbe,maei->ijab',tiJAb,WMbeJ)
+    #term 15b
+    _tIjaB -= np.einsum('jmeb,maei->ijab',tiatIA,IjaB[ob,va,va,ob])
+    #term 16
+    _tIjaB += np.einsum('ie,abej->ijab',tIA,iJAb[va,vb,vb,oa])
+    #term 17
+    _tIjaB -= np.einsum('je,abei->ijab',tia,iJaB[va,vb,va,ob])
+    #term 18
+    _tIjaB -= np.einsum('ma,mbij->ijab',tia,iJAb[oa,vb,ob,oa])
+    #term 19
+    _tIjaB += np.einsum('mb,maij->ijab',tIA,IjAb[ob,va,ob,oa])
+    _tIjaB /= DIjaB
+    return _tIjaB
 
 Wmnij = form_Wmnij(tia,tijab,ijab)
 WmNiJ = form_WmNiJ(tia,tIA,tiJaB,tiJAb,iJaB,iJAb)
@@ -941,3 +1160,5 @@ tijab_new = update_tijab(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,
 tiJaB_new = update_tiJaB(tia,tIA,tiJaB,tiJAb,tIjaB,tIjAb,tIJAB,iJaB,IjaB,iJAb,IjAb)
 tiJAb_new = update_tiJAb(tia,tIA,tiJAb,tiJaB,tIjAb,tijab,tIJAB,tIjaB,IjaB,iJaB,IjAb)
 tIJAB_new = update_tIJAB(fb,tia,tIA,tIJAB,tIjAb,tiJaB,tIjaB,IJAB,ijab,iJaB,IjAb)
+tIjAb_new = update_tIjAb(tia,tIA,tIjAb,tIjaB,tiJAb,tijab,iJAb,IjaB,iJaB,ijab,IJAB)
+tIjaB_new = update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB)
