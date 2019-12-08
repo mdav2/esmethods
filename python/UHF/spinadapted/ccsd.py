@@ -258,17 +258,17 @@ def form_FMI(fb,tia,tIA,tIJAB,tIjAb,tIjaB,IJAB,IjAb,IjaB):
     FMI += fb[ob,ob]
     FMI -= np.diag(np.diagonal(fb[ob,ob]))
     #term 2
-    #FMI += (1/2)*np.einsum('me,ie->mi',fb[ob,vb],tIA)
+    FMI += (1/2)*np.einsum('me,ie->mi',fb[ob,vb],tIA)
     #term 3
-    #FMI += np.einsum('ne,mnie->mi',tIA,IJAB[ob,ob,ob,vb])
+    FMI += np.einsum('ne,mnie->mi',tIA,IJAB[ob,ob,ob,vb])
     #term 4
-    #FMI += np.einsum('ne,mnie->mi',tia,IjAb[ob,oa,ob,va])
+    FMI += np.einsum('ne,mnie->mi',tia,IjAb[ob,oa,ob,va])
     #term 5
-    #FMI += (1/2)*np.einsum('inef,mnef->mi',tIJAB + (1/2)*(tIAtIA - tIAtIA.transpose(0,1,3,2)),IJAB[ob,ob,vb,vb])
+    FMI += (1/2)*np.einsum('inef,mnef->mi',tIJAB + (1/2)*(tIAtIA - tIAtIA.transpose(0,1,3,2)),IJAB[ob,ob,vb,vb])
     #term 6
-    #FMI += (1/2)*np.einsum('inef,mnef->mi',tIjAb + (1/2)*tIAtia, IjAb[ob,oa,vb,va])
+    FMI += (1/2)*np.einsum('inef,mnef->mi',tIjAb + (1/2)*tIAtia, IjAb[ob,oa,vb,va])
     #term 7
-    #FMI += (1/2)*np.einsum('inef,mnef->mi',tIjaB - (1/2)*tIAtia.transpose(0,1,3,2), IjaB[ob,oa,va,vb])
+    FMI += (1/2)*np.einsum('inef,mnef->mi',tIjaB - (1/2)*tIAtia.transpose(0,1,3,2), IjaB[ob,oa,va,vb])
     return FMI
 
 def form_Fme(fa,tia,tIA,ijab,iJaB):
@@ -629,7 +629,6 @@ def update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia):
     #term 133
     _tia += (1/2)*np.einsum('imef,amef->ia',tiJAb,iJAb[va,ob,vb,va])
     _tia /= Dia
-    print(_tia)
     return _tia
 
 def update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA):
@@ -701,9 +700,9 @@ def update_tijab(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,IjAb):
     _tijab += np.einsum('jmab,mi->ijab',tijab,Fmi +\
               (1/2)*np.einsum('ie,me->mi',tia,Fme))
     #term 6
-    _tijab += (1/2)*np.einsum('mnab,mnij->ijab',tijab + tiatia - tiatia.transpose(0,1,3,2),Wmnij)
+    _tijab += (1/2)*np.einsum('mnab,mnij->ijab',tijab + tiatia - tiatia,Wmnij)
     #term 7
-    _tijab += (1/2)*np.einsum('ijef,abef->ijab',tijab + tiatia - tiatia.transpose(0,1,3,2),Wabef)
+    _tijab += (1/2)*np.einsum('ijef,abef->ijab',tijab + tiatia - tiatia,Wabef)
     #term 8a
     _tijab += np.einsum('imae,mbej->ijab',tijab,Wmbej)
     #term 8b
@@ -725,7 +724,7 @@ def update_tijab(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,IjAb):
     #term 14a
     _tijab += np.einsum('jmbe,maei->ijab',tijab,Wmbej)
     #term 14b
-    _tijab -= np.einsum('jmeb,maei->ijab',tijab,ijab[oa,va,va,oa])
+    _tijab -= np.einsum('jmeb,maei->ijab',tiatia,ijab[oa,va,va,oa])
     #term 15
     _tijab += np.einsum('jmbe,maei->ijab',tiJaB,WMbEj)
     #term 16
@@ -794,21 +793,21 @@ def update_tiJaB(tia,tIA,tiJaB,tiJAb,tIjaB,tIjAb,tIJAB,iJaB,IjaB,iJAb,IjAb):
     #term 10a
     _tiJaB += np.einsum('imae,mbej->ijab',tijab,WmBeJ)
     #term 10b
-    _tiJaB -= np.einsum('imea,mbej->ijab',tijab,iJaB[oa,vb,va,ob])
+    _tiJaB -= np.einsum('imea,mbej->ijab',tiatia,iJaB[oa,vb,va,ob])
     #term 11
     _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,WMBEJ)
     #term 12a
     _tiJaB -= np.einsum('imbe,maej->ijab',tiJAb,WMbeJ)
     #term 12b
-    _tiJaB += np.einsum('imeb,maej->ijab',tiJaB,IjaB[ob,va,va,ob])
+    _tiJaB += np.einsum('imeb,maej->ijab',tiatIA,IjaB[ob,va,va,ob])
     #term 13a
     _tiJaB -= np.einsum('jmae,mbei->ijab',tIjaB,WmBEj)
     #term 13b
-    _tiJaB += np.einsum('jmea,mbei->ijab',tIjAb,iJAb[oa,vb,vb,oa])
+    _tiJaB += np.einsum('jmea,mbei->ijab',tIAtia,iJAb[oa,vb,vb,oa])
     #term 14a
     _tiJaB += np.einsum('jmbe,maei->ijab',tIJAB,WMbEj)
     #term 14b
-    _tiJaB -= np.einsum('jmeb,maei->ijab',tIJAB,IjAb[ob,va,vb,oa])
+    _tiJaB -= np.einsum('jmeb,maei->ijab',tIAtIA,IjAb[ob,va,vb,oa])
     #term 15
     _tiJaB += np.einsum('jmbe,maei->ijab',tIjAb,Wmbej)
     #term 16
@@ -1107,7 +1106,7 @@ def update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB
     #term 10a
     _tIjaB += np.einsum('imae,mbej->ijab',tIjaB,WmBEj)
     #term 10b
-    _tIjaB -= np.einsum('imea,mbej->ijab',tIjAb,iJAb[oa,vb,vb,oa])
+    _tIjaB -= np.einsum('imea,mbej->ijab',tIAtia,iJAb[oa,vb,vb,oa])
     #term 11a
     _tIjaB -= np.einsum('imbe,maej->ijab',tIJAB,WMbEj)
     #term 11b
@@ -1147,34 +1146,26 @@ def ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJ
     ecc = 0
     #term 1
     ecc += np.einsum('ia,ia->',fa[oa,va],tia)
-    print(ecc)
     #term 2
     ecc += np.einsum('ia,ia->',fb[ob,vb],tIA)
-    print(ecc)
     #term 3
     ecc += (1/4)*np.einsum('ijab,ijab->',tijab + 2*tiatia, ijab[oa,oa,va,va])
-    print(ecc)
     #term 4
     ecc += (1/4)*np.einsum('ijab,ijab->',tiJaB + 2*tiatIA, iJaB[oa,ob,va,vb])
-    print(ecc)
     #term 5
     ecc += (1/4)*np.einsum('ijab,ijab->',tiJAb,iJAb[oa,ob,vb,va])
-    print(ecc)
     #term 6
     ecc += (1/4)*np.einsum('ijab,ijab->',tIJAB + 2*tIAtIA,IJAB[ob,ob,vb,vb])
-    print(ecc)
     #term 7
     ecc += (1/4)*np.einsum('ijab,ijab->',tIjAb + 2*tIAtia,IjAb[ob,oa,vb,va])
-    print(ecc)
     #term 8
     ecc += (1/4)*np.einsum('ijab,ijab->',tIjaB,IjaB[ob,oa,va,vb])
-    print(ecc)
     return ecc
 
 
 ecc = ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJAB,IjAb,IjaB)
 print(ecc)
-for i in range(2):
+for i in range( 30):
     tia_new = update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia)
     tIA_new = update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA)
     
@@ -1184,13 +1175,17 @@ for i in range(2):
     tIJAB_new = update_tIJAB(fb,tia,tIA,tIJAB,tIjAb,tiJaB,tIjaB,IJAB,ijab,iJaB,IjAb)
     tIjAb_new = update_tIjAb(tia,tIA,tIjAb,tIjaB,tiJAb,tijab,iJAb,IjaB,iJaB,ijab,IJAB)
     tIjaB_new = update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB)
+    #print(tiJaB_new)
     tia = deepcopy(tia_new)
-    tIA = deepcopy(tIA_new)
-    #tijab = deepcopy(tijab_new)
-    #tiJaB = deepcopy(tiJaB_new)
-    #tiJAb = deepcopy(tiJAb_new)
-    #tIJAB = deepcopy(tIJAB_new)
-    #tIjAb = deepcopy(tIjAb_new)
-    #tIjaB = deepcopy(tIjaB_new)
+    tIA = deepcopy(tia_new)
+    #assert np.allclose(tijab_new,tIJAB_new)
+    #assert np.allclose(tIjAb_new,tiJaB_new)
+    #assert np.allclose(tIjaB_new,tiJAb_new)
+    tijab = deepcopy(tijab_new)
+    tiJaB = deepcopy(tiJaB_new)
+    tiJAb = deepcopy(tiJAb_new)
+    tIJAB = deepcopy(tijab_new)
+    tIjAb = deepcopy(tiJaB_new)
+    tIjaB = deepcopy(tiJAb_new)
     ecc = ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJAB,IjAb,IjaB)
     print(ecc)
