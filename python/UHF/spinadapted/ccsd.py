@@ -2,7 +2,7 @@ import psi4
 import numpy as np
 from time import time
 from copy import deepcopy
-np.set_printoptions(precision=6, linewidth=200, suppress=True)
+np.set_printoptions(precision=10, linewidth=200, suppress=True)
 psi4.core.be_quiet()
 psi4.core.set_num_threads(4)
 psi4.core.set_output_file("output.dat")
@@ -183,7 +183,7 @@ def form_Fae(fa,tia,tIA,tijab,tiJaB,tIjaB,ijab,iJaB,IjaB):
     #term 1 
     Fae = np.zeros_like(fa[va,va])
     Fae += fa[va,va]
-    Fae -= np.diagonal(fa[va,va])
+    Fae -= np.diag(np.diagonal(fa[va,va]))
     #term 2 
     Fae -= (1/2)*np.einsum('me,ma->ae',fa[oa,va],tia)
     #term 3
@@ -208,7 +208,7 @@ def form_FAE(fb,tia,tIA,tIJAB,tIjAb,tiJaB,IJAB,IjAb,iJAb):
     #term 1
     FAE = np.zeros_like(fb[vb,vb])
     FAE += fb[vb,vb]
-    FAE -= np.diagonal(fb[vb,vb])
+    FAE -= np.diag(np.diagonal(fb[vb,vb]))
     #term 2
     FAE -= (1/2)*np.einsum('me,ma->ae',fb[ob,vb],tIA)
     #term 3
@@ -231,7 +231,7 @@ def form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb):
     #term 1
     Fmi = np.zeros_like(fa[oa,oa])
     Fmi += fa[oa,oa]
-    Fmi -= np.diagonal(fa[oa,oa])
+    Fmi -= np.diag(np.diagonal(fa[oa,oa]))
     #term 2
     Fmi += (1/2)*np.einsum('me,ie->mi',fa[oa,va],tia)
     #term 3
@@ -256,19 +256,19 @@ def form_FMI(fb,tia,tIA,tIJAB,tIjAb,tIjaB,IJAB,IjAb,IjaB):
     #term 1
     FMI = np.zeros_like(fb[ob,ob])
     FMI += fb[ob,ob]
-    FMI -= np.diagonal(fb[ob,ob])
+    FMI -= np.diag(np.diagonal(fb[ob,ob]))
     #term 2
-    FMI += (1/2)*np.einsum('me,ie->mi',fb[ob,vb],tIA)
+    #FMI += (1/2)*np.einsum('me,ie->mi',fb[ob,vb],tIA)
     #term 3
-    FMI += np.einsum('ne,mnie->mi',tIA,IJAB[ob,ob,ob,vb])
+    #FMI += np.einsum('ne,mnie->mi',tIA,IJAB[ob,ob,ob,vb])
     #term 4
-    FMI += np.einsum('ne,mnie->mi',tia,IjAb[ob,oa,ob,va])
+    #FMI += np.einsum('ne,mnie->mi',tia,IjAb[ob,oa,ob,va])
     #term 5
-    FMI += (1/2)*np.einsum('inef,mnef->mi',tIJAB + (1/2)*(tIAtIA - tIAtIA.transpose(0,1,3,2)),IJAB[ob,ob,vb,vb])
+    #FMI += (1/2)*np.einsum('inef,mnef->mi',tIJAB + (1/2)*(tIAtIA - tIAtIA.transpose(0,1,3,2)),IJAB[ob,ob,vb,vb])
     #term 6
-    FMI += (1/2)*np.einsum('inef,mnef->mi',tIjAb + (1/2)*tIAtia, IjAb[ob,oa,vb,va])
+    #FMI += (1/2)*np.einsum('inef,mnef->mi',tIjAb + (1/2)*tIAtia, IjAb[ob,oa,vb,va])
     #term 7
-    FMI += (1/2)*np.einsum('inef,mnef->mi',tIjaB - (1/2)*tIAtia.transpose(0,1,3,2), IjaB[ob,oa,va,vb])
+    #FMI += (1/2)*np.einsum('inef,mnef->mi',tIjaB - (1/2)*tIAtia.transpose(0,1,3,2), IjaB[ob,oa,va,vb])
     return FMI
 
 def form_Fme(fa,tia,tIA,ijab,iJaB):
@@ -601,35 +601,35 @@ def update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia):
     Fmi = form_Fmi(fa,tia,tIA,tijab,tiJaB,tiJAb,ijab,iJaB,iJAb)
     Fme = form_Fme(fa,tia,tIA,ijab,iJaB)
     FME = form_FME(fb,tia,tIA,IJAB,IjAb)
-
     _tia = np.zeros_like(tia)
     #term 1
     _tia += fa[oa,va]
     #term 2
     _tia += np.einsum('ie,ae->ia',tia,Fae)
     #term 3
-    #_tia -= np.einsum('ma,mi->ia',tia,Fmi)
+    _tia -= np.einsum('ma,mi->ia',tia,Fmi)
     #term 4
-    #_tia += np.einsum('imae,me->ia',tijab,Fme)
+    _tia += np.einsum('imae,me->ia',tijab,Fme)
     #term 5
-    #_tia += np.einsum('imae,me->ia',tiJaB,FME)
+    _tia += np.einsum('imae,me->ia',tiJaB,FME)
     #term 6
-    #_tia += np.einsum('me,amie->ia',tia,ijab[va,oa,oa,va])
+    _tia += np.einsum('me,amie->ia',tia,ijab[va,oa,oa,va])
     #term 7
-    #_tia += np.einsum('me,amie->ia',tIA,iJaB[va,ob,oa,vb])
+    _tia += np.einsum('me,amie->ia',tIA,iJaB[va,ob,oa,vb])
     #term 8
-    #_tia -= (1/2)*np.einsum('mnae,mnie->ia',tijab,ijab[oa,oa,oa,va])
+    _tia -= (1/2)*np.einsum('mnae,mnie->ia',tijab,ijab[oa,oa,oa,va])
     #term 9
-    #_tia -= (1/2)*np.einsum('mnae,mnie->ia',tiJaB,iJaB[oa,ob,oa,vb])
+    _tia -= (1/2)*np.einsum('mnae,mnie->ia',tiJaB,iJaB[oa,ob,oa,vb])
     #term 10
-    #_tia -= (1/2)*np.einsum('mnae,mnie->ia',tIjaB,IjaB[ob,oa,oa,vb])
+    _tia -= (1/2)*np.einsum('mnae,mnie->ia',tIjaB,IjaB[ob,oa,oa,vb])
     #term 11
-    #_tia += (1/2)*np.einsum('imef,amef->ia',tijab,ijab[va,oa,va,va])
+    _tia += (1/2)*np.einsum('imef,amef->ia',tijab,ijab[va,oa,va,va])
     #term 12
-    #_tia += (1/2)*np.einsum('imef,amef->ia',tiJaB,iJaB[va,ob,va,vb])
+    _tia += (1/2)*np.einsum('imef,amef->ia',tiJaB,iJaB[va,ob,va,vb])
     #term 133
-    #_tia += (1/2)*np.einsum('imef,amef->ia',tiJAb,iJAb[va,ob,vb,va])
+    _tia += (1/2)*np.einsum('imef,amef->ia',tiJAb,iJAb[va,ob,vb,va])
     _tia /= Dia
+    print(_tia)
     return _tia
 
 def update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA):
@@ -647,25 +647,25 @@ def update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA):
     #term 3
     _tIA -= np.einsum('ma,mi->ia',tIA,FMI)
     #term 4
-    #_tIA += np.einsum('imae,me->ia',tIJAB,FME)
+    _tIA += np.einsum('imae,me->ia',tIJAB,FME)
     #term 5
-    #_tIA += np.einsum('imae,me->ia',tIjAb,Fme)
+    _tIA += np.einsum('imae,me->ia',tIjAb,Fme)
     #term 6
-    #_tIA += np.einsum('me,amie->ia',tIA,IJAB[vb,ob,ob,vb])
+    _tIA += np.einsum('me,amie->ia',tIA,IJAB[vb,ob,ob,vb])
     #term 7
-    #_tIA += np.einsum('me,amie->ia',tia,IjAb[vb,oa,ob,va])
+    _tIA += np.einsum('me,amie->ia',tia,IjAb[vb,oa,ob,va])
     #term 8
-    #_tIA -= (1/2)*np.einsum('mnae,mnie->ia',tIJAB,IJAB[ob,ob,ob,vb])
+    _tIA -= (1/2)*np.einsum('mnae,mnie->ia',tIJAB,IJAB[ob,ob,ob,vb])
     #term 9
-    #_tIA -= (1/2)*np.einsum('mnae,mnie->ia',tIjAb,IjAb[ob,oa,ob,va])
+    _tIA -= (1/2)*np.einsum('mnae,mnie->ia',tIjAb,IjAb[ob,oa,ob,va])
     #term 10
-    #_tIA -= (1/2)*np.einsum('mnae,mnie->ia',tiJAb,iJAb[oa,ob,ob,va])
+    _tIA -= (1/2)*np.einsum('mnae,mnie->ia',tiJAb,iJAb[oa,ob,ob,va])
     #term 11
-    #_tIA += (1/2)*np.einsum('imef,amef->ia',tIJAB,IJAB[vb,ob,vb,vb])
+    _tIA += (1/2)*np.einsum('imef,amef->ia',tIJAB,IJAB[vb,ob,vb,vb])
     #term 12
-    #_tIA += (1/2)*np.einsum('imef,amef->ia',tIjAb,IjAb[vb,oa,vb,va])
+    _tIA += (1/2)*np.einsum('imef,amef->ia',tIjAb,IjAb[vb,oa,vb,va])
     #term 13
-    #_tIA += (1/2)*np.einsum('imef,amef->ia',tIjaB,IjaB[vb,oa,va,vb])
+    _tIA += (1/2)*np.einsum('imef,amef->ia',tIjaB,IjaB[vb,oa,va,vb])
 
     _tIA /= DIA
 
@@ -1147,26 +1147,34 @@ def ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJ
     ecc = 0
     #term 1
     ecc += np.einsum('ia,ia->',fa[oa,va],tia)
+    print(ecc)
     #term 2
     ecc += np.einsum('ia,ia->',fb[ob,vb],tIA)
+    print(ecc)
     #term 3
     ecc += (1/4)*np.einsum('ijab,ijab->',tijab + 2*tiatia, ijab[oa,oa,va,va])
+    print(ecc)
     #term 4
     ecc += (1/4)*np.einsum('ijab,ijab->',tiJaB + 2*tiatIA, iJaB[oa,ob,va,vb])
+    print(ecc)
     #term 5
     ecc += (1/4)*np.einsum('ijab,ijab->',tiJAb,iJAb[oa,ob,vb,va])
+    print(ecc)
     #term 6
     ecc += (1/4)*np.einsum('ijab,ijab->',tIJAB + 2*tIAtIA,IJAB[ob,ob,vb,vb])
+    print(ecc)
     #term 7
     ecc += (1/4)*np.einsum('ijab,ijab->',tIjAb + 2*tIAtia,IjAb[ob,oa,vb,va])
+    print(ecc)
     #term 8
     ecc += (1/4)*np.einsum('ijab,ijab->',tIjaB,IjaB[ob,oa,va,vb])
+    print(ecc)
     return ecc
 
 
 ecc = ccenergy(fa,fb,tia,tIA,tijab,tiJaB,tiJAb,tIJAB,tIjAb,tIjaB,ijab,iJaB,iJAb,IJAB,IjAb,IjaB)
 print(ecc)
-for i in range(50):
+for i in range(2):
     tia_new = update_tia(fa,tia,tIA,tijab,tiJaB,tIjaB,tiJAb,ijab,iJaB,IjaB,iJAb,Dia)
     tIA_new = update_tIA(fb,tia,tIA,tIJAB,tIjAb,tiJAb,tIjaB,IJAB,IjAb,iJAb,IjaB,DIA)
     
@@ -1178,7 +1186,6 @@ for i in range(50):
     tIjaB_new = update_tIjaB(tia,tIA,tIjaB,tIjAb,tiJaB,tIJAB,tijab,tiJAb,IjaB,iJAb,IjAb,iJaB)
     tia = deepcopy(tia_new)
     tIA = deepcopy(tIA_new)
-    print(np.allclose(tia,tIA))
     #tijab = deepcopy(tijab_new)
     #tiJaB = deepcopy(tiJaB_new)
     #tiJAb = deepcopy(tiJAb_new)
