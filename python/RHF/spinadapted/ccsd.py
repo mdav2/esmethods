@@ -2,7 +2,7 @@ import psi4
 import numpy as np
 from time import time
 from copy import deepcopy
-np.set_printoptions(precision=10, linewidth=200, suppress=True)
+np.set_printoptions(precision=6, linewidth=200, suppress=True)
 psi4.core.be_quiet()
 psi4.core.set_num_threads(4)
 psi4.core.set_output_file("output.dat")
@@ -15,8 +15,7 @@ mol = psi4.geometry ( """
         """)
 enuc = mol.nuclear_repulsion_energy()
 
-psi4.set_options({'basis':'sto-3g',
-                  'reference':'rhf',
+psi4.set_options({'basis':'cc-pvqz',
                   'e_convergence':1e-14,
                   'd_convergence':1e-10,
                   'scf_type':'pk'})
@@ -85,8 +84,8 @@ if disk_iJaB:
     ijab = np.memmap('ijab.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
 else:
     print('Using in core arrays')
-    ijab = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,2,1,3).transpose(0,1,3,2)
-    iJAb = -mo_eri.np.transpose(0,2,1,3).transpose(0,1,3,2)
+    ijab = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,1,2)
+    iJAb = -mo_eri.np.transpose(0,3,1,2)
     iJaB = mo_eri.np.transpose(0,2,1,3)
 #form denominator array
 #just one spin case
@@ -216,14 +215,6 @@ def update_T1(tia,Fae,Fme,Fmi,tiJaB,iJaB):
 
 def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
     "Equation 47"
-    #DEBUG
-    #Fae = np.zeros_like(Fae)
-    #Fme = np.zeros_like(Fme)
-    #Fmi = np.zeros_like(Fmi)
-    Wabef = np.zeros_like(Wabef)
-    WmBEj = np.zeros_like(WmBEj)
-    WmBeJ = np.zeros_like(WmBeJ)
-    Wmnij = np.zeros_like(Wmnij)
     if disk_T2:
         _tiJaB = np.memmap('_T2.npy',dtype='float64',mode='w+',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
         _tiJaB[:] = 0
@@ -231,65 +222,65 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
         _tiJaB = np.zeros_like(tiJaB)
     #term 1
     _tiJaB += iJaB[o,o,v,v]
-    ##term 2 
+    #term 2 
     temp    = np.einsum( 'mb,me->be',     tia,   Fme  , optimize=True)/2
     _tiJaB += np.einsum( 'ijae,be->ijab', tiJaB, Fae  , optimize=True)
     _tiJaB -= np.einsum( 'ijae,be->ijab', tiJaB, temp , optimize=True)
-    ##term 3
+    #term 3
     temp = np.einsum('ma,me->ae',tia,Fme, optimize=True)/2
     _tiJaB += np.einsum('ijeb,ae->ijab',tiJaB,Fae, optimize=True)
     _tiJaB -= np.einsum('ijeb,ae->ijab',tiJaB,temp, optimize=True)
 
-    ##term 4
+    #term 4
     temp = np.einsum('je,me->mj',tia,Fme, optimize=True)/2
     _tiJaB -= np.einsum('imab,mj->ijab',tiJaB,Fmi, optimize=True)
-    #_tiJaB -= np.einsum('imab,mj->ijab',tiJaB,temp, optimize=True)
+    _tiJaB -= np.einsum('imab,mj->ijab',tiJaB,temp, optimize=True)
 
-    ##term 5
-    #temp = np.einsum('ie,me->mi',tia,Fme, optimize=True)/2
-    #_tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,Fmi, optimize=True)
-    #_tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,temp, optimize=True)
+    #term 5
+    temp = np.einsum('ie,me->mi',tia,Fme, optimize=True)/2
+    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,Fmi, optimize=True)
+    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,temp, optimize=True)
 
     # --> expansion of (tia)(tia) 
-    #temp_1  = np.einsum('ma,nb->mnab',tia,tia, optimize=True)
-    ##term 6 
-    #_tiJaB += np.einsum('mnab,mnij->ijab',(tiJaB + temp_1),Wmnij, optimize=True)
+    temp_1  = np.einsum('ma,nb->mnab',tia,tia, optimize=True)
+    #term 6 
+    _tiJaB += np.einsum('mnab,mnij->ijab',(tiJaB + temp_1),Wmnij, optimize=True)
 
-    ##term 7
-    #_tiJaB += np.einsum('ijef,abef->ijab',(tiJaB + temp_1),Wabef, optimize=True)
+    #term 7
+    _tiJaB += np.einsum('ijef,abef->ijab',(tiJaB + temp_1),Wabef, optimize=True)
 
-    ##term 8
-    #_tiJaB += np.einsum('imae,mbej->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
-    #_tiJaB -= np.einsum('imea,mbej->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
+    #term 8
+    _tiJaB += np.einsum('imae,mbej->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
+    _tiJaB -= np.einsum('imea,mbej->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
 
-    ##term 9
-    #_tiJaB += np.einsum('imae,mbej->ijab',tiJaB,(WmBeJ + WmBEj), optimize=True)
+    #term 9
+    _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,(WmBeJ + WmBEj), optimize=True)
 
-    ##term 10
-    #_tiJaB += np.einsum('mibe,maej->ijab',tiJaB,WmBEj, optimize=True)
-    #_tiJaB -= np.einsum('imeb,amej->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
-    #
-    ##term 11
-    #_tiJaB += np.einsum('mjae,mbei->ijab',tiJaB,WmBEj, optimize=True)
-    #_tiJaB -= np.einsum('jmea,bmei->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
+    #term 10
+    _tiJaB += np.einsum('mibe,maej->ijab',tiJaB,WmBEj, optimize=True)
+    _tiJaB -= np.einsum('imeb,amej->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
+    
+    #term 11
+    _tiJaB += np.einsum('mjae,mbei->ijab',tiJaB,WmBEj, optimize=True)
+    _tiJaB -= np.einsum('jmea,bmei->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
 
-    ##term 12
-    #_tiJaB += np.einsum('jmbe,maei->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
-    #_tiJaB -= np.einsum('jmeb,maei->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
+    #term 12
+    _tiJaB += np.einsum('jmbe,maei->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
+    _tiJaB -= np.einsum('jmeb,maei->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
 
-    ##term 13
-    #_tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBeJ, optimize=True)
-    #_tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBEj, optimize=True)
+    #term 13
+    _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBeJ, optimize=True)
+    _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBEj, optimize=True)
 
-    ##term 14
-    #_tiJaB += np.einsum('ie,abej->ijab',tia,iJaB[v,v,v,o],optimize=True)
-    ##term 15
-    #_tiJaB += np.einsum('je,abie->ijab',tia,iJaB[v,v,o,v],optimize=True)
-    ##term 16
-    #_tiJaB -= np.einsum('ma,mbij->ijab',tia,iJaB[o,v,o,o],optimize=True)
-    ##term 17
-    #_tiJaB -= np.einsum('mb,amij->ijab',tia,iJaB[v,o,o,o],optimize=True)
-    #_tiJaB /= Dijab
+    #term 14
+    _tiJaB += np.einsum('ie,abej->ijab',tia,iJaB[v,v,v,o],optimize=True)
+    #term 15
+    _tiJaB += np.einsum('je,abie->ijab',tia,iJaB[v,v,o,v],optimize=True)
+    #term 16
+    _tiJaB -= np.einsum('ma,mbij->ijab',tia,iJaB[o,v,o,o],optimize=True)
+    #term 17
+    _tiJaB -= np.einsum('mb,amij->ijab',tia,iJaB[v,o,o,o],optimize=True)
+    _tiJaB /= Dijab
     return _tiJaB
 
 def ccenergy(tia,tiJaB,iJaB):
@@ -320,20 +311,19 @@ def cciter(tia,tiJaB,iJaB):
     del Wabef
     del WmBeJ
     del WmBEj
-    del Wmnij
     return tia_new,tiJaB_new
 
 print(ccenergy(tia,tiJaB,iJaB))
-for i in range(2):
+for i in range(10):
     if disk_T2:
         tiJaB = np.memmap('T2.npy',dtype='float64',mode='r',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
     tia_new,tiJaB_new = cciter(tia,tiJaB,iJaB)
+    print(ccenergy(tia_new,tiJaB_new,iJaB))
     if disk_T2:
         del tiJaB
         tiJaB = np.memmap('T2.npy',dtype='float64',mode='write',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
-    #tia[:] = tia_new[:]
+    tia[:] = tia_new[:]
     tiJaB[:] = tiJaB_new[:]
-    print(ccenergy(tia,tiJaB,iJaB))
     if disk_T2:
         tiJaB.flush()
         del tiJaB
