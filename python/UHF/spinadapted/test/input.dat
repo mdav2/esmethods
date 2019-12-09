@@ -1,0 +1,14 @@
+memory 2 GB
+
+molecule {
+0 1
+O
+H 1 1.1
+H 1 1.1 2 104.0
+}
+
+set basis sto-3g
+set scf_type pk
+set reference uhf
+set mp2_type conv
+energy('mp2')
