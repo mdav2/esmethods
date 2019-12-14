@@ -56,32 +56,42 @@ if __name__ == "__main__":
     symmetry c1
     """)
     nat = mol.natom()
-    core = 0
-    for i in range(nat):
-        if mol.Z(i) in range(2,11):
-            core += 1
-        elif mol.Z(i) in range(11,20):
-            core += 5
-        elif mol.Z(i) in range(0,3):
-            core += 0
-        else:
-            print("WTF are you doing? use a real CIS code!")
-            exit()
-    print(core)
-    nroot = 5
     psi4.set_options({'basis':'cc-pvdz',
                       'e_convergence':10,
                       'd_convergence':10,
                       'scf_type':'pk'})
+    nroot = 5
+    core = 0
+    freeze_core = True
+    disk = False 
+    if freeze_core:
+        for i in range(nat):
+            if mol.Z(i) in range(2,11):
+                core += 1
+            elif mol.Z(i) in range(11,20):
+                core += 5
+            elif mol.Z(i) in range(0,3):
+                core += 0
+            else:
+                print("WTF are you doing? use a real CIS code!")
+                exit()
+
     e,wfn = psi4.energy('hf',mol=mol,return_wfn=True)
     eps = wfn.epsilon_a().np
     nocc = wfn.nalpha()*2
+    nbf = wfn.nmo()
     nmo = wfn.nmo()*2
     nvir = nmo - nocc
     mints = psi4.core.MintsHelper(wfn.basisset())
     _C = wfn.Ca()
     C = _C.to_array()
-    mo_eri = mints.mo_eri(_C,_C,_C,_C).np
+    if disk:
+        mo_eri = np.memmap(filename="moeri.npz",shape=(nbf,nbf,nbf,nbf),dtype="float64",mode="w+")
+    else:
+        mo_eri = np.zeros((nbf,nbf,nbf,nbf))
+    mo_eri[:] = mints.mo_eri(_C,_C,_C,_C).np
+    if disk:
+        mo_eri.flush()
     o = slice(0,nocc)
     v = slice(nocc,nmo)
     h = wfn.H().to_array()
@@ -99,28 +109,36 @@ if __name__ == "__main__":
 
     t1 = time.time()
     nso = nmo
-    so_eri = np.zeros((nso,nso,nso,nso))
+    so_eri = np.memmap(filename="soeri.npz",mode="w+",dtype="float64",shape=(nso,nso,nso,nso))
 
     #        p   r   q   s
     # p = q & r = s
     # p = q = 0; r = s = 0
-    so_eri[0::2,0::2,0::2,0::2] += mo_eri.transpose(0,2,1,3)  
+    print("Transforming integrals ...")
+    so_eri[0::2,0::2,0::2,0::2] += mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,2,1) 
+    print("16.6%")
     # p = q = 0; r = s = 1
     so_eri[0::2,1::2,0::2,1::2] += mo_eri.transpose(0,2,1,3) 
+    print("33.3%")
     # p = q = 1; r = s = 0
     so_eri[1::2,0::2,1::2,0::2] += mo_eri.transpose(0,2,1,3) 
+    print("50.0%")
     # p = q = 1; r = s = 1
-    so_eri[1::2,1::2,1::2,1::2] += mo_eri.transpose(0,2,1,3) 
+    so_eri[1::2,1::2,1::2,1::2] += mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,2,1)
+    print("66.6%")
 
     # p = r & q = s
-    # p = r = 0; q = s = 0
-    so_eri[0::2,0::2,0::2,0::2] -= mo_eri.transpose(0,3,2,1)
-    # p = r = 1; q = s = 1 
-    so_eri[1::2,1::2,1::2,1::2] -= mo_eri.transpose(0,3,2,1)
     # p = r = 1; q = s = 0
     so_eri[1::2,1::2,0::2,0::2] -= mo_eri.transpose(0,3,2,1)
+    print("83.3%")
     # p = r = 0; q = s = 1 
     so_eri[0::2,0::2,1::2,1::2] -= mo_eri.transpose(0,3,2,1)
+    print("100%")
+
+    del mo_eri
+
+    if disk:
+        so_eri.flush()
 
     t2 = time.time()
     print("integrals transformed in {} s".format(t2 - t1))
