@@ -44,15 +44,48 @@ def CIS(mol,basis='sto-3g'):
     nvir = info['nvir']
     nmo = info['nmo']
 
-def make_SO_eri(info):
+def make_so_eri(info,disk=True):
     nmo = info['nmo']
-    so_eri = np.zeros((nmo,nmo,nmo,nmo))
+    mo_eri = info['mo_eri']
+    if disk:
+        so_eri = np.memmap(filename="soeri.npz",mode="w+",dtype="float64",shape=(nmo,nmo,nmo,nmo))
+        so_eri[:] = 0
+    else:
+        so_eri = np.zeros((nmo,nmo,nmo,nmo))
+    print("Transforming integrals ...")
+    so_eri[0::2,0::2,0::2,0::2] += mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,2,1) 
+    print("16.6%")
+    # p = q = 0; r = s = 1
+    so_eri[0::2,1::2,0::2,1::2] += mo_eri.transpose(0,2,1,3) 
+    print("33.3%")
+    # p = q = 1; r = s = 0
+    so_eri[1::2,0::2,1::2,0::2] += mo_eri.transpose(0,2,1,3) 
+    print("50.0%")
+    # p = q = 1; r = s = 1
+    so_eri[1::2,1::2,1::2,1::2] += mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,2,1)
+    print("66.6%")
+
+    # p = r & q = s
+    # p = r = 1; q = s = 0
+    so_eri[1::2,1::2,0::2,0::2] -= mo_eri.transpose(0,3,2,1)
+    print("83.3%")
+    # p = r = 0; q = s = 1 
+    so_eri[0::2,0::2,1::2,1::2] -= mo_eri.transpose(0,3,2,1)
+    print("100%")
+    if disk:
+        so_eri.flush()
+        del so_eri
+        return 0
+    else:
+        return so_eri
 
 if __name__ == "__main__":
     t1 = time.time()
     psi4.core.be_quiet()
     mol = psi4.geometry("""
-    pubchem:propane
+    O
+    H 1 1.1
+    H 1 1.1 2 104.0
     symmetry c1
     """)
     nat = mol.natom()
@@ -63,7 +96,8 @@ if __name__ == "__main__":
     nroot = 5
     core = 0
     freeze_core = True
-    disk = False 
+    disk = True
+    #assign frozen core orbitals
     if freeze_core:
         for i in range(nat):
             if mol.Z(i) in range(2,11):
@@ -85,13 +119,8 @@ if __name__ == "__main__":
     mints = psi4.core.MintsHelper(wfn.basisset())
     _C = wfn.Ca()
     C = _C.to_array()
-    if disk:
-        mo_eri = np.memmap(filename="moeri.npz",shape=(nbf,nbf,nbf,nbf),dtype="float64",mode="w+")
-    else:
-        mo_eri = np.zeros((nbf,nbf,nbf,nbf))
-    mo_eri[:] = mints.mo_eri(_C,_C,_C,_C).np
-    if disk:
-        mo_eri.flush()
+
+    mo_eri = mints.mo_eri(_C,_C,_C,_C).np
     o = slice(0,nocc)
     v = slice(nocc,nmo)
     h = wfn.H().to_array()
@@ -100,46 +129,21 @@ if __name__ == "__main__":
     f += h
     f += 2*np.einsum('pqkk->pq',mo_eri[:,:,o,o])
     f -= np.einsum('pkqk->pq',mo_eri[:,o,:,o])
+    del mo_eri
     t2 = time.time()
     print('setup completed in {} s'.format(t2 - t1))
-    #info = wfn_info(mol)
-
-    #mo_eri = mo_eri.transpose(0,2,1,3)
-    #mo_eri = mo_eri - mo_eri.transpose(0,1,3,2)
+    info = wfn_info(mol)
 
     t1 = time.time()
     nso = nmo
-    so_eri = np.memmap(filename="soeri.npz",mode="w+",dtype="float64",shape=(nso,nso,nso,nso))
 
-    #        p   r   q   s
-    # p = q & r = s
-    # p = q = 0; r = s = 0
-    print("Transforming integrals ...")
-    so_eri[0::2,0::2,0::2,0::2] += mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,2,1) 
-    print("16.6%")
-    # p = q = 0; r = s = 1
-    so_eri[0::2,1::2,0::2,1::2] += mo_eri.transpose(0,2,1,3) 
-    print("33.3%")
-    # p = q = 1; r = s = 0
-    so_eri[1::2,0::2,1::2,0::2] += mo_eri.transpose(0,2,1,3) 
-    print("50.0%")
-    # p = q = 1; r = s = 1
-    so_eri[1::2,1::2,1::2,1::2] += mo_eri.transpose(0,2,1,3) - mo_eri.transpose(0,3,2,1)
-    print("66.6%")
-
-    # p = r & q = s
-    # p = r = 1; q = s = 0
-    so_eri[1::2,1::2,0::2,0::2] -= mo_eri.transpose(0,3,2,1)
-    print("83.3%")
-    # p = r = 0; q = s = 1 
-    so_eri[0::2,0::2,1::2,1::2] -= mo_eri.transpose(0,3,2,1)
-    print("100%")
-
-    del mo_eri
-
+    so_eri = make_so_eri(info,disk=disk)
+    if disk:
+        so_eri = np.memmap(filename="soeri.npz",mode="r",dtype="float64",shape=(nso,nso,nso,nso))
+    print("integrals transformed, cleaning up ...")
     if disk:
         so_eri.flush()
-
+        del so_eri
     t2 = time.time()
     print("integrals transformed in {} s".format(t2 - t1))
 
@@ -153,9 +157,12 @@ if __name__ == "__main__":
     for i in range(nocc - core):
         for j in range(nocc - core):
             for a in range(nvir):
+                so_eri = np.memmap(filename="soeri.npz",mode="r",dtype="float64",shape=(nso,nso,nso,nso))
                 aa = a + nocc
                 bb = np.arange(nvir) + nocc
                 H[i*nvir + a][j*nvir:j*nvir+nvir] = HS(so_eri,ff,i+core,j+core,aa,bb)
+                del so_eri
+    del ff
 
     t2 = time.time()
     print('matrix generated in {} s'.format(t2 - t1))
