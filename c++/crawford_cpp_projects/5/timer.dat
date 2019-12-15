@@ -1,0 +1,174 @@
+
+Host: ws-b14-mmd
+
+Timers On : Sun Oct 27 14:36:36 2019
+Timers Off: Sun Oct 27 14:36:37 2019
+
+Wall Time:        1.08 seconds
+
+Total PK formation time     :      0.017u      0.000s      0.014w      1 calls
+HF: Form H                  :      0.000u      0.000s      0.001w      1 calls
+HF: Form S/X                :      0.000u      0.000s      0.004w      1 calls
+HF: Guess                   :      0.000u      0.000s      0.001w      1 calls
+HF: Form G                  :      0.000u      0.000s      0.001w     39 calls
+JK: D                       :      0.000u      0.000s      0.000w     39 calls
+JK: USO2AO                  :      0.000u      0.000s      0.000w     39 calls
+JK: JK                      :      0.000u      0.000s      0.000w     39 calls
+PK computes JK              :      0.000u      0.000s      0.000w     39 calls
+JK: AO2USO                  :      0.000u      0.000s      0.000w     39 calls
+HF: Form F                  :      0.000u      0.000s      0.000w     39 calls
+HF: DIIS                    :      0.017u      0.000s      0.005w     39 calls
+DIISManager::add_entry      :      0.000u      0.000s      0.001w     39 calls
+DIISManager::extrapolate    :      0.017u      0.000s      0.003w     38 calls
+bMatrix setup               :      0.000u      0.000s      0.001w     38 calls
+bMatrix pseudoinverse       :      0.017u      0.000s      0.001w     38 calls
+New vector                  :      0.000u      0.000s      0.001w     38 calls
+HF: Form C                  :      0.000u      0.000s      0.001w     39 calls
+HF: Form D                  :      0.000u      0.000s      0.000w     39 calls
+
+-----------------------------------------------------------
+Total PK formation time     :      0.017u      0.000s      0.014w      1 calls
+HF: Form H                  :      0.000u      0.000s      0.001w      1 calls
+HF: Form S/X                :      0.000u      0.000s      0.004w      1 calls
+HF: Guess                   :      0.000u      0.000s      0.001w      1 calls
+HF: Form G                  :      0.000u      0.000s      0.001w     39 calls
+| JK: D                     :      0.000u      0.000s      0.000w     39 calls
+| JK: USO2AO                :      0.000u      0.000s      0.000w     39 calls
+| JK: JK                    :      0.000u      0.000s      0.000w     39 calls
+| | PK computes JK          :      0.000u      0.000s      0.000w     39 calls
+| JK: AO2USO                :      0.000u      0.000s      0.000w     39 calls
+HF: Form F                  :      0.000u      0.000s      0.000w     39 calls
+HF: DIIS                    :      0.017u      0.000s      0.005w     39 calls
+| DIISManager::add_entry    :      0.000u      0.000s      0.001w     39 calls
+| DIISManager::extrapolate  :      0.017u      0.000s      0.003w     38 calls
+| | bMatrix setup           :      0.000u      0.000s      0.001w     38 calls
+| | bMatrix pseudoinverse   :      0.017u      0.000s      0.001w     38 calls
+| | New vector              :      0.000u      0.000s      0.001w     38 calls
+HF: Form C                  :      0.000u      0.000s      0.001w     39 calls
+HF: Form D                  :      0.000u      0.000s      0.000w     39 calls
+
+***********************************************************
+
+Host: ws-b14-mmd
+
+Timers On : Sun Oct 27 14:39:42 2019
+Timers Off: Sun Oct 27 14:39:42 2019
+
+Wall Time:        0.55 seconds
+
+Total PK formation time     :      0.033u      0.000s      0.013w      1 calls
+HF: Form H                  :      0.000u      0.000s      0.001w      1 calls
+HF: Form S/X                :      0.000u      0.000s      0.000w      1 calls
+HF: Guess                   :      0.000u      0.000s      0.000w      1 calls
+HF: Form G                  :      0.000u      0.000s      0.000w      7 calls
+JK: D                       :      0.000u      0.000s      0.000w      7 calls
+JK: USO2AO                  :      0.000u      0.000s      0.000w      7 calls
+JK: JK                      :      0.000u      0.000s      0.000w      7 calls
+PK computes JK              :      0.000u      0.000s      0.000w      7 calls
+JK: AO2USO                  :      0.000u      0.000s      0.000w      7 calls
+HF: Form F                  :      0.000u      0.000s      0.000w      7 calls
+HF: DIIS                    :      0.000u      0.000s      0.001w      7 calls
+DIISManager::add_entry      :      0.000u      0.000s      0.000w      7 calls
+DIISManager::extrapolate    :      0.000u      0.000s      0.000w      6 calls
+bMatrix setup               :      0.000u      0.000s      0.000w      6 calls
+bMatrix pseudoinverse       :      0.000u      0.000s      0.000w      6 calls
+New vector                  :      0.000u      0.000s      0.000w      6 calls
+HF: Form C                  :      0.000u      0.000s      0.000w      7 calls
+HF: Form D                  :      0.000u      0.000s      0.000w      7 calls
+
+-----------------------------------------------------------
+Total PK formation time     :      0.033u      0.000s      0.013w      1 calls
+HF: Form H                  :      0.000u      0.000s      0.001w      1 calls
+HF: Form S/X                :      0.000u      0.000s      0.000w      1 calls
+HF: Guess                   :      0.000u      0.000s      0.000w      1 calls
+HF: Form G                  :      0.000u      0.000s      0.000w      7 calls
+| JK: D                     :      0.000u      0.000s      0.000w      7 calls
+| JK: USO2AO                :      0.000u      0.000s      0.000w      7 calls
+| JK: JK                    :      0.000u      0.000s      0.000w      7 calls
+| | PK computes JK          :      0.000u      0.000s      0.000w      7 calls
+| JK: AO2USO                :      0.000u      0.000s      0.000w      7 calls
+HF: Form F                  :      0.000u      0.000s      0.000w      7 calls
+HF: DIIS                    :      0.000u      0.000s      0.001w      7 calls
+| DIISManager::add_entry    :      0.000u      0.000s      0.000w      7 calls
+| DIISManager::extrapolate  :      0.000u      0.000s      0.000w      6 calls
+| | bMatrix setup           :      0.000u      0.000s      0.000w      6 calls
+| | bMatrix pseudoinverse   :      0.000u      0.000s      0.000w      6 calls
+| | New vector              :      0.000u      0.000s      0.000w      6 calls
+HF: Form C                  :      0.000u      0.000s      0.000w      7 calls
+HF: Form D                  :      0.000u      0.000s      0.000w      7 calls
+
+***********************************************************
+
+Host: ws-b14-mmd
+
+Timers On : Sat Nov  9 20:14:52 2019
+Timers Off: Sat Nov  9 20:14:52 2019
+
+Wall Time:        0.00 seconds
+
+Total PK formation time:       0.01u       0.00s 0.01140000w      1 call
+HF: Form H  :       0.00u       0.00s 0.00062100w      1 call
+HF: Form S/X:       0.00u       0.00s 0.00087500w      1 call
+HF: Guess   :       0.00u       0.00s 0.00002900w      1 call
+HF: Form G  :       0.00u       0.00s   0.000726w      9 calls
+JK: D       :       0.00u       0.00s   0.000012w      9 calls
+JK: USO2AO  :       0.00u       0.00s   0.000039w      9 calls
+JK: JK      :       0.00u       0.00s   0.000574w      9 calls
+PK computes JK:       0.00u       0.00s   0.000562w      9 calls
+JK: AO2USO  :       0.00u       0.00s   0.000023w      9 calls
+HF: Form F  :       0.00u       0.00s   0.000019w      9 calls
+HF: DIIS    :       0.00u       0.00s   0.000745w      9 calls
+DIISManager::add_entry:       0.00u       0.00s   0.000288w      9 calls
+HF: Form C  :       0.00u       0.00s   0.000114w      9 calls
+HF: Form D  :       0.00u       0.00s   0.000007w      9 calls
+DIISManager::extrapolate:       0.00u       0.00s   0.000367w      8 calls
+DIISManager::extrapolate: bMatrix setup:       0.00u       0.00s   0.000145w      8 calls
+DIISManager::extrapolate: bMatrix pseudoinverse:       0.00u       0.00s   0.000103w      8 calls
+DIISManager::extrapolate: form new data:       0.00u       0.00s   0.000095w      8 calls
+trans_ints  :       0.00u       0.00s 0.00271600w      1 call
+Trans (OV|OV):       0.00u       0.00s 0.00198700w      1 call
+Sort chem -> phys:       0.00u       0.00s 0.00003000w      1 call
+Sort (OV|OV) -> <OO|VV>:       0.00u       0.00s 0.00002800w      1 call
+Trans OEI   :       0.00u       0.00s 0.00000800w      1 call
+Build Denominators:       0.00u       0.00s 0.00001500w      1 call
+T2(1)       :       0.00u       0.00s 0.00040200w      1 call
+MP2 Energy  :       0.00u       0.00s 0.00274600w      1 call
+
+***********************************************************
+
+Host: ws-b14-mmd
+
+Timers On : Sat Nov  9 22:35:51 2019
+Timers Off: Sat Nov  9 22:35:51 2019
+
+Wall Time:        0.00 seconds
+
+Total PK formation time:       0.01u       0.00s 0.01108800w      1 call
+HF: Form H  :       0.00u       0.00s 0.00047400w      1 call
+HF: Form S/X:       0.00u       0.00s 0.00006100w      1 call
+HF: Guess   :       0.00u       0.00s 0.00002900w      1 call
+HF: Form G  :       0.00u       0.00s   0.000214w      9 calls
+JK: D       :       0.00u       0.00s   0.000014w      9 calls
+JK: USO2AO  :       0.00u       0.00s   0.000051w      9 calls
+JK: JK      :       0.00u       0.00s   0.000064w      9 calls
+PK computes JK:       0.00u       0.00s   0.000050w      9 calls
+JK: AO2USO  :       0.00u       0.00s   0.000024w      9 calls
+HF: Form F  :       0.00u       0.00s   0.000033w      9 calls
+HF: DIIS    :       0.00u       0.00s   0.000813w      9 calls
+DIISManager::add_entry:       0.00u       0.00s   0.000257w      9 calls
+HF: Form C  :       0.00u       0.00s   0.000098w      9 calls
+HF: Form D  :       0.00u       0.00s   0.000009w      9 calls
+DIISManager::extrapolate:       0.00u       0.00s   0.000436w      8 calls
+DIISManager::extrapolate: bMatrix setup:       0.00u       0.00s   0.000173w      8 calls
+DIISManager::extrapolate: bMatrix pseudoinverse:       0.00u       0.00s   0.000137w      8 calls
+DIISManager::extrapolate: form new data:       0.00u       0.00s   0.000101w      8 calls
+trans_ints  :       0.00u       0.00s 0.00253800w      1 call
+Trans (OV|OV):       0.00u       0.00s 0.00233600w      1 call
+Sort chem -> phys:       0.00u       0.00s 0.00003900w      1 call
+Sort (OV|OV) -> <OO|VV>:       0.00u       0.00s 0.00003700w      1 call
+Trans OEI   :       0.00u       0.00s 0.00001000w      1 call
+Build Denominators:       0.00u       0.00s 0.00002100w      1 call
+T2(1)       :       0.00u       0.00s 0.00039100w      1 call
+MP2 Energy  :       0.00u       0.00s 0.00024500w      1 call
+
+***********************************************************
