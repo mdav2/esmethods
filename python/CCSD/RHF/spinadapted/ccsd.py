@@ -15,7 +15,7 @@ mol = psi4.geometry ( """
         """)
 enuc = mol.nuclear_repulsion_energy()
 
-psi4.set_options({'basis':'cc-pvqz',
+psi4.set_options({'basis':'sto-3g',
                   'e_convergence':1e-14,
                   'd_convergence':1e-10,
                   'scf_type':'pk'})
@@ -84,8 +84,8 @@ if disk_iJaB:
     ijab = np.memmap('ijab.npy',dtype='float64',mode='r',shape=(mo_eri.np.shape))
 else:
     print('Using in core arrays')
-    ijab = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,1,2)
-    iJAb = -mo_eri.np.transpose(0,3,1,2)
+    ijab = mo_eri.np.transpose(0,2,1,3) - mo_eri.np.transpose(0,3,2,1)
+    iJAb = -mo_eri.np.transpose(0,3,2,1)
     iJaB = mo_eri.np.transpose(0,2,1,3)
 #form denominator array
 #just one spin case
@@ -107,6 +107,7 @@ for i in range(ndocc):
 tia = f[:ndocc,ndocc:]/Dia
 
 #form initial T2
+#print(iJaB)
 tijab = ijab[:ndocc,:ndocc,ndocc:,ndocc:]/Dijab
 if disk_T2:
     print('Using disk T2')
@@ -224,22 +225,22 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
     _tiJaB += iJaB[o,o,v,v]
     #term 2 
     temp    = np.einsum( 'mb,me->be',     tia,   Fme  , optimize=True)/2
-    _tiJaB += np.einsum( 'ijae,be->ijab', tiJaB, Fae  , optimize=True)
-    _tiJaB -= np.einsum( 'ijae,be->ijab', tiJaB, temp , optimize=True)
+    #_tiJaB += np.einsum( 'ijae,be->ijab', tiJaB, Fae  , optimize=True)
+    #_tiJaB -= np.einsum( 'ijae,be->ijab', tiJaB, temp , optimize=True)
     #term 3
     temp = np.einsum('ma,me->ae',tia,Fme, optimize=True)/2
-    _tiJaB += np.einsum('ijeb,ae->ijab',tiJaB,Fae, optimize=True)
-    _tiJaB -= np.einsum('ijeb,ae->ijab',tiJaB,temp, optimize=True)
+    #_tiJaB += np.einsum('ijeb,ae->ijab',tiJaB,Fae, optimize=True)
+    #_tiJaB -= np.einsum('ijeb,ae->ijab',tiJaB,temp, optimize=True)
 
     #term 4
     temp = np.einsum('je,me->mj',tia,Fme, optimize=True)/2
-    _tiJaB -= np.einsum('imab,mj->ijab',tiJaB,Fmi, optimize=True)
-    _tiJaB -= np.einsum('imab,mj->ijab',tiJaB,temp, optimize=True)
+    #_tiJaB -= np.einsum('imab,mj->ijab',tiJaB,Fmi, optimize=True)
+    #_tiJaB -= np.einsum('imab,mj->ijab',tiJaB,temp, optimize=True)
 
     #term 5
     temp = np.einsum('ie,me->mi',tia,Fme, optimize=True)/2
-    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,Fmi, optimize=True)
-    _tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,temp, optimize=True)
+    #_tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,Fmi, optimize=True)
+    #_tiJaB -= np.einsum('mjab,mi->ijab',tiJaB,temp, optimize=True)
 
     # --> expansion of (tia)(tia) 
     temp_1  = np.einsum('ma,nb->mnab',tia,tia, optimize=True)
@@ -251,35 +252,35 @@ def update_T2(tia,Fae,Fme,Fmi,tiJaB,WmBeJ,WmBEj,Wabef,Wmnij,iJaB):
 
     #term 8
     _tiJaB += np.einsum('imae,mbej->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
-    _tiJaB -= np.einsum('imea,mbej->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
+    #_tiJaB -= np.einsum('imea,mbej->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
 
     #term 9
     _tiJaB += np.einsum('imae,mbej->ijab',tiJaB,(WmBeJ + WmBEj), optimize=True)
 
     #term 10
     _tiJaB += np.einsum('mibe,maej->ijab',tiJaB,WmBEj, optimize=True)
-    _tiJaB -= np.einsum('imeb,amej->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
+    #_tiJaB -= np.einsum('imeb,amej->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
     
     #term 11
     _tiJaB += np.einsum('mjae,mbei->ijab',tiJaB,WmBEj, optimize=True)
-    _tiJaB -= np.einsum('jmea,bmei->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
+    #_tiJaB -= np.einsum('jmea,bmei->ijab',temp_1,iJaB[v,o,v,o], optimize=True)
 
     #term 12
     _tiJaB += np.einsum('jmbe,maei->ijab',(tiJaB - tiJaB.transpose(1,0,2,3)),WmBeJ, optimize=True)
-    _tiJaB -= np.einsum('jmeb,maei->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
+    #_tiJaB -= np.einsum('jmeb,maei->ijab',temp_1,iJaB[o,v,v,o], optimize=True)
 
     #term 13
     _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBeJ, optimize=True)
     _tiJaB += np.einsum('jmbe,maei->ijab',tiJaB,WmBEj, optimize=True)
 
     #term 14
-    _tiJaB += np.einsum('ie,abej->ijab',tia,iJaB[v,v,v,o],optimize=True)
+    #_tiJaB += np.einsum('ie,abej->ijab',tia,iJaB[v,v,v,o],optimize=True)
     #term 15
-    _tiJaB += np.einsum('je,abie->ijab',tia,iJaB[v,v,o,v],optimize=True)
+    #_tiJaB += np.einsum('je,abie->ijab',tia,iJaB[v,v,o,v],optimize=True)
     #term 16
-    _tiJaB -= np.einsum('ma,mbij->ijab',tia,iJaB[o,v,o,o],optimize=True)
+    #_tiJaB -= np.einsum('ma,mbij->ijab',tia,iJaB[o,v,o,o],optimize=True)
     #term 17
-    _tiJaB -= np.einsum('mb,amij->ijab',tia,iJaB[v,o,o,o],optimize=True)
+    #_tiJaB -= np.einsum('mb,amij->ijab',tia,iJaB[v,o,o,o],optimize=True)
     _tiJaB /= Dijab
     return _tiJaB
 
@@ -289,14 +290,15 @@ def ccenergy(tia,tiJaB,iJaB):
     #print('COMPONENT 1: ', np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*tiJaB))
     ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*tiJaB)
     #print('COMPONENT 2: ',  np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*temp_1))
-    ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*temp_1)
+    #ecc += np.einsum('ijab,ijab->',iJaB[o,o,v,v],2*temp_1)
     #print('COMPONENT 3: ', -np.einsum('ijab,jiab->',iJaB[o,o,v,v],tiJaB))
     ecc -= np.einsum('ijab,jiab->',iJaB[o,o,v,v],tiJaB)
     #print('COMPONENT 4: ', -np.einsum('ijab,jiab->',iJaB[o,o,v,v],temp_1))
-    ecc -= np.einsum('ijab,jiab->',iJaB[o,o,v,v],temp_1)
+    #ecc -= np.einsum('ijab,jiab->',iJaB[o,o,v,v],temp_1)
     return ecc
 
 def cciter(tia,tiJaB,iJaB):
+    tia[:] = 0
     Fae       = form_Fae(tia,iJaB,tiJaB)
     Fmi       = form_Fmi(tia,iJaB,tiJaB)
     Fme       = form_Fme(tia,iJaB)
@@ -314,7 +316,7 @@ def cciter(tia,tiJaB,iJaB):
     return tia_new,tiJaB_new
 
 print(ccenergy(tia,tiJaB,iJaB))
-for i in range(10):
+for i in range(1):
     if disk_T2:
         tiJaB = np.memmap('T2.npy',dtype='float64',mode='r',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
     tia_new,tiJaB_new = cciter(tia,tiJaB,iJaB)
@@ -322,7 +324,8 @@ for i in range(10):
     if disk_T2:
         del tiJaB
         tiJaB = np.memmap('T2.npy',dtype='float64',mode='write',shape=((ndocc,ndocc,nbf-ndocc,nbf-ndocc)))
-    tia[:] = tia_new[:]
+#    tia[:] = tia_new[:]
+    tia[:] = 0
     tiJaB[:] = tiJaB_new[:]
     if disk_T2:
         tiJaB.flush()

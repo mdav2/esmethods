@@ -2,9 +2,9 @@
 #import Pkg
 #Pkg.build("PyCall")
 using PyCall
+using CISingles
 psi4 = pyimport("psi4")
 include("Crutch.jl")
-using CISingles
 
 mol = psi4.geometry("""
 		    O
@@ -14,5 +14,5 @@ mol = psi4.geometry("""
 		    """)
 psi4.set_options(Dict("basis" => "sto-3g", "scf_type" => "pk"))
 wfn = init(mol,"sto-3g")
-nocc,nvir,mo_eri,F = setup_cis(wfn)
+nocc,nvir,mo_eri,F = setup_rcis(wfn,Float64)
 println(do_CIS(nocc,nvir,mo_eri,F,2))
