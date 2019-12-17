@@ -1,4 +1,0 @@
-#!/bin/bash
-g++ HF.cc -c -Wall -lgsl -lgslcblas 
-g++ MP2.cc -c -Wall -lgsl -lgslcblas 
-g++ -o mpbin HF.o MP2.o -Wall -lgsl -lgslcblas 

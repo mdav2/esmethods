@@ -1,3 +1,0 @@
-/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/moint/CMakeFiles/rebuild_cache.dir
-/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/moint/CMakeFiles/moint.dir
-/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/moint/CMakeFiles/edit_cache.dir

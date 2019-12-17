@@ -1,4 +1,0 @@
-#!/bin/bash
-g++ HF.cc -c -Wall -lgsl -lgslcblas -I ../ -L ../
-g++ CCSD.cc -c -Wall -lgsl -lgslcblas -I ../ -L ../
-g++ -o bin HF.o CCSD.o -Wall -lgsl -lgslcblas -I ../ -L ../

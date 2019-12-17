@@ -1,3 +1,0 @@
-/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/aoint/CMakeFiles/rebuild_cache.dir
-/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/aoint/CMakeFiles/aoint.dir
-/home/mmd01986/Dropbox/dev/esmethods/psi4_interface/aoint/CMakeFiles/edit_cache.dir

@@ -1,2 +1,0 @@
-lessons learned: don't mix floats and doubles! Hecka precision errors.
-Check summation indices (over and over)
