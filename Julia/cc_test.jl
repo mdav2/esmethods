@@ -19,8 +19,8 @@ mol = psi4.geometry("""
 #		    """)
 psi4.set_options(Dict("basis" => "sto-3g", "scf_type" => "pk",
 					  "d_convergence" => 14))
-wfn = init(mol,"cc-pvdz")
+wfn = init(mol)
 #println(wfn.current_energy())
-refWfn = PyToJl(wfn,Float64,false)
-do_rccd(refWfn,Float64,5)
+refWfn = PyToJl(wfn,Float32,false)
+do_rccd(refWfn,5)
 #Profile.print(maxdepth=10)

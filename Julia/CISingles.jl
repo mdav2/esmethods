@@ -1,20 +1,25 @@
 module CISingles
+"""
+Module for performing CIS computations.
+
+Currently only RHF reference supported
+"""
+
 using PyCall
 using LinearAlgebra 
 using Dates
 psi4 = pyimport("psi4")
 dt = Float64
 export do_CIS
-export HS
-export so_eri
-export make_H
 
 @inline @inbounds @fastmath function HS(eri::Array{dt,4}, F::Array{dt,2}, i::Int64, j::Int64, a::Int64, b::Int64)
+	"computes a singly excited Hamiltonian matrix element. Slaters rules are
+	incorporated via the kronecker deltas"
     return kron(i,j)*F[a,b] - kron(a,b)*F[i,j] + so_eri(eri,a,j,i,b)
 end
 
-
 @inbounds @fastmath function make_H(nocc,nvir,so_eri,F)
+	"Constructs Hamiltonian matrix"
     H = zeros(dt,nocc*nvir,nocc*nvir)
     rocc = collect(UnitRange(1,nocc))
     rvir = collect(UnitRange(1,nvir))
@@ -34,43 +39,6 @@ end
     return H
 end
 
-@views function eigdav(A,eigs,k,kmax,tol)
-    n = size(A,1)
-    V = zeros((n,n))
-    t = I(n)
-    theta = 0
-    w = 0
-    theta_old = 0
-    for m in k:k:kmax
-        if m <= k
-            for j in 1:1:k
-                V[:,j] = t[:,j]/norm(t[:,j])
-            end
-            theta_old = ones(eigs)
-        else
-            theta_old = theta[1:eigs]
-        end
-        F = qr(V)
-        V = Matrix(F.Q)
-        T = transpose(V[:,1:(m+1)])*A*V[:,1:(m+1)]
-        THETA = eigvals(T)
-        S = eigvecs(T)
-        idx = sortperm(THETA)
-        theta = THETA[idx]
-        s = S[:,idx]
-        for j in 1:1:k
-            w = (A - theta[j]*I(n))*V[:,1:(m+1)]*s[:,j]
-            q = w/(theta[j] - A[j,j])
-            V[:,m+j+1] = q
-        normm = norm(theta[1:eigs] - theta_old)
-        if normm < tol
-            return theta[1:eigs]
-        end
-        end
-
-    end
-    return theta[1:eigs]
-end
 
 function do_CIS(nocc,nvir,so_eri,F,nroots)
     t0 = Dates.Time(Dates.now())
