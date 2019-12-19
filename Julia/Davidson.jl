@@ -1,4 +1,6 @@
 module Davidson
+using LinearAlgebra
+export eigdav
 @views function eigdav(A,eigs,k,kmax,tol)
     n = size(A,1)
     V = zeros((n,n))
@@ -27,10 +29,11 @@ module Davidson
             w = (A - theta[j]*I(n))*V[:,1:(m+1)]*s[:,j]
             q = w/(theta[j] - A[j,j])
             V[:,m+j+1] = q
+        end
         normm = norm(theta[1:eigs] - theta_old)
+        println(normm)
         if normm < tol
             return theta[1:eigs]
-        end
         end
 
     end

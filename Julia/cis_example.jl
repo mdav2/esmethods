@@ -2,10 +2,11 @@
 #import Pkg
 #Pkg.build("PyCall")
 using PyCall
+using Wavefunction
 using CISingles
 psi4 = pyimport("psi4")
 psi4.core.be_quiet()
-include("Crutch.jl")
+#include("Crutch.jl")
 
 mol = psi4.geometry("""
 		    O

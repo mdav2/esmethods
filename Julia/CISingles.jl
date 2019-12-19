@@ -5,6 +5,7 @@ Module for performing CIS computations.
 Currently only RHF reference supported
 """
 
+using Davidson
 using PyCall
 using LinearAlgebra 
 using Dates
