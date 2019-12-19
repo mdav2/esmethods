@@ -1,3 +1,4 @@
+__precompile__()
 module Wavefunction
 "Module for storing and handling reference wavefunctions"
 
