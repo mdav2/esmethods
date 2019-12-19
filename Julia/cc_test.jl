@@ -4,7 +4,7 @@ using InteractiveUtils
 #include("CoupledCluster.jl")
 using CoupledCluster
 psi4 = pyimport("psi4")
-include("Crutch.jl")
+#include("Crutch.jl")
 psi4.core.be_quiet()
 
 mol = psi4.geometry("""
@@ -20,7 +20,7 @@ mol = psi4.geometry("""
 psi4.set_options(Dict("basis" => "sto-3g", "scf_type" => "pk",
 					  "d_convergence" => 14))
 wfn = init(mol)
-#println(wfn.current_energy())
+println(wfn)
 refWfn = PyToJl(wfn,Float32,false)
 do_rccd(refWfn,5)
-#Profile.print(maxdepth=10)
+Profile.print(maxdepth=10)

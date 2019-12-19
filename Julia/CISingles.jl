@@ -8,10 +8,16 @@ Currently only RHF reference supported
 using PyCall
 using LinearAlgebra 
 using Dates
-psi4 = pyimport("psi4")
-dt = Float64
-export do_CIS
 
+const psi4 = PyNULL()
+
+function __init__()
+	copy!(psi4,pyimport("psi4"))
+end
+dt = Float64
+
+export setup_rcis
+export do_CIS
 @inline @inbounds @fastmath function HS(eri::Array{dt,4}, F::Array{dt,2}, i::Int64, j::Int64, a::Int64, b::Int64)
 	"computes a singly excited Hamiltonian matrix element. Slaters rules are
 	incorporated via the kronecker deltas"
@@ -37,6 +43,23 @@ end
         end
     end
     return H
+end
+function setup_rcis(wfn,dt)
+    _C = wfn.Ca()
+    nbf = wfn.nmo()
+    nso = 2*nbf
+    nocc = 2*wfn.nalpha()
+    eps = wfn.epsilon_a().to_array()
+    nvir = nso - nocc
+    basis = wfn.basisset()
+    mints = psi4.core.MintsHelper(basis)
+    mo_eri = convert(Array{dt},mints.mo_eri(_C,_C,_C,_C).to_array())
+    ff = zeros(dt,nso,nso)
+    r = collect(UnitRange(1,nso))
+    @inbounds @fastmath for i in r
+        ff[i,i] = eps[Int64(fld((i+1),2))]
+    end
+    return nocc,nvir,mo_eri,ff
 end
 
 
