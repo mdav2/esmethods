@@ -25,7 +25,6 @@ export do_rccd
 
 
 function do_rccd(refWfn::Wfn)
-    #Implicit dtype = float64
 	#implicit maxit = 40
     return do_rccd(refWfn,40)
 end
@@ -48,7 +47,7 @@ end
 	Wabef = form_Wabef(iJaB,T2)
 	WmBeJ = form_WmBeJ(iJaB,T2)
 	WmBEj = form_WmBEj(iJaB,T2)
-    for i in UnitRange(1,maxit)
+    for i in UnitRange(1,maxit) #TODO: implement RMS check
         t0 = Dates.Time(Dates.now())
         T2 = cciter(T2,iJaB,Dijab,Fae,Fmi,Wabef,Wmnij,WmBeJ,WmBEj)
         t1 = Dates.Time(Dates.now())
@@ -79,7 +78,6 @@ function ccenergy(tiJaB,iJaB)
 			for a in rvir
 				for b in rvir
                     cache = iJaB_oovv[i,j,a,b]
-					#ecc += iJaB_oovv[i,j,a,b]*2*tiJaB[i,j,a,b]
 					ecc += cache*2*tiJaB[i,j,a,b]
 					ecc -= cache*tiJaB[j,i,a,b]
 				end
@@ -107,15 +105,6 @@ function T2_init!(tiJaB,iJaB,Dijab)
 	rocc = collect(UnitRange(1,nocc))
 	rvir = collect(UnitRange(1,nvir))
     tiJaB .= iJaB_oovv ./ Dijab
-	#for i in rocc
-	#	for j in rocc
-	#		for a in rvir
-	#			for b in rvir
-	#				tiJaB[i,j,a,b] = (iJaB_oovv[i,j,a,b])/Dijab[i,j,a,b]
-	#			end
-	#		end
-	#	end
-	#end
 end
 
 function form_Fae(tiJaB,iJaB)
@@ -132,11 +121,13 @@ function form_Fae!(Fae,tiJaB,iJaB)
 	rvir = collect(UnitRange(1,nvir))
 	@views iJaB_oovv = iJaB[1:nocc,1:nocc,nocc+1:nocc+nvir,nocc+1:nocc+nvir]
     Fae .= 0.0
+    cache1 = zeros(eltype(iJaB),nocc,nocc)
+    cache2 = zeros(eltype(iJaB),nocc,nocc)
     for f in rvir
     	for a in rvir
         	for e in rvir
                 for n in rocc
-                    for m in rocc
+                    @simd for m in rocc
                         Fae[a,e] -= tiJaB[m,n,a,f]*(2*iJaB_oovv[m,n,e,f] - iJaB_oovv[n,m,e,f])
                     end
                 end
@@ -164,7 +155,7 @@ function form_Fmi!(Fmi,tiJaB,iJaB)
         for e in rvir
             for n in rocc
                 for i in rocc
-                    for m in rocc
+                    @simd for m in rocc
                         Fmi[m,i] += tiJaB[i,n,e,f]*(2*iJaB_oovv[m,n,e,f] - iJaB_oovv[m,n,f,e])
                     end
                 end
@@ -184,7 +175,7 @@ function form_Dijab(tiJaB,F)
 	for i in rocc
 		for j in rocc
 			for a in rvir
-				@simd for b in rvir
+				for b in rvir
 					aa = a + nocc
 					bb = b + nocc
 					Dijab[i,j,a,b] = F[i] + F[j] - F[aa] - F[bb]
@@ -203,75 +194,46 @@ function form_T2(tiJaB_i,Fae,Fmi,WmBeJ,WmBEj,Wabef,Wmnij,iJaB,Dijab)
 	@views iJaB_oovv = iJaB[1:nocc,1:nocc,nocc+1:nocc+nvir,nocc+1:nocc+nvir]
 	rocc = collect(UnitRange(1,nocc))
 	rvir = collect(UnitRange(1,nvir))
-    _Wabef = zeros(dtt,nvir,nvir)
 	ttiJaB_i = permutedims(tiJaB_i,[4,1,2,3])
 	WWmBEj  = permutedims(WmBEj,[3,1,2,4])
 	WWmBeJ  = permutedims(WmBeJ,[3,1,2,4])
 	WmBEj = nothing
 	WmBeJ = nothing
-	for b in rvir
+	Threads.@threads for b in rvir
         for a in rvir 
-            _Wabef .= Wabef[a,b,:,:]
-		    for j in rocc
+            _Wabef = Wabef[a,b,:,:]
+		   for j in rocc
                 for i in rocc
-                    #term 2
                     temp = iJaB_oovv[i,j,a,b]
-                    temp += BLAS.dot(tiJaB_i[i,j,a,:] , Fae[b,:])
-                    temp += BLAS.dot(tiJaB_i[i,j,:,b], Fae[a,:])
+                    for e in rvir
+                        temp += tiJaB_i[i,j,a,e] * Fae[b,e]
+                        temp += tiJaB_i[i,j,e,b] * Fae[a,e]
+                        for f in rvir
+                            temp += tiJaB_i[i,j,e,f]*_Wabef[e,f]
+                        end
+                        for m in rocc
+                             temp += ttiJaB_i[e,m,i,b]*WWmBEj[e,m,a,j]
+                             temp += ttiJaB_i[e,m,j,a]*WWmBEj[e,m,b,i]
+                             temp += ttiJaB_i[e,i,m,a]*WWmBeJ[e,m,b,j]
+                             temp -= ttiJaB_i[e,m,i,a]*WWmBeJ[e,m,b,j]
+                             temp += ttiJaB_i[e,i,m,a]*WWmBeJ[e,m,b,j]
+                             temp += ttiJaB_i[e,i,m,a]*WWmBEj[e,m,b,j]
+                             temp += ttiJaB_i[e,j,m,b]*WWmBeJ[e,m,a,i]
+                             temp -= ttiJaB_i[e,m,j,b]*WWmBeJ[e,m,a,i]
+                             temp += ttiJaB_i[e,j,m,b]*WWmBeJ[e,m,a,i]
+                             temp += ttiJaB_i[e,j,m,b]*WWmBEj[e,m,a,i]
+                        end
+                    end
 
 					for m in rocc
-                        #@views temp += BLAS.dot(ttiJaB_i[:,m,i,b],WWmBEj[:,m,a,j])
-                        #@views temp += BLAS.dot(ttiJaB_i[:,m,j,a],WWmBEj[:,m,b,i])
-						#@views temp += BLAS.dot(ttiJaB_i[:,i,m,a],WWmBeJ[:,m,b,j])
-						#@views temp -= BLAS.dot(ttiJaB_i[:,m,i,a],WWmBeJ[:,m,b,j])
-						#@views temp += BLAS.dot(ttiJaB_i[:,i,m,a],WWmBeJ[:,m,b,j])
-						#@views temp += BLAS.dot(ttiJaB_i[:,i,m,a],WWmBEj[:,m,b,j])
-						#@views temp += BLAS.dot(ttiJaB_i[:,j,m,b],WWmBeJ[:,m,a,i])
-						#@views temp -= BLAS.dot(ttiJaB_i[:,m,j,b],WWmBeJ[:,m,a,i])
-						#@views temp += BLAS.dot(ttiJaB_i[:,j,m,b],WWmBeJ[:,m,a,i])
-						#@views temp += BLAS.dot(ttiJaB_i[:,j,m,b],WWmBEj[:,m,a,i])
-						
-                        @views temp += dot(ttiJaB_i[:,m,i,b],WWmBEj[:,m,a,j])
-                        @views temp += dot(ttiJaB_i[:,m,j,a],WWmBEj[:,m,b,i])
-						@views temp += dot(ttiJaB_i[:,i,m,a],WWmBeJ[:,m,b,j])
-						@views temp -= dot(ttiJaB_i[:,m,i,a],WWmBeJ[:,m,b,j])
-						@views temp += dot(ttiJaB_i[:,i,m,a],WWmBeJ[:,m,b,j])
-						@views temp += dot(ttiJaB_i[:,i,m,a],WWmBEj[:,m,b,j])
-						@views temp += dot(ttiJaB_i[:,j,m,b],WWmBeJ[:,m,a,i])
-						@views temp -= dot(ttiJaB_i[:,m,j,b],WWmBeJ[:,m,a,i])
-						@views temp += dot(ttiJaB_i[:,j,m,b],WWmBeJ[:,m,a,i])
-						@views temp += dot(ttiJaB_i[:,j,m,b],WWmBEj[:,m,a,i])
-                        #for e in rvir
-						#	#8
-						#	temp += tiJaB_i[i,m,a,e]*WmBeJ[m,b,e,j]
-						#	temp -= tiJaB_i[m,i,a,e]*WmBeJ[m,b,e,j]
-						#	#9
-						#	temp += tiJaB_i[i,m,a,e]*(WmBeJ[m,b,e,j])
-						#	temp += tiJaB_i[i,m,a,e]*(WmBEj[m,b,e,j])
-						#	#10
-                        #    cache = tiJaB_i[j,m,b,e]
-						#	##13
-						#	temp += cache*WmBeJ[m,a,e,i]
-						#	temp -= tiJaB_i[m,j,b,e]*WmBeJ[m,a,e,i]
-						#	#13
-                        #    temp += cache*(WmBeJ[m,a,e,i])
-                        #    temp += cache*(WmBEj[m,a,e,i])
-						#end
+                        temp -= tiJaB_i[i,m,a,b]*Fmi[m,j]
+                        temp -= tiJaB_i[m,j,a,b]*Fmi[m,i]
+                        for n in rocc
+                            temp += tiJaB_i[m,n,a,b]*Wmnij[m,n,i,j]
+                        end
                     end
-                    @views temp += reduce(+, tiJaB_i[i,j,:,:] .* _Wabef[:,:])
-                    @views temp -= BLAS.dot(tiJaB_i[i,:,a,b],Fmi[:,j])#sum( tiJaB_i[i,:,a,b] .* Fmi[:,j])
-                    @views temp -= BLAS.dot(tiJaB_i[:,j,a,b], Fmi[:,i])#sum( tiJaB_i[:,j,a,b] .* Fmi[:,i])
-					@views temp += reduce(+, tiJaB_i[:,:,a,b] .* Wmnij[:,:,i,j])
-                    #for m in rocc
-					#    #term 6
-					#    for n in rocc
-					#    	temp += tiJaB_i[m,n,a,b]*Wmnij[m,n,i,j]
-					#    end
-                    #end
-                    tiJaB_d[i,j,a,b] = temp
-                #    tiJaB_d[j,i,b,a] = temp
+                    tiJaB_d[i,j,a,b] += temp
 				end
-				#wait(x)
 			end
 		end
 	end
@@ -287,22 +249,22 @@ function form_Wmnij(iJaB,tiJaB)
     return Wmnij
 end
 @fastmath @inbounds function form_Wmnij!(Wmnij,iJaB,tiJaB)
-	#Wmnij for RCCD
-	#fills Wmnij (!)	
 	nocc = size(tiJaB,1)
 	nvir = size(tiJaB,4)
-	@views iJaB_oovv = iJaB[1:nocc,1:nocc,nocc+1:nocc+nvir,nocc+1:nocc+nvir]
+	iJaB_oovv = iJaB[1:nocc,1:nocc,nocc+1:nocc+nvir,nocc+1:nocc+nvir]
 	rocc = collect(UnitRange(1,nocc))
 	rvir = collect(UnitRange(1,nvir))
 
+    _tiJaB =  permutedims(tiJaB,[3,4,1,2])
+    _iJaB_oovv = permutedims(iJaB_oovv,[3,4,1,2])
 	@views Wmnij .= iJaB[1:nocc,1:nocc,1:nocc,1:nocc]
-	for f in rvir
-	    for e in rvir
-			for j in rocc
-                for n in rocc
-			        for i in rocc
-	                    @simd for m in rocc
-							Wmnij[m,n,i,j] += tiJaB[i,j,e,f]*iJaB_oovv[m,n,e,f]/2.0
+	Threads.@threads for j in rocc
+        for n in rocc
+	        for i in rocc
+	            for m in rocc
+	                for f in rvir
+	                    @simd for e in rvir
+							Wmnij[m,n,i,j] += _tiJaB[e,f,i,j]*_iJaB_oovv[e,f,m,n]/2.0
 						end
 					end
 				end
@@ -331,11 +293,9 @@ function form_Wabef!(Wabef,iJaB,tiJaB)
     for f in rvir
         for e in rvir
             _iJaB_oovv .= iJaB_oovv[:,:,e,f]./2.0
-	        for b in rvir
+	        Threads.@threads for b in rvir
 	            for a in rvir
-					#@views Wabef[a,b,e,f] += reduce(+, tiJaB[:,:,a,b] .* _iJaB_oovv[:,:])
 					for n in rocc
-                        #@views Wabef[a,b,e,f] += BLAS.dot(tiJaB[:,n,a,b],_iJaB_oovv[:,n])
 						@simd for m in rocc
                             Wabef[a,b,e,f] += tiJaB[m,n,a,b]*_iJaB_oovv[m,n]#*iJaB_oovv[m,n,e,f]
 						end
