@@ -5,7 +5,8 @@ Module for performing CIS computations.
 Currently only RHF reference supported
 """
 
-using Davidson
+using IterativeSolvers
+#using Davidson
 using PyCall
 using LinearAlgebra 
 using Dates
@@ -64,26 +65,45 @@ function setup_rcis(wfn,dt)
 end
 
 
-function do_CIS(nocc,nvir,so_eri,F,nroots)
+function do_CIS(nocc,nvir,so_eri,F,nroots,algo="lobpcg",doprint=false)
     t0 = Dates.Time(Dates.now())
-    #nocc,nvir,so_eri,F = setup(wfn)
     t1 = Dates.Time(Dates.now())
-  #  print("Setup completed in ") 
-  #  print(convert(Dates.Millisecond,(t1 - t0)))
-  #  print("\n")
+    if doprint
+        println("constructing Hamiltonian ") 
+    end
     t0 = Dates.Time(Dates.now())
     H = make_H(nocc,nvir,so_eri,F)
     H = Symmetric(H)
     t1 = Dates.Time(Dates.now())
-    print("Hamiltonian constructed in ") 
-    print(convert(Dates.Millisecond,(t1 - t0)))
-    print("\n")
-    t0 = Dates.Time(Dates.now())
-    eigs = eigvals(H,1:nroots)
-    t1 = Dates.Time(Dates.now())
-    print("Hamiltonian diagonalized in ") 
-    print(convert(Dates.Millisecond,(t1 - t0)))
-    print("\n")
+    if doprint
+        print("Hamiltonian constructed in ") 
+        print(convert(Dates.Millisecond,(t1 - t0)))
+        print("\n")
+    end
+    if algo == "lobpcg" || algo == "iter"
+        t0 = Dates.Time(Dates.now())
+        eigs = lobpcg(H,false,nroots).λ
+        t1 = Dates.Time(Dates.now())
+        if doprint
+            print("Hamiltonian iteratively solved in ") 
+            print(convert(Dates.Millisecond,(t1 - t0)))
+            print("\n")
+        end
+    elseif algo == "diag"
+        t0 = Dates.Time(Dates.now())
+        eigs = eigvals(H,1:nroots)
+        t1 = Dates.Time(Dates.now())
+        if doprint
+            print("Hamiltonian diagonalized exactly in ") 
+            print(convert(Dates.Millisecond,(t1 - t0)))
+            print("\n")
+        end
+    else
+        if doprint
+            println("solver ",algo," is not supported! Choose from { lobpcg, diag }")
+        end
+        return false
+    end
     return eigs[1:nroots]
 end
 
