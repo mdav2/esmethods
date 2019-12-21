@@ -1,7 +1,7 @@
 module Davidson
 using LinearAlgebra
 export eigdav
-@views function eigdav(A,eigs,k,kmax,tol)
+function eigdav(A,eigs,k,kmax,tol)
     n = size(A,1)
     V = zeros((n,n))
     t = I(n)
@@ -15,10 +15,10 @@ export eigdav
             end
             theta_old = ones(eigs)
         else
-            theta_old = theta[1:eigs]
+            #theta_old = theta[1:eigs]
         end
         F = qr(V)
-        V = Matrix(F.Q)
+		V = Array{Float64}(F.Q)
         T = transpose(V[:,1:(m+1)])*A*V[:,1:(m+1)]
         THETA = eigvals(T)
         S = eigvecs(T)
@@ -30,13 +30,14 @@ export eigdav
             q = w/(theta[j] - A[j,j])
             V[:,m+j+1] = q
         end
-        normm = norm(theta[1:eigs] - theta_old)
-        println(normm)
-        if normm < tol
-            return theta[1:eigs]
-        end
+		println(V)
+        #normm = norm(theta[1:eigs] - theta_old)
+        #println(normm)
+        #if normm < tol
+        #    return theta[1:eigs]
+        #end
 
     end
-    return theta[1:eigs]
+    #return theta[1:eigs]
 end
 end #module Davidson
