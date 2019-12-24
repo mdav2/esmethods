@@ -6,6 +6,7 @@ Currently only RHF reference supported
 """
 
 using IterativeSolvers
+using Wavefunction
 #using Davidson
 using PyCall
 using LinearAlgebra 
@@ -65,7 +66,15 @@ function setup_rcis(wfn,dt)
 end
 
 
-function do_CIS(nocc,nvir,so_eri,F,nroots,algo="lobpcg",doprint=false)
+function do_CIS(refWfn::Wfn,nroots,algo="lobpcg",doprint=false)
+	nocc = 2*refWfn.nalpha
+	nvir = 2*refWfn.nvira
+	so_eri = refWfn.pqrs
+	F = zeros(nocc + nvir, nocc + nvir)
+	r = collect(UnitRange(1,nocc+nvir))
+    @inbounds @fastmath for i in r
+        F[i,i] = refWfn.epsa[Int64(fld((i+1),2))]
+    end
     t0 = Dates.Time(Dates.now())
     t1 = Dates.Time(Dates.now())
     if doprint

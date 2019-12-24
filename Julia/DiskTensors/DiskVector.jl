@@ -5,12 +5,14 @@ function todisk(fname::String,A::Array{Float64})
 end
 
 struct DiskVector
+	"data structure for holding file/group/dataset handles
+	and other information required to use a disk based vector"
 	file::HDF5File
 	group::HDF5Group
 	data::HDF5Dataset
-	fname::String
-	gname::String
-	dname::String
+	fname::String #file name
+	gname::String #group name
+	dname::String #dataset name
 	dtype::Union{Type{Float32},Type{Float64}}
 	size::Int #number of elements to be allocated
 	compress::Bool
@@ -21,6 +23,7 @@ end
 function DiskVector(fname::String,dtype::Union{Type{Float32},Type{Float64}},
 					mode::String="r+",fieldname::String="data",
 					size::Int,compress::Bool=false,chonk::Bool=false,chonksz::Array{Int}=Tuple{Int,Int}((1,1)))
+	"Constructor for DiskVector objects"
 	file = h5open(fname,mode)
 	if (mode == "w") | (mode == "w+")
 		g = g_create(file,"data")
@@ -32,6 +35,7 @@ function DiskVector(fname::String,dtype::Union{Type{Float32},Type{Float64}},
 end
 
 function fill!(dvec::DiskVector,arr::Array{Union{Type{Float32},Type{Float64}}})
+
 end
 
 function activate(dvec::DiskVector)

@@ -18,10 +18,11 @@ mol = psi4.geometry("""
 #                    pubchem:ethane
 #		    symmetry c1
 #		    """)
-psi4.set_options(Dict("basis" => "cc-pvtz", "scf_type" => "pk",
+psi4.set_options(Dict("basis" => "sto-3g", "scf_type" => "pk",
 					  "d_convergence" => 14))
 wfn = init(mol)
 println(wfn)
-refWfn = PyToJl(wfn,Float32,false)
-print(@time do_rccd(refWfn,5))
+refWfn = PyToJl(wfn,Float64,false)
+print(do_rccd(refWfn,5))
+print(@time do_rccd(refWfn,40))
 #Profile.print()

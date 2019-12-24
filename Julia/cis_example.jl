@@ -14,7 +14,9 @@ mol = psi4.geometry("""
                     H 1 1.1 2 104.0
 		    symmetry c1
 		    """)
-psi4.set_options(Dict("basis" => "cc-pvdz", "scf_type" => "pk"))
+psi4.set_options(Dict("basis" => "sto-3g", "scf_type" => "pk"))
 wfn = init(mol)
 nocc,nvir,mo_eri,F = setup_rcis(wfn,Float64)
-println(do_CIS(nocc,nvir,mo_eri,F,2,"lobpcg",true))
+#println(do_CIS(nocc,nvir,mo_eri,F,2,"lobpcg",true))
+Wfn = PyToJl(wfn,Float64,false)
+print(do_CIS(Wfn,1,"lobpcg",true))

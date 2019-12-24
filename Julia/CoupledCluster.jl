@@ -28,10 +28,9 @@ function do_rccd(refWfn::Wfn)
 	#implicit maxit = 40
     return do_rccd(refWfn,40)
 end
-@fastmath @inbounds function do_rccd(refWfn::Wfn,maxit)
+@fastmath @inbounds function do_rccd(refWfn::Wfn,maxit,print=false)
     #goes through appropriate steps to do RCCD
 	set_zero_subnormals(true)
-	println(size(refWfn.pqrs,1))
     nocc = refWfn.nalpha
     nvir = refWfn.nvira
     iJaB = permutedims(refWfn.pqrs,[1,3,2,4])
@@ -40,7 +39,6 @@ end
 	T2 = zeros(dtt,nocc,nocc,nvir,nvir)
     Dijab = form_Dijab(T2,epsa)
     T2_init!(T2,iJaB,Dijab)
-    println(ccenergy(T2,iJaB))
     Fae = form_Fae(T2,iJaB)
     Fmi = form_Fmi(T2,iJaB)
     Wmnij = form_Wmnij(iJaB,T2)
@@ -51,20 +49,22 @@ end
         t0 = Dates.Time(Dates.now())
         T2 = cciter(T2,iJaB,Dijab,Fae,Fmi,Wabef,Wmnij,WmBeJ,WmBEj)
         t1 = Dates.Time(Dates.now())
-        print("T2 formed in ")
-        print(convert(Dates.Millisecond, (t1 - t0)))
-        print("\n")
-        t0 = Dates.Time(Dates.now())
-        print("@CCD ")
-        print(ccenergy(T2,iJaB))
-        print
+        #print("T2 formed in ")
+        #print(convert(Dates.Millisecond, (t1 - t0)))
+        #print("\n")
+        #t0 = Dates.Time(Dates.now())
+		if print
+        	print("@CCD ")
+        	print(ccenergy(T2,iJaB))
+			print("\n")
+		end
         t1 = Dates.Time(Dates.now())
-        print("\n")
-        print("energy computed in ")
-        print(convert(Dates.Millisecond, (t1 - t0)))
-        print("\n")
+        #print("\n")
+        #print("energy computed in ")
+        #print(convert(Dates.Millisecond, (t1 - t0)))
+        #print("\n")
     end
-    println(ccenergy(T2,iJaB))
+	return ccenergy(T2,iJaB)
 end
 function ccenergy(tiJaB,iJaB)
 	ecc = 0.0
