@@ -7,7 +7,7 @@ Currently only RHF reference supported
 
 using IterativeSolvers
 using Wavefunction
-#using Davidson
+using Davidson
 using PyCall
 using LinearAlgebra 
 using Dates
@@ -50,8 +50,10 @@ end
 function setup_rcis(wfn,dt)
     _C = wfn.Ca()
     nbf = wfn.nmo()
-    nso = 2*nbf
-    nocc = 2*wfn.nalpha()
+    #nso = 2*nbf
+    #nocc = 2*wfn.nalpha()
+    nso = nbf
+    nocc = wfn.nalpha()
     eps = wfn.epsilon_a().to_array()
     nvir = nso - nocc
     basis = wfn.basisset()
@@ -82,8 +84,8 @@ function do_CIS(refWfn::Wfn,nroots,algo="lobpcg",doprint=false)
     end
     t0 = Dates.Time(Dates.now())
     H = make_H(nocc,nvir,so_eri,F)
-    H = Symmetric(H)
     t1 = Dates.Time(Dates.now())
+	print(isposdef(H))
     if doprint
         print("Hamiltonian constructed in ") 
         print(convert(Dates.Millisecond,(t1 - t0)))
@@ -98,7 +100,28 @@ function do_CIS(refWfn::Wfn,nroots,algo="lobpcg",doprint=false)
             print(convert(Dates.Millisecond,(t1 - t0)))
             print("\n")
         end
+	elseif algo == "davidson"
+		println(size(H))
+        t0 = Dates.Time(Dates.now())
+        eigs = eigdav(H,1,4,100,1E-6)
+        t1 = Dates.Time(Dates.now())
+		if doprint
+            print("Hamiltonian iteratively solved in ") 
+            print(convert(Dates.Millisecond,(t1 - t0)))
+            print("\n")
+		end
+	elseif algo == "svd"
+        t0 = Dates.Time(Dates.now())
+		eigs = svdvals(H)
+		print(eigs)
+        t1 = Dates.Time(Dates.now())
+        if doprint
+            print("Hamiltonian diagonalized exactly in ") 
+            print(convert(Dates.Millisecond,(t1 - t0)))
+            print("\n")
+        end
     elseif algo == "diag"
+    	H = Symmetric(H)
         t0 = Dates.Time(Dates.now())
         eigs = eigvals(H,1:nroots)
         t1 = Dates.Time(Dates.now())
