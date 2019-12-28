@@ -36,6 +36,24 @@ struct Wfn{T}
     PqRs::Array{T,4} #MO basis electron repulsion integrals
     PqrS::Array{T,4} #MO basis electron repulsion integrals
 end
+struct directWfn{T}
+	#requires the module using this struct to have properly imported
+	#psi4 with pycall
+	nalpha::Int
+	nbeta::Int
+    nvira::Int
+    nvirb::Int
+	nmo::Int
+	unrestricted::Bool
+    Ca::Array{T,2} #AO->MO coefficients
+    Cb::Array{T,2} #AO->MO coefficients
+    ha::Array{T,2} #Core hamiltonian
+    hb::Array{T,2} #Core hamiltonian
+    epsa::Array{T,1} #orbital eigenvalues
+    epsb::Array{T,1} #orbital eigenvalues
+	basis::PyObject
+	mints::PyObject
+end
 function PyToJl(wfn,dt,unrestricted::Bool)
 	"Takes in a psi4 wavefunction and converts important information
 	to pure Julia objects for stability."
