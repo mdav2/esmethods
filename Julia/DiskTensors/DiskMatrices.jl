@@ -58,11 +58,11 @@ function dmdot(dmat1::DiskMatrix,dmat2::DiskMatrix)
 	end
 	return tsum
 end
-function dmread(dmat::DiskMatrix,val,posx,posy)
+function dmread(dmat::DiskMatrix,posx,posy)
 	fid = h5open(dmat.fname,"r")
 	return fid["$dmat.dname"][posx,posy]
 end
-function dmwrite(dmat::DiskMatrix,posx,posy)
+function dmwrite(dmat::DiskMatrix,posx,posy,val)
 	fid = h5open(dmat.fname,"r+")
 	fid["$dmat.dname"][posx,posy] = val
 end
