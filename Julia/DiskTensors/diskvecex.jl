@@ -1,4 +1,4 @@
-using DiskVectors
+using DiskTensors
 using BenchmarkTools
 using LinearAlgebra
 

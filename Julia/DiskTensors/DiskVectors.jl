@@ -1,13 +1,6 @@
-module DiskVectors
 using HDF5
 using LinearAlgebra
 
-export DiskVector
-export blockfill!
-export printdv
-export dvwrite!
-export dvread
-export dvdot
 function todisk(fname::String,A::Array{Float64})
 
 end
@@ -84,4 +77,3 @@ function printdv(dvec)
 	"print a DiskVector"
 	println(h5read(dvec.fname,"$dvec.dname"))
 end
-end #module
